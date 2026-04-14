@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head th:replace="_fragments :: head('详情页')">
+    <title>详情页</title>
+</head>
+<body>
+    <!--导航-->
+    <nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="_fragments :: menu(1)">
+    </nav>
+
+    <!--内容-->
+    <div class="md-pd-tb-massive">
+        <div class="ui container">
+            <!--头部-->
+            <div class="ui top attached segment">
+                <div class="ui horizontal list">
+                    <div class="item">
+                        <div class="content">
+                            <a href="#" class="header md-tt-thin" th:text="${blog.user != null ? blog.user.nickname : '匿名'}">作者名</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <span th:text="${blog.updateTime != null ? #dates.format(blog.updateTime, 'yyyy-MM-dd HH:mm') : '未知'}">日期</span>
+                    </div>
+                    <div class="item">
+                        <div th:if="${blog.type != null}">
+                            分类：<span th:text="${blog.type.name}">未分类</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--图片-->
+            <div class="ui attached segment">
+                <img src="../static/images/back.jpg" class="ui fluid image" th:src="@{/images/back.jpg}">
+            </div>
+            <!--内容-->
+            <div class="ui attached segment">
+                <div class="ui basic segment">
+                    <div class="ui teal label md-right-top">图标</div>
+                </div>
+                <h3 class="ui center aligned header" th:text="${blog.title}">标题</h3>
+                <div id="content" class="typo typo-selection js-toc-content md-pd-lr md-pd-tb-massive" th:utext="${blog.content}">
+                </div>
+                <!--赞赏-->
+                <div class="ui center aligned segment">
+                    <button class="ui red basic button" id="PayButton">爆点金币支持我</button>
+                </div>
+
+                <div class="ui PayButtonShow flowing popup transition hidden">
+                    <div class="ui orange basic label">
+                        <div class="ui images" style="font-size: inherit !important;">
+                            <div class="image">
+                                <img src="../static/images/wechat.jpg" alt="" class="ui image" style="width: 120px;" th:src="@{/images/wechat.jpg}">
+                                <div>微信</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--信息-->
+            <div class="ui message">
+                <div class="ui middle aligned grid">
+                    <div class="eleven wide column">
+                        <ui class="list">
+                            <li>其实这里应该放文章信息的</li>
+                            <li>但是我没有</li>
+                            <li>放几行假装我写了</li>
+                        </ui>
+                    </div>
+                    <div class="five wide column">
+                        <img src="../static/images/wechat.jpg" alt="" class="ui floated right image" style="width: 120px;">
+                    </div>
+                </div>
+            </div>
+            <!--评论-->
+        <div class="ui vertical icon buttons md-fixed md-right-bottom">
+            <button type="button" class="ui toc teal button">目录</button>
+            <a href="#comment-container" class="ui teal button">评论</a>
+            <button class="ui wechat teal button"><i class="weixin icon"></i></button>
+            <a id="toTop-button" class="ui teal button"><i class="chevron up icon"></i></a>
+            
+        </div>
+    </div>
+
+    <!--存放目录内容-->
+    <div class="ui toc-container flowing popup transition hidden" style="width: 300px;">
+        <ol class="js-toc">
+        </ol>
+    </div>
+
+    <!--存放弹出的微信-->
+    <div id="qrcode" class="ui wechat-image flowing popup transition hidden" style="width: 150px;" >
+        <!--img src="../static/images/wechat.jpg" alt=""  style="width: 130px;" th:src="@{/images/wechat.jpg}"-->
+    </div>
+    
+
+    <!--底部-->
+    <footer class="ui inverted vertical segment md-padded-tb-massive" th:replace="_fragments :: footer">
+    </footer>
+    <!--/*/<th:block th:replace="_fragments :: script">/*/-->
+    <!--/*/</th:block>/*/-->
+
+<!--底下这串我看不懂，做互动的-->
+    <script>
+        /*做一个适应手机端的导航栏收缩按键*/
+        $('.menu.toggle').click(function(){
+            $('.md-item').toggleClass('md-mobile-hide');
+        });
+        /*一个赞赏探出二维码*/
+        $('#PayButton').popup({
+            popup : $('.PayButtonShow.popup'),
+            on : 'click',
+            position: 'bottom center'
+        });
+        /*弹出微信*/
+        $('.wechat').popup({
+            popup : $('.wechat-image.popup'),
+            position: 'bottom center'
+        });
+
+        /*生成二维码*/
+        var qrcode = new QRCode("qrcode", {
+	        text: "https://www.luogu.com.cn/",
+	        width: 128,
+	        height: 128,
+	        colorDark : "#000000",
+	        colorLight : "#ffffff",
+	        correctLevel : QRCode.CorrectLevel.H
+        });
+
+        $('#toTop-button').click(function(){
+            $(window).scrollTo(0,500);
+        });
+
+
+        /*用于初始化tocbot*/
+        tocbot.init({
+  // Where to render the table of contents.
+  tocSelector: '.js-toc',
+  // Where to grab the headings to build the table of contents.
+  contentSelector: '.js-toc-content',
+  // Which headings to grab inside of the contentSelector element.
+  headingSelector: 'h1, h2, h3',
+  // For headings inside relative or absolute positioned containers within content.
+  hasInnerContainers: true,
+});
+        /*用于弹出目录*/
+        $('.toc.button').popup({
+            popup : $('.toc-container.popup'),
+            on : 'click',
+            position: 'left center'
+        });
+    </script>
+    
+
+    
+</body>
+</html>

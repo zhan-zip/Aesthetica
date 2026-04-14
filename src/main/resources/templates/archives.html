@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head th:replace="_fragments :: head('详情页')">
+    <title>详情页</title>
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="_fragments :: menu(3)">
+</nav>
+
+    <!--内容-->
+    <div class="md-pd-tb-massive">
+        <div class="ui container">
+            <!--头部-->
+            <div class="ui attached padded segment">
+                <div class="ui middle aligned two column grid">
+                     <div class="column">
+                        <h1 class="ui teal header">归档</h1>
+                    </div>
+                    <div class="right aligned column">
+                    目前共<h3 class="ui teal header md-inline-block">3</h3>篇博客
+                    </div>
+                </div>
+            </div>
+
+            <!--内容-->
+            <h1 class="ui center aligned teal header">2025</h1>
+            <div class="ui vertical fluid menu">
+                <a href="#" target="_blank" class="item">
+                    <span>
+                        第一篇
+                        <div class="ui teal basic left pointing label">9.1</div>
+                    </span>
+                </a>
+                <a href="#" target="_blank" class="item">
+                    <span>
+                        第一篇
+                        <div class="ui teal basic left pointing label">9.1</div>
+                    </span>
+                </a>
+                <a href="#" target="_blank" class="item">
+                    <span>
+                        第一篇
+                        <div class="ui teal basic left pointing label">9.1</div>
+                    </span>
+                </a>
+                <a href="#" target="_blank" class="item">
+                    <span>
+                        第一篇
+                        <div class="ui teal basic left pointing label">9.1</div>
+                    </span>
+                </a>
+            </div>
+
+            <h1 class="ui center aligned teal header">2026</h1>
+            <div class="ui vertical fluid menu">
+                <a href="#" target="_blank" class="item">
+                    <span>
+                        第一篇
+                        <div class="ui teal basic left pointing label">9.1</div>
+                    </span>
+                </a>
+                <a href="#" target="_blank" class="item">
+                    <span>
+                        第一篇
+                        <div class="ui teal basic left pointing label">9.1</div>
+                    </span>
+                </a>
+                <a href="#" target="_blank" class="item">
+                    <span>
+                        第一篇
+                        <div class="ui teal basic left pointing label">9.1</div>
+                    </span>
+                </a>
+                <a href="#" target="_blank" class="item">
+                    <span>
+                        第一篇
+                        <div class="ui teal basic left pointing label">9.1</div>
+                    </span>
+                </a>
+            </div>
+
+            
+            <!--底部-->
+            <div class="ui bottom attached segment">
+                <div class="ui middle aligned two column grid">
+                    <div class="column">
+                        <a href="#" class="ui teal button">上一页</a>
+                    </div>
+                    <div class="right aligned column">
+                        <a href="#" class="ui teal button">下一页</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--底部-->
+<footer class="ui inverted vertical segment md-padded-tb-massive" th:replace="_fragments :: footer">
+</footer>
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<!--/*/</th:block>/*/-->
+
+<!--底下这串我看不懂，做互动的-->
+    <script>
+        /*做一个适应手机端的导航栏收缩按键*/
+        $('.menu.toggle').click(function(){
+            $('.md-item').toggleClass('md-mobile-hide');
+        });
+        
+    </script>
+
+    
+</body>
+</html>

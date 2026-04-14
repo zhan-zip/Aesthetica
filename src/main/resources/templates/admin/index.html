@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head th:replace="admin/_fragments :: head('欢迎登录')">
+    <title>管理员神秘区域</title>
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="admin/_fragments :: menu(1)">
+</nav>
+
+    <!--内容-->
+    <div class="md-pd-tb-massive">
+        <div class="ui container">
+            <div class="ui success large message">
+                <h2>欢迎登录喵</h2>
+                <img src="../../static/images/back.jpg" class="ui fluid image" th:src="@{/images/back.jpg}">
+            </div>
+        </div>
+    </div>
+
+    <!--底部-->
+    <footer class="ui inverted vertical segment md-padded-tb-massive" th:replace="admin/_fragments :: footer">
+    </footer>
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<!--/*/</th:block>/*/-->
+
+<!--底下这串我看不懂，做互动的-->
+    <script>
+        /*做一个适应手机端的导航栏收缩按键*/
+        $('.menu.toggle').click(function(){
+            $('.md-item').toggleClass('md-mobile-hide');
+        });
+        
+        /*头像下拉组件*/
+        $('.ui.dropdown').dropdown();
+    </script>
+
+    
+</body>
+</html>

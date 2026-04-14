@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head th:replace="admin/_fragments :: head('后台')">
+    <title>管理员神秘区域</title>
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="admin/_fragments :: menu(2)">
+</nav>
+    <!--二级导航-->
+    <div class="ui attached md-pd-tb-mini menu">
+        <div class="ui container">
+            <a href="#" class="item" th:href="@{/admin/types/input}">发布</a>
+            <a href="#" class="teal active item" th:href="@{/admin/types}">列表</a>
+        </div>
+    </div>
+
+    <!--内容-->
+    <div class="md-pd-tb-massive">
+        <div class="ui container">
+
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">提示</div>
+                <p th:text="${message}">操作成功</p>
+            </div>
+
+
+
+            <!--表格-->
+            <table class="ui table">
+                <!--表头-->
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>名称</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <!--内容-->
+                <tbody>
+                    <tr th:each="type,iterStat : ${page.content}">
+                        <td th:text="${iterStat.count}">1</td>
+                        <td th:text="${type.name}">133</td>
+                        <td>
+                            <a href="#" class="ui teal button" th:href="@{/admin/types/{id}/input(id=${type.id})}">编辑</a>
+                            <a href="#" class="ui red button" th:href="@{/admin/types/{id}/delete(id=${type.id})}">删除</a>
+                        </td>
+                    </tr>
+
+                </tbody>
+                <!--表底部-->
+                <tfoot>
+                    <tr>
+                        <th colspan="6">
+                            <div class="ui pagination menu">
+                                <a class="item" th:href="@{/admin/types(page=${page.number}-1)}">上一页</a>
+                                <a class="item" th:href="@{/admin/types(page=${page.number}+1)}">下一页</a>
+                            </div>
+                            <a href="#" class="ui right floated teal button" th:href="@{/admin/types/input}">新增</a>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!--底部-->
+    <footer class="ui inverted vertical segment md-padded-tb-massive" th:replace="admin/_fragments :: footer">
+    </footer>
+    <!--/*/<th:block th:replace="_fragments :: script">/*/-->
+    <!--/*/</th:block>/*/-->
+<!--底下这串我看不懂，做互动的-->
+    <script>
+        /*做一个适应手机端的导航栏收缩按键*/
+        $('.menu.toggle').click(function(){
+            $('.md-item').toggleClass('md-mobile-hide');
+        });
+        
+        /*头像下拉组件*/
+        $('.ui.dropdown').dropdown();
+
+        /*关闭消息提示*/
+        $('.message .close')
+            .on('click',function () {
+                $(this)
+                    .closest('.message')
+                    .transition('fade');
+            });
+    </script>
+
+    
+</body>
+</html>
