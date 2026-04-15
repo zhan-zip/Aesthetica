@@ -29,7 +29,7 @@ public class IndexController {
         model.addAttribute("page",blogService.listBlog(pageable));
         model.addAttribute("types",typeService.listTypeTop(6)); //嗯显示几个分类
 
-        List<Long> recommendIds = Arrays.asList(252L, 253L, 254L);  // 写死的推荐博客id
+        List<Long> recommendIds = Arrays.asList(1L, 2L, 3L);  // 写死的推荐博客id
         List<Blog> recommendBlogs = new ArrayList<>();
         for (Long id : recommendIds) {
             Blog b = blogService.getBlog(id);
