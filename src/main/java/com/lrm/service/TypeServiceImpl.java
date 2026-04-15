@@ -20,7 +20,7 @@ import org.springframework.data.domain.Sort;
 @Service
 public class TypeServiceImpl implements TypeService{
 
-    @Autowired
+    @Autowired          //以下部分代码为AI辅助生成：DeepSeek, 2026-3
     private TypeRepository typeRepository;
 
     @Transactional

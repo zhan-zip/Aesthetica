@@ -24,12 +24,12 @@ public class IndexController {
     @Autowired
     private TypeService typeService;
 
-    @GetMapping("/")
+    @GetMapping("/")            //以下部分代码为AI辅助生成：DeepSeek, 2026-3
     public String index(@PageableDefault(size = 4,sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model) {
         model.addAttribute("page",blogService.listBlog(pageable));
-        model.addAttribute("types",typeService.listTypeTop(6)); //嗯显示几个分类
+        model.addAttribute("types",typeService.listTypeTop(6));
 
-        List<Long> recommendIds = Arrays.asList(1L, 2L, 3L);  // 写死的推荐博客id
+        List<Long> recommendIds = Arrays.asList(1L, 2L, 3L);  // 这里写了的推荐博客id
         List<Blog> recommendBlogs = new ArrayList<>();
         for (Long id : recommendIds) {
             Blog b = blogService.getBlog(id);

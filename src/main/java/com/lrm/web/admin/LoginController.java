@@ -30,7 +30,7 @@ public class LoginController {
         return "admin/login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/login")              //AI辅助生成：DeepSeek, 2026-2-27
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         HttpSession session,

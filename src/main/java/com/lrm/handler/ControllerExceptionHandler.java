@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-@ControllerAdvice
+@ControllerAdvice           //以下部分代码为AI辅助生成：DeepSeek, 2026-2-27
 public class ControllerExceptionHandler {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Autowired          //以下部分代码为AI辅助生成：DeepSeek, 2026-3
     private UserRepository userRepository;
 
     @Override

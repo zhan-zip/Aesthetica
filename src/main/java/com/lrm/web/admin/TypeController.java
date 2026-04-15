@@ -57,7 +57,7 @@ public class TypeController {
     public String post(@Valid Type type, BindingResult result, RedirectAttributes attributes) {
         Type type2 = typeService.getTypeByName(type.getName());
         if(type2 != null) {
-            result.rejectValue("name","nameError","不能重复添加分类");
+            result.rejectValue("name","nameError","不能重复添加分类");      //以下部分代码为AI辅助生成：DeepSeek, 2026-2-27
         }
 
         if (result.hasErrors()) {

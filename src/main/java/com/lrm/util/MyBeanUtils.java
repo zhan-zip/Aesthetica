@@ -7,7 +7,7 @@ import java.beans.PropertyDescriptor;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyBeanUtils {
+public class MyBeanUtils {          //以下代码为AI辅助生成：DeepSeek, 2026-3
     public static String[] getNullPropertyNames(Object source) {
         BeanWrapper beanWrapper = new BeanWrapperImpl(source);
         PropertyDescriptor[] pds = beanWrapper.getPropertyDescriptors();

@@ -2,7 +2,7 @@ package com.lrm.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class MD5Utils {
+public class MD5Utils {         //使用了开源的MD5加密功能
 
     /**
      * MD5加密类

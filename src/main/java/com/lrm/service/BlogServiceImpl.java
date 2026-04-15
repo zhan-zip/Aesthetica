@@ -35,7 +35,7 @@ public class BlogServiceImpl implements BlogService{
     }
 
     @Override
-    public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
+    public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {         //以下部分代码为AI辅助生成：DeepSeek, 2026-3
         return blogRepository.findAll(new Specification<Blog>() {
             @Override
             public @Nullable Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
