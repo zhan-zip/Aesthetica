@@ -8,7 +8,8 @@ tb:top&bottom也即上下
 
 /*背景*/
 body {
-    background: url('../images/back.jpg') no-repeat fixed center;       //以下部分代码为AI辅助生成：DeepSeek, 2026-2-21
+    /* background: url('../images/back.jpg') no-repeat fixed center; */
+    background: #ffffff;
     display: flex !important;
     flex-direction: column !important;
     min-height: 100vh !important;
@@ -114,3 +115,6 @@ footer {
         display: block !important;
     }
 }
+
+
+

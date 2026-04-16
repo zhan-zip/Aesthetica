@@ -1,129 +1,618 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head th:replace="_fragments :: head('首页')">
-    <title>首页</title>
+<head>              //以下由ai辅助生成，2026-4-16
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 | Aesthetica</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========= 所有样式保持不变 ========= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #404e5b;
+            --gray-brown: #948f8c;
+            --light-blue-gray: #8fa0b8;
+            --accent-blue: #5a7d9a;
+            --bg-color: #F0F4F8;
+            --text-main: #4e5e6b;
+            --text-secondary: #6c7c8c;
+            --card-bg: #ffffff;
+            --shadow: rgba(148, 143, 140, 0.15);
+        }
+
+        body {
+            background-color: #ffffff;
+            font-family: 'Inter', 'Source Han Sans SC', '思源黑体', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 3rem 1rem 3rem 0;
+            padding-top: 5rem;
+        }
+
+        h1, h2, h3, h4, .serif {
+            font-family: 'Noto Serif SC', 'Source Han Serif SC', '思源宋体', Georgia, serif;
+            font-weight: 400;
+        }
+
+        /* ========= 右上角方块导航 ========= */
+        .corner-nav {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 2000;
+        }
+
+        .nav-trigger {
+            width: 52px;
+            height: 52px;
+            background-color: #8fa0b8;
+            border-radius: 0;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .nav-trigger:hover {
+            background-color:#677b8f;
+            transform: scale(1.02);
+        }
+
+        .nav-trigger span {
+            width: 24px;
+            height: 2px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .nav-trigger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .nav-trigger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-trigger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ========= 弹出菜单 ========= */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 25%;
+            height: 100vh;
+            background-color: var(--card-bg);
+            box-shadow: -4px 0 24px var(--shadow);
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            z-index: 2001;
+        }
+
+        .nav-menu.open {
+            transform: translateX(0);
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            padding: 2rem 0;
+        }
+
+        .nav-menu li a {
+            display: block;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            transition: all 0.2s;
+            border-bottom: 1px solid var(--gray-brown);
+            text-align: left;
+        }
+
+        .nav-menu li:first-child a {
+            border-top: 1px solid var(--gray-brown);
+        }
+
+        .nav-menu li a:hover {
+            background-color: rgba(143, 160, 184, 0.15);
+            color: var(--accent-blue);
+            padding-left: 2.5rem;
+        }
+
+        .nav-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            background-color: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-menu-close:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.3);
+            backdrop-filter: blur(2px);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ========= 左侧上下轮播图样式 ========= */
+        .left-roll {
+            height: 800px;
+            background-color: #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-container-vertical {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-item-vertical {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            visibility: hidden;
+        }
+
+        .carousel-item-vertical.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .carousel-title-vertical {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 0;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .carousel-subtitle-vertical {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 0;
+            line-height: 1.5;
+        }
+
+        .carousel-number {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 5rem;
+            font-weight: 300;
+            color: var(--gray-brown);
+            line-height: 1;
+        }
+
+        .carousel-prev,
+        .carousel-next {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 48px;
+            height: 48px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .carousel-prev:hover,
+        .carousel-next:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .carousel-prev {
+            top: 20px;
+        }
+
+        .carousel-next {
+            bottom: 20px;
+        }
+
+        .four.wide.column {
+            margin-left: -2rem;
+        }
+
+        .twelve.wide.column {
+            padding-left: 4rem !important;
+        }
+
+        .intro-box {
+            background-color: rgba(255, 255, 255, 0.88);
+            padding: 3rem 3rem;
+            box-shadow: 0 4px 12px var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .intro-box h1 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .intro-box p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .featured-box {
+            flex: 1;
+            background-color: var(--card-bg);
+            padding: 2rem 2rem 1rem 2rem;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .categories-box {
+            flex: 1;
+            background-color: var(--card-bg);
+            padding: 2rem 2rem 1rem 2rem;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .section-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-top: 1px solid var(--gray-brown);
+            margin-top: 40px;
+        }
+
+        .featured-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--gray-brown);
+        }
+
+        .featured-item:last-child {
+            border-bottom: none;
+        }
+
+        .featured-item a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .featured-item a:hover {
+            color: var(--accent-blue);
+        }
+
+        .featured-category {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            background-color: rgba(143, 160, 184, 0.15);
+            padding: 0.2rem 0.6rem;
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--gray-brown);
+        }
+
+        .category-item:last-child {
+            border-bottom: none;
+        }
+
+        .category-item a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .category-item a:hover {
+            color: var(--accent-blue);
+        }
+
+        .category-count {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            background-color: rgba(143, 160, 184, 0.15);
+            padding: 0.2rem 0.6rem;
+        }
+
+        @media (max-width: 1000px) {
+            .left-roll {
+                height: 400px;
+            }
+            .nav-menu {
+                width: 60%;
+            }
+            .twelve.wide.column {
+                padding-left: 1rem !important;
+            }
+            .four.wide.column {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .corner-nav {
+                top: 16px;
+                right: 16px;
+            }
+            .nav-trigger {
+                width: 44px;
+                height: 44px;
+            }
+            .nav-menu {
+                width: 80%;
+            }
+        }
+    </style>
 </head>
 <body>
-<!--导航-->
-    <nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="_fragments :: menu(1)">
-    </nav>
 
-    <!--内容-->
-    <div class="md-pd-tb-massive">
-        <div class="ui container">
-            <div class="ui grid">
-                <!--左边博客列表-->
-                <div class="twelve wide column">
-                    <!--头部-->
-                    <div class="ui attached segment">
-                        <div class="ui middle aligned two column grid">
-                            <div class="column">
-                                <h1 class="ui teal header">Aesthetica</h1>
-                            </div>
-                            <div class="right aligned column">
-                                目前共<h3 class="ui teal header md-inline-block" th:text="${page.totalElements}"></h3>篇博客
-                            </div>
-                        </div>
+<!-- ========= 右上角导航（静态，无需修改） ========= -->
+<div class="corner-nav">
+    <div class="nav-trigger" id="navTrigger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<div class="nav-menu" id="navMenu">
+    <button class="nav-menu-close" id="navMenuClose">✕</button>
+    <ul>
+        <li><a href="/" th:href="@{/}">首页</a></li>
+        <li><a href="/timeline" th:href="@{/timeline}">归档线轴</a></li>
+        <li><a href="/about" th:href="@{/about}">关于网站</a></li>
+    </ul>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- ========= 主要内容 ========= -->
+<div class="ui container">
+    <div class="ui grid">
+        <!-- 左侧轮播图（静态，保持原样） -->
+        <div class="four wide column">
+            <div class="left-roll" id="verticalCarousel">
+                <div class="carousel-container-vertical">
+                    <div class="carousel-item-vertical active">
+                        <div class="carousel-number">01</div>
+                        <div class="carousel-title-vertical">美学源流</div>
+                        <div class="carousel-subtitle-vertical">ORIGINS</div>
                     </div>
-                    <!--内容-->
-                    <div class="ui attached segment">
-                        <div class="ui padded vertical segment md-pd-tb-massive">
-                            <div class="ui grid" th:each="blog : ${page.content}">
-                                <div class="twelve wide column">        //以下为AI辅助修改源代码：DeepSeek, 2026-4-14
-                                    <h3 class="ui header"><a th:href="@{/blog/{id}(id=${blog.id})}" th:text="${blog.title}">标题</a></h3>
-                                    <p class="md-tt-spaced" th:text="${#strings.abbreviate(blog.content, 100)}">摘要</p>
-                                    <div class="ui grid">
-                                        <div class="twelve wide column">
-                                            <div class="ui horizontal list">
-                                                <div class="item">
-                                                    <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank">
-                                                    <img src="/images/back.jpg" class="ui rounded image" alt="" th:src="@{/images/back.jpg}" style="width: 500px">      //AI辅助生成：DeepSeek, 2026-4-14
-                                                    </a>
-                                                </div>
-                                                <div class="item">
-                                                    <i class="calendar alternate icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">日期</span>
-                                                </div>
-                                            </div>
+                    <div class="carousel-item-vertical">
+                        <div class="carousel-number">02</div>
+                        <div class="carousel-title-vertical">形态经典</div>
+                        <div class="carousel-subtitle-vertical">FORMS</div>
+                    </div>
+                    <div class="carousel-item-vertical">
+                        <div class="carousel-number">03</div>
+                        <div class="carousel-title-vertical">审美经验</div>
+                        <div class="carousel-subtitle-vertical">EXPERIENCE</div>
+                    </div>
+                </div>
+                <button class="carousel-prev" id="carouselPrev">←</button>
+                <button class="carousel-next" id="carouselNext">→</button>
+            </div>
+        </div>
+
+        <!-- 右侧内容 -->
+        <div class="twelve wide column">
+            <div class="ui grid" style="height: 100%;">
+                <!-- 介绍框（静态） -->
+                <div class="sixteen wide column">
+                    <div class="intro-box">
+                        <h1>美哉·美哉——美学知识科普平台</h1>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aesthetica，意为感性学，即美学，该词由德国理性主义哲学家鲍姆嘉通发明，1750年同名著作的发表代表着美学学科的建立。</p>
+                    </div>
+                </div>
+
+                <!-- 关于网站框（静态） -->
+                <div class="sixteen wide column">
+                    <div class="about-box">
+                        <h2>关于网站</h2>
+                        <p>Aesthetica 美学知识库致力于构建系统性的美学知识谱系，以《美学原理》教材为骨架，通过六大板块梳理美学脉络，为美学爱好者提供深度、专业的知识内容。</p>
+                    </div>
+                </div>
+
+                <!-- 推荐内容 + 分类区域（动态数据） -->
+                <div class="row" style="margin-top: auto;">
+                    <div class="sixteen wide column">
+                        <div style="display: flex; gap: 2rem;">
+                            <!-- 推荐内容区域 -->
+                            <div style="flex: 1;">
+                                <div class="featured-box">
+                                    <div class="section-label">或许你会感兴趣</div>
+                                    <div style="border-top: 1px solid var(--gray-brown); margin: 0.5rem 0 1rem 0;"></div>
+                                    <div class="featured-list">
+                                        <div th:each="blog : ${recommendBlogs}" class="featured-item">
+                                            <a th:href="@{/blog/{id}(id=${blog.id})}" th:text="${blog.title}">文章标题</a>
+                                            <span class="featured-category" th:text="${blog.type.name}">分类</span>
                                         </div>
-                                        <div class="right aligned four wide column">
-                                            <a href="#" target="_blank" class="ui label" th:text="${blog.type.name}">分类</a>
+                                        <!-- 如果推荐内容为空，显示占位提示 -->
+                                        <div th:if="${#lists.isEmpty(recommendBlogs)}" class="featured-item">
+                                            <span>暂无推荐内容</span>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                            </div>
-                        </div>
-                    </div>
-                    <!--底部-->
-                    <div class="ui bottom attached segment">
-                        <div class="ui middle aligned two column grid">
-                            <div class="column">
-                                <a class="ui teal button" th:href="@{/(page=${page.number-1})}">上一页</a>
-                            </div>
-                            <div class="right aligned column">
-                                <a class="ui teal button" th:href="@{/(page=${page.number+1})}">下一页</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--右边博客TOP-->
-                <div class="four wide column">
-                    <!--分类-->
-                    <div class="ui attached segments">      //以下为AI辅助修改源代码：DeepSeek, 2026-4-13
-                        <div class="ui secondary segment">
-                            <div class="ui two column grid">
-                                <div class="column">
-                                    <i class="idea icon"></i>分类
-                                </div>
-                                <div class="right aligned column">
-                                    <a href="#">更多内容 >></a>
+                            <!-- 分类区域 -->
+                            <div style="flex: 1;">
+                                <div class="categories-box">
+                                    <div class="section-label">分类</div>
+                                    <div style="border-top: 1px solid var(--gray-brown); margin: 0.5rem 0 1rem 0;"></div>
+                                    <div class="category-list">
+                                        <div th:each="type : ${types}" class="category-item">
+                                            <a th:href="@{/types/{id}(id=${type.id})}" th:text="${type.name}">分类名称</a>
+                                            <span class="category-count" th:text="${type.blogs.size()} + '篇'">0篇</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="ui segment">
-                            <div class="ui fluid vertical menu">
-                                <a th:each="type : ${types}" th:href="@{/types/{id}(id=${type.id})}" class="item">
-                                    <span th:text="${type.name}">分类名称</span>
-                                    <div class="ui teal basic label" th:text="${type.blogs.size()}">0</div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--最新推荐-->
-                    <div class="ui segments">       //以下为AI辅助修改源代码：DeepSeek, 2026-4-13
-                        <div class="ui secondary segment">
-                            <div class="ui two column grid">
-                                <div class="column">
-                                    <i class="bookmark icon"></i>推荐内容
-                                </div>
-                            </div>
-                        </div>
-                        <div th:each="blog : ${recommendBlogs}" class="ui segment">
-                            <a th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" th:text="${blog.title}">内容One</a>
-                        </div>
-                    </div>
-                    <!--二维码-->
-                    <div class="ui horizontal divider header">加我好友！</div>
-                    <div class="ui center card">
-                        <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!--底部-->
-    <footer class="ui inverted vertical segment md-padded-tb-massive" th:replace="_fragments :: footer">
-    </footer>
-    <!--/*/<th:block th:replace="_fragments :: script">/*/-->
-    <!--/*/</th:block>/*/-->
+<div class="footer">
+    <p>Aesthetica © 2026</p>
+</div>
 
-<!--底下这串我看不懂，适应手机端的-->
-    <script>
-        $('.menu.toggle').click(function(){
-            $('.md-item').toggleClass('md-mobile-hide');
+<!-- ========= 脚本 ========= -->
+<script>
+    // 上下轮播图逻辑（保持不变）
+    (function() {
+        const items = document.querySelectorAll('.carousel-item-vertical');
+        const prevBtn = document.getElementById('carouselPrev');
+        const nextBtn = document.getElementById('carouselNext');
+        let currentIndex = 0;
+        const totalItems = items.length;
+
+        function showItem(index) {
+            items.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        function nextItem() {
+            currentIndex = (currentIndex + 1) % totalItems;
+            showItem(currentIndex);
+        }
+
+        function prevItem() {
+            currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            showItem(currentIndex);
+        }
+
+        if (prevBtn) prevBtn.addEventListener('click', prevItem);
+        if (nextBtn) nextBtn.addEventListener('click', nextItem);
+    })();
+
+    // 导航交互（保持不变）
+    (function() {
+        const trigger = document.getElementById('navTrigger');
+        const menu = document.getElementById('navMenu');
+        const overlay = document.getElementById('navOverlay');
+        const closeBtn = document.getElementById('navMenuClose');
+
+        function openMenu() {
+            trigger.classList.add('open');
+            menu.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            trigger.classList.remove('open');
+            menu.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function toggleMenu() {
+            if (menu.classList.contains('open')) closeMenu();
+            else openMenu();
+        }
+
+        trigger.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', closeMenu);
+        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+        const menuLinks = menu.querySelectorAll('ul li a');
+        menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
         });
-    </script>
+    })();
+</script>
 </body>
 </html>
