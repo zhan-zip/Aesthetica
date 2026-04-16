@@ -96,5 +96,10 @@ public class IndexController {
         return "admin/types-input";
     }
 
+    @GetMapping("/bobbin")
+    public String bobbin() {
+        return "bobbin";
+    }
+
 
 }

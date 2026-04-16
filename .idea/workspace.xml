@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-更改了注释部分，显示异常问题" />
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-更改了注释部分，显示异常问题">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -319,7 +325,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776316327415</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="-更改了注释部分，显示异常问题">
+      <option name="closed" value="true" />
+      <created>1776320160584</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1776320160584</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
