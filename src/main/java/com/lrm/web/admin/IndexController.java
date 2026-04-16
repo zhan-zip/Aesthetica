@@ -38,6 +38,7 @@ public class IndexController {
             }
         }
         model.addAttribute("recommendBlogs", recommendBlogs);
+        model.addAttribute("latestBlogs", blogService.getLatestBlogs(10));      //ai辅助4-16
 
         System.out.println("--index控制器执行了---");
         return "index";

@@ -17,7 +17,7 @@
     <!--内容-->
     <div class="md-pd-tb-massive">
         <div class="ui container">
-            <form action="#" method="post" class="ui form" th:action="@{/admin/blogs}" id="blog-form" th:object="${blog}">
+            <form action="#" method="post" class="ui form" th:action="@{/admin/blogs}" id="blog-form" th:object="${blog}" enctype="multipart/form-data">
                 <input type="hidden" name="published">
                 <input type="hidden" name="id" th:value="*{id}">
                 <!--标题栏-->
@@ -58,11 +58,15 @@
                             </div>
                         </div>
                 </div>
+                <!-ai辅助4-16->
                 <div class="required field">
                     <div class="ui left labeled input">
                         <label class="ui teal basic label">首图</label>
-                        <input type="text" name="firstPicture" placeholder="首图地址" th:value="*{firstPicture}">
+                        <input type="text" name="firstPicture" placeholder="首图地址" th:value="*{firstPicture}" id="firstPictureInput">
+                        <button type="button" id="uploadImageBtn" class="ui button">上传图片</button>
                     </div>
+                    <input type="file" id="imageFile" style="display: none;" accept="image/jpeg,image/png,image/gif,image/webp">
+                    <div id="uploadProgress" style="display: none; color: green;">上传中...</div>
                 </div>
                 <!--表单错误信息显示-->
                 <div class="ui error message"></div>
@@ -108,6 +112,38 @@
                 });
             });
 
+            // 图片上传功能
+$('#uploadImageBtn').click(function() {
+    $('#imageFile').click();
+});
+$('#imageFile').change(function() {
+    var file = this.files[0];
+    if (!file) return;
+    var formData = new FormData();
+    formData.append('file', file);
+    $('#uploadProgress').show();
+    $.ajax({
+        url: '/upload/image',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            $('#uploadProgress').hide();
+            if (response.url) {
+                $('#firstPictureInput').val(response.url);
+                alert('上传成功');
+            } else if (response.error) {
+                alert(response.error);
+            }
+        },
+        error: function(xhr) {
+            $('#uploadProgress').hide();
+            alert('上传失败：' + (xhr.responseJSON?.error || '服务器错误'));
+        }
+    });
+});
+
         /*做一个适应手机端的导航栏收缩按键*/
         $('.menu.toggle').click(function(){
             $('.md-item').toggleClass('md-mobile-hide');
@@ -140,13 +176,6 @@
                         prompt:'请输入分类名称'
                     }]
                 },
-                firstPicture : {
-                    identifier:'firstPicture',
-                    rules:[{
-                        type : 'empty',
-                        prompt:'请输入首图地址'
-                    }]
-                }
             }
         });
 

@@ -15,7 +15,9 @@ import org.jspecify.annotations.Nullable;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import com.lrm.util.MyBeanUtils;
@@ -91,5 +93,11 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public Page<Blog> listBlog(Pageable pageable) {
         return blogRepository.findByPublishedTrue(pageable);
+    }
+
+    @Override       //ai辅助4-16
+    public List<Blog> getLatestBlogs(int limit) {
+        Pageable pageable = PageRequest.of(0, limit, Sort.by(Sort.Direction.DESC, "updateTime"));
+        return blogRepository.findAll(pageable).getContent();
     }
 }

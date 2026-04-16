@@ -178,7 +178,6 @@
        /* ========= 左侧上下轮播图样式 ========= */
        .left-roll {
            height: 800px;
-           background-color: #f0f0f0;
            position: relative;
            overflow: hidden;
        }
@@ -190,15 +189,21 @@
        }
 
        .carousel-item-vertical {
-           position: absolute;
-           top: 0;
-           left: 0;
-           width: 100%;
-           height: 100%;
-           opacity: 0;
-           transition: opacity 0.5s ease-in-out;
-           visibility: hidden;
-       }
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    visibility: hidden;
+}
+/* 新增：让内部图片容器填满整个区域 */
+.carousel-item-vertical > a,
+.carousel-item-vertical > a > div {
+    width: 100%;
+    height: 100%;
+}
 
        .carousel-item-vertical.active {
            opacity: 1;
@@ -211,24 +216,29 @@
            left: 2rem;
            writing-mode: vertical-lr;
            text-orientation: upright;
-           font-size: 1.8rem;
-           font-weight: 400;
+           font-size: 2.5rem;
+           font-weight: 800;
            letter-spacing: 0;
-           color: var(--primary);
+           color: #404e5b;
            line-height: 1.2;
+           font-family: 'Noto Serif SC', 'Source Han Serif SC', '思源宋体', Georgia, serif;
        }
 
        .carousel-subtitle-vertical {
-           position: absolute;
-           top: 2rem;
-           right: 2rem;
-           writing-mode: vertical-lr;
-           text-orientation: upright;
-           font-size: 0.85rem;
-           color: var(--text-secondary);
-           letter-spacing: 0;
-           line-height: 1.5;
-       }
+    position: absolute;
+    top: 2rem;
+    right: 1rem;               /* 调整距离右边界的距离 */
+    writing-mode: vertical-lr;
+    text-orientation: mixed;   /* 让文字正常显示（不旋转） */
+    font-size: 1.0rem;
+    color: #404e5b;
+    letter-spacing: 0;
+    line-height: 1.5;
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', '思源宋体', Georgia, serif;
+    max-width: 2rem;           /* 限制最大宽度，避免撑开 */
+
+    z-index: 2;
+}
 
        .carousel-number {
            position: absolute;
@@ -452,24 +462,19 @@
 <!-- ========= 主要内容 ========= -->
 <div class="ui container">
     <div class="ui grid">
-        <!-- 左侧轮播图（静态，保持原样） -->
+        <!-- 左侧轮播图（动态绑定最新10篇文章） -->
         <div class="four wide column">
             <div class="left-roll" id="verticalCarousel">
                 <div class="carousel-container-vertical">
-                    <div class="carousel-item-vertical active">
-                        <div class="carousel-number">01</div>
-                        <div class="carousel-title-vertical">美学源流</div>
-                        <div class="carousel-subtitle-vertical">ORIGINS</div>
-                    </div>
-                    <div class="carousel-item-vertical">
-                        <div class="carousel-number">02</div>
-                        <div class="carousel-title-vertical">形态经典</div>
-                        <div class="carousel-subtitle-vertical">FORMS</div>
-                    </div>
-                    <div class="carousel-item-vertical">
-                        <div class="carousel-number">03</div>
-                        <div class="carousel-title-vertical">审美经验</div>
-                        <div class="carousel-subtitle-vertical">EXPERIENCE</div>
+                    <div th:each="blog, iterStat : ${latestBlogs}" class="carousel-item-vertical" th:classappend="${iterStat.first} ? 'active'">
+                        <a th:href="@{/blog/{id}(id=${blog.id})}" style="display: block; width: 100%; height: 100%; position: relative; text-decoration: none;">
+                            <!-- 背景图：占满整个框，居中裁剪，z-index 设为 0 放在最底层 -->
+                            <div th:style="'background-image: url(' + (${blog.firstPicture} != null ? @{${blog.firstPicture}} : '/images/back.jpg') + '); background-size: cover; background-position: center; width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 0;'"></div>
+                            <!-- 左上角标题（竖向） -->
+                            <div class="carousel-title-vertical" th:text="${blog.title}">标题</div>
+                            <!-- 右上角简介（竖向） -->
+                            <div class="carousel-subtitle-vertical" th:text="${#strings.abbreviate(blog.content, 50)}">简介</div>
+                        </a>
                     </div>
                 </div>
                 <button class="carousel-prev" id="carouselPrev">←</button>

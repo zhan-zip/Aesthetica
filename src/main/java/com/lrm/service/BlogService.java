@@ -16,4 +16,6 @@ public interface BlogService {
     Blog updateBlog(Long id,Blog blog);
     void deleteBlog(Long id);
     Page<Blog> listBlog(Pageable pageable);
+
+    List<Blog> getLatestBlogs(int limit);   //ai辅助4-16
 }
