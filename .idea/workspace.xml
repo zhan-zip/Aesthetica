@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-增加了代码使用ai等的说明注释&#10;-上传了新的首页前端">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-更改了注释部分，显示异常问题" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -306,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776315044393</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="-更改了注释部分，显示异常问题">
+      <option name="closed" value="true" />
+      <created>1776316032075</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1776316032075</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -352,7 +357,8 @@
     <MESSAGE value="-测试写死的文章id能不能在主页推送内容显示" />
     <MESSAGE value="-增加了代码使用ai等的说明注释" />
     <MESSAGE value="-增加了代码使用ai等的说明注释&#10;-上传了新的首页前端" />
-    <option name="LAST_COMMIT_MESSAGE" value="-增加了代码使用ai等的说明注释&#10;-上传了新的首页前端" />
+    <MESSAGE value="-更改了注释部分，显示异常问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="-更改了注释部分，显示异常问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
