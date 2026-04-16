@@ -4,22 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-增加了代码使用ai等的说明注释">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/index--.html" afterDir="false" />
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-增加了代码使用ai等的说明注释&#10;-上传了新的首页前端">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/me_define.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/me_define.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/logback-spring.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/me_define.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/me_define.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/typo.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/typo.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/blogs-input.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/blogs-input.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/me.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/tag.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/types.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/types.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -311,7 +298,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776254665871</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="-增加了代码使用ai等的说明注释&#10;-上传了新的首页前端">
+      <option name="closed" value="true" />
+      <created>1776315044393</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1776315044393</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -356,7 +351,8 @@
     <MESSAGE value="-为了重新上传到新的git仓库做了一些修改" />
     <MESSAGE value="-测试写死的文章id能不能在主页推送内容显示" />
     <MESSAGE value="-增加了代码使用ai等的说明注释" />
-    <option name="LAST_COMMIT_MESSAGE" value="-增加了代码使用ai等的说明注释" />
+    <MESSAGE value="-增加了代码使用ai等的说明注释&#10;-上传了新的首页前端" />
+    <option name="LAST_COMMIT_MESSAGE" value="-增加了代码使用ai等的说明注释&#10;-上传了新的首页前端" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
