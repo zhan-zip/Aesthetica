@@ -311,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776316032075</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="-更改了注释部分，显示异常问题">
+      <option name="closed" value="true" />
+      <created>1776316327414</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1776316327415</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
