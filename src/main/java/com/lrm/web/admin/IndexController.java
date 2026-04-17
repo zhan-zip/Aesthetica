@@ -126,5 +126,10 @@ public class IndexController {
         return "admin/types-input";
     }
 
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
 
 }
