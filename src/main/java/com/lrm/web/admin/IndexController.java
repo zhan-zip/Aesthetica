@@ -1,8 +1,9 @@
 package com.lrm.web.admin;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import com.lrm.po.Blog;
+import com.lrm.po.Type;
 import com.lrm.service.BlogService;
 import com.lrm.service.TypeService;
 import com.lrm.vo.BlogQuery;
@@ -46,7 +47,7 @@ public class IndexController {
 
 
 
-    @GetMapping("/archives")
+    @GetMapping("/archives")        //归档页，去掉了
     public String archives() {
         return "archives";
     }
@@ -60,6 +61,34 @@ public class IndexController {
         }
         model.addAttribute("blog", blog);
         return "blog";
+    }
+
+    @GetMapping("/bobbin")      //ds4-17
+    public String bobbin(Model model) {
+        List<Type> types = typeService.listTypeTop(10);
+
+        // 构建数据：分类名称 -> {count, articles}
+        Map<String, Map<String, Object>> categoryData = new LinkedHashMap<>();
+        for (Type type : types) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("count", type.getBlogs().size());
+
+            // 获取该分类下的所有文章（包含 id 和 title）
+            List<Map<String, Object>> articles = type.getBlogs().stream()
+                    .map(blog -> {
+                        Map<String, Object> article = new HashMap<>();
+                        article.put("id", blog.getId());
+                        article.put("title", blog.getTitle());
+                        return article;
+                    })
+                    .collect(Collectors.toList());
+            data.put("articles", articles);
+
+            categoryData.put(type.getName(), data);
+        }
+
+        model.addAttribute("categoryData", categoryData);
+        return "bobbin";
     }
 
     @GetMapping("/tag")
@@ -95,11 +124,6 @@ public class IndexController {
     @GetMapping("/typesInput")
     public String typesInput() {
         return "admin/types-input";
-    }
-
-    @GetMapping("/bobbin")
-    public String bobbin() {
-        return "bobbin";
     }
 
 

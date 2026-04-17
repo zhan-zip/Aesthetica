@@ -383,6 +383,7 @@ transform: translateY(-50%);
   <ul>
     <li><a href="/" th:href="@{/}">首页</a></li>
     <li><a href="/bobbin" th:href="@{/bobbin}">归档线轴</a></li>
+    <li><a href="/admin" th:href="@{/admin}">后台</a></li>
     <li><a href="#">关于网站</a></li>
   </ul>
 </div>
@@ -402,7 +403,26 @@ transform: translateY(-50%);
 <button class="nav-switch nav-prev" id="navPrev">←</button>
 <button class="nav-switch nav-next" id="navNext">→</button>
 
-<script>
+<script th:inline="javascript">
+  // 固定6个分类
+const categories = [
+    { name: "导论", count: 0, articles: [] },
+    { name: "活动论", count: 0, articles: [] },
+    { name: "形态论", count: 0, articles: [] },
+    { name: "经验论", count: 0, articles: [] },
+    { name: "艺术论", count: 0, articles: [] },
+    { name: "教育论", count: 0, articles: [] }
+];
+
+// 从后端获取数据并填充
+const categoryData = /*[[${categoryData}]]*/ {};
+for (let i = 0; i < categories.length; i++) {
+    const name = categories[i].name;
+    if (categoryData[name]) {
+        categories[i].count = categoryData[name].count;
+        categories[i].articles = categoryData[name].articles;
+    }
+}
 
   // 导航交互
 (function() {
@@ -448,17 +468,10 @@ transform: translateY(-50%);
         }
     });
 })();
-  const categories = [
-      { name: "导论", count: 4, articles: ["美学的定义", "美学简史", "研究对象与方法", "美学与其他学科"] },
-      { name: "活动论", count: 3, articles: ["审美活动本质", "审美发生", "审美心理"] },
-      { name: "形态论", count: 5, articles: ["优美与崇高", "悲剧与喜剧", "丑与荒诞", "意境与韵味", "范畴演变"] },
-      { name: "经验论", count: 4, articles: ["审美感知", "审美情感", "审美想象", "审美理解"] },
-      { name: "艺术论", count: 6, articles: ["艺术定义", "艺术分类", "创作论", "作品论", "接受论", "艺术价值"] },
-      { name: "教育论", count: 3, articles: ["美育思想史", "美育与人格", "当代美育实践"] }
-  ];
 
-  const BASE_OFFSET = 40;
-  const UNIT = 35;
+
+  const BASE_OFFSET = 80;   //基础连接线长度
+  const UNIT = 40;    //一篇文章增加的值
   const ZOOM_SCALE = 2.1;
   const POPUP_WIDTH = 240;
   const SIDE_MARGIN_PERCENT = 5;
@@ -536,19 +549,15 @@ transform: translateY(-50%);
   function showPopup(node, cat) {
       const rect = node.getBoundingClientRect();
       let left, top;
-      const rightSpace = window.innerWidth - rect.right;
-      if (rightSpace < POPUP_WIDTH + 20) {
-          left = rect.left - POPUP_WIDTH - 12;
-      } else {
-          left = rect.right + 12;
-      }
+      // 强制显示在节点左侧
+left = rect.left - POPUP_WIDTH - 30;
       top = rect.top;
       if (top + 200 > window.innerHeight) top = window.innerHeight - 210;
       if (top < 10) top = 10;
       popup.style.left = `${left}px`;
       popup.style.top = `${top}px`;
       popupTitle.textContent = cat.name;
-      popupList.innerHTML = cat.articles.map(a => `<li><a href="#">${a}</a></li>`).join('');
+      popupList.innerHTML = cat.articles.map(a => `<li><a href="/blog/${a.id}">${a.title}</a></li>`).join('');
       popup.offsetHeight;
       popup.classList.add('visible');
   }

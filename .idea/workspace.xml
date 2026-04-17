@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-新增了导航栏后台选项">
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-修改了Index部分细节问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -395,7 +396,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776353454079</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="-修改了Index部分细节问题">
+      <option name="closed" value="true" />
+      <created>1776425228947</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1776425228947</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -449,7 +458,8 @@
     <MESSAGE value="-新增了ai使用说明注释" />
     <MESSAGE value="-新增了写死的推荐id列表用于在本地测试详情页" />
     <MESSAGE value="-调整了首页左侧轮换图上的标题和简介内容，与文章关联&#10;-实现配图与文章关联内容&#10;-实现配图不仅限于链接输入而能直接上传的功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="-调整了首页左侧轮换图上的标题和简介内容，与文章关联&#10;-实现配图与文章关联内容&#10;-实现配图不仅限于链接输入而能直接上传的功能" />
+    <MESSAGE value="-修改了Index部分细节问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="-修改了Index部分细节问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
