@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-修改了Index部分细节问题">
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-为线轴页的导航栏新增了后台选项&#10;-实现了将后端文章数据传入线轴页&#10;-为线轴页的文章列表添加了跳转链接&#10;-修改了线轴页文章列表为空时的默认连接线长度&#10;-修改了线轴页文章列表浮窗的位置">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/IndexController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -404,7 +406,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776425228947</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="-为线轴页的导航栏新增了后台选项&#10;-实现了将后端文章数据传入线轴页&#10;-为线轴页的文章列表添加了跳转链接&#10;-修改了线轴页文章列表为空时的默认连接线长度&#10;-修改了线轴页文章列表浮窗的位置">
+      <option name="closed" value="true" />
+      <created>1776427825537</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1776427825537</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,7 +444,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add gitignore" />
     <MESSAGE value="第一次提交博客项目" />
     <MESSAGE value="前台首页分类按数量显示功能" />
     <MESSAGE value="summary:完成前台首页推荐功能和博客详情页动态展示&#10;- 首页右侧分类按博客数量排序&#10;- 首页推荐内容暂时写死ID（252,253,254）&#10;- 博客详情页动态显示标题、作者、时间、分类、内容&#10;- 修复博客详情页空指针异常" />
@@ -459,7 +468,8 @@
     <MESSAGE value="-新增了写死的推荐id列表用于在本地测试详情页" />
     <MESSAGE value="-调整了首页左侧轮换图上的标题和简介内容，与文章关联&#10;-实现配图与文章关联内容&#10;-实现配图不仅限于链接输入而能直接上传的功能" />
     <MESSAGE value="-修改了Index部分细节问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="-修改了Index部分细节问题" />
+    <MESSAGE value="-为线轴页的导航栏新增了后台选项&#10;-实现了将后端文章数据传入线轴页&#10;-为线轴页的文章列表添加了跳转链接&#10;-修改了线轴页文章列表为空时的默认连接线长度&#10;-修改了线轴页文章列表浮窗的位置" />
+    <option name="LAST_COMMIT_MESSAGE" value="-为线轴页的导航栏新增了后台选项&#10;-实现了将后端文章数据传入线轴页&#10;-为线轴页的文章列表添加了跳转链接&#10;-修改了线轴页文章列表为空时的默认连接线长度&#10;-修改了线轴页文章列表浮窗的位置" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -67,18 +67,18 @@ public class IndexController {
     public String bobbin(Model model) {
         List<Type> types = typeService.listTypeTop(10);
 
-        // 构建数据：分类名称 -> {count, articles}
         Map<String, Map<String, Object>> categoryData = new LinkedHashMap<>();
         for (Type type : types) {
             Map<String, Object> data = new HashMap<>();
             data.put("count", type.getBlogs().size());
 
-            // 获取该分类下的所有文章（包含 id 和 title）
+            // 获取该分类下的所有文章（包含 id、title、firstPicture）
             List<Map<String, Object>> articles = type.getBlogs().stream()
                     .map(blog -> {
                         Map<String, Object> article = new HashMap<>();
                         article.put("id", blog.getId());
                         article.put("title", blog.getTitle());
+                        article.put("firstPicture", blog.getFirstPicture()); // 添加配图
                         return article;
                     })
                     .collect(Collectors.toList());

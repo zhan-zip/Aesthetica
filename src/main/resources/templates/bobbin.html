@@ -35,6 +35,8 @@
         overflow-x: hidden;
         margin: 0;
         padding: 2rem;
+        transition: background-image 1.0s ease-out, background-color 0.8s ease;
+}
     }
 
     h1, h2, h3, h4, .serif {
@@ -549,17 +551,53 @@ for (let i = 0; i < categories.length; i++) {
   function showPopup(node, cat) {
       const rect = node.getBoundingClientRect();
       let left, top;
-      // 强制显示在节点左侧
-left = rect.left - POPUP_WIDTH - 30;
+      // 获取节点索引
+    const nodeIndex = parseInt(node.dataset.index);
+
+    // 第一个节点（导论）特殊处理：显示在右侧
+    if (nodeIndex === 0) {
+        const rightSpace = window.innerWidth - rect.right;
+        if (rightSpace < POPUP_WIDTH + 20) {
+            left = rect.left - POPUP_WIDTH - 12;
+        } else {
+            left = rect.right + 170;
+        }
+    } else {
+        // 其他节点显示在左侧
+        left = rect.left - POPUP_WIDTH - 35;
+        if (left < 10) left = 10;
+    }
       top = rect.top;
       if (top + 200 > window.innerHeight) top = window.innerHeight - 210;
       if (top < 10) top = 10;
       popup.style.left = `${left}px`;
       popup.style.top = `${top}px`;
       popupTitle.textContent = cat.name;
-      popupList.innerHTML = cat.articles.map(a => `<li><a href="/blog/${a.id}">${a.title}</a></li>`).join('');
+      popupList.innerHTML = cat.articles.map(a => `<li><a href="/blog/${a.id}" data-image="${a.firstPicture || ''}">${a.title}</a></li>`).join('');
       popup.offsetHeight;
       popup.classList.add('visible');
+
+      // 显示浮层后，绑定悬浮事件
+setTimeout(() => {
+    const items = popupList.querySelectorAll('li a');
+    items.forEach(item => {
+        const imgUrl = item.dataset.image;
+        if (imgUrl) {
+            item.addEventListener('mouseenter', () => {
+                document.body.style.backgroundImage = `url(${imgUrl})`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+                document.body.style.backgroundColor = 'rgba(0,0,0,0.3)';
+                document.body.style.backgroundBlendMode = 'overlay';
+            });
+            item.addEventListener('mouseleave', () => {
+                document.body.style.backgroundImage = '';
+                document.body.style.backgroundColor = 'var(--bg-color)';
+                document.body.style.backgroundBlendMode = 'normal';
+            });
+        }
+    });
+}, 50);
   }
 
   function updateNavButtons() {
@@ -700,6 +738,34 @@ left = rect.left - POPUP_WIDTH - 30;
   navNext.addEventListener('click', goNext);
 
   buildNodes();
+
+  //接受参数放大节点
+  // 获取 URL 参数中的分类名称
+function getUrlParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+// 页面加载完成后，检查是否有指定分类
+document.addEventListener('DOMContentLoaded', function() {
+    const typeName = getUrlParameter('type');
+    if (typeName) {
+        // 找到对应的节点
+        const targetNode = Array.from(document.querySelectorAll('.node')).find(node => {
+            return node.querySelector('.node-info')?.innerText.includes(typeName);
+        });
+        if (targetNode) {
+            // 找到对应的分类数据
+            const targetCat = categories.find(cat => cat.name === typeName);
+            if (targetCat) {
+                // 延迟执行，确保节点已渲染完成
+                setTimeout(() => {
+                    zoomToNode(targetNode, targetCat);
+                }, 100);
+            }
+        }
+    }
+});
 </script>
 </body>
 </html>

@@ -222,6 +222,12 @@
            color: #404e5b;
            line-height: 1.2;
            font-family: 'Noto Serif SC', 'Source Han Serif SC', '思源宋体', Georgia, serif;
+           text-shadow:
+        -1px -1px 0 #ffffff,
+        1px -1px 0 #ffffff,
+        -1px 1px 0 #ffffff,
+        1px 1px 0 #ffffff,
+        0 0 2px #ffffff;
        }
 
        .carousel-subtitle-vertical {
@@ -236,8 +242,12 @@
     line-height: 1.5;
     font-family: 'Noto Serif SC', 'Source Han Serif SC', '思源宋体', Georgia, serif;
     max-width: 2rem;           /* 限制最大宽度，避免撑开 */
-
     z-index: 2;
+    text-shadow:
+        -1px -1px 0 rgba(255, 255, 255, 0.5),
+        1px -1px 0 rgba(255, 255, 255, 0.5),
+        -1px 1px 0 rgba(255, 255, 255, 0.5),
+        1px 1px 0 rgba(255, 255, 255, 0.5);
 }
 
        .carousel-number {
@@ -532,7 +542,7 @@
                                     <div style="border-top: 1px solid var(--gray-brown); margin: 0.5rem 0 1rem 0;"></div>
                                     <div class="category-list">
                                         <div th:each="type : ${types}" class="category-item">
-                                            <a th:href="@{/types/{id}(id=${type.id})}" th:text="${type.name}">分类名称</a>
+                                            <a th:href="@{/bobbin(type=${type.name})}" th:text="${type.name}">分类名称</a>
                                             <span class="category-count" th:text="${type.blogs.size()} + '篇'">0篇</span>
                                         </div>
                                     </div>
