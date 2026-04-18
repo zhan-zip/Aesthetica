@@ -7,13 +7,6 @@
 <!--导航-->
 <nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="admin/_fragments :: menu(2)">
 </nav>
-    <!--二级导航-->
-    <div class="ui attached md-pd-tb-mini menu">
-        <div class="ui container">
-            <a href="#" class="item" th:href="@{/admin/types/input}">发布</a>
-            <a href="#" class="teal active item" th:href="@{/admin/types}">列表</a>
-        </div>
-    </div>
 
     <!--内容-->
     <div class="md-pd-tb-massive">
@@ -65,11 +58,7 @@
         </div>
     </div>
 
-    <!--底部-->
-    <footer class="ui inverted vertical segment md-padded-tb-massive" th:replace="admin/_fragments :: footer">
-    </footer>
-    <!--/*/<th:block th:replace="_fragments :: script">/*/-->
-    <!--/*/</th:block>/*/-->
+<th:block th:replace="admin/_fragments :: script"></th:block>
 <!--底下这串我看不懂，做互动的-->
     <script>
         /*做一个适应手机端的导航栏收缩按键*/

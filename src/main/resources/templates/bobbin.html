@@ -35,7 +35,7 @@
         overflow-x: hidden;
         margin: 0;
         padding: 2rem;
-        transition: background-image 1.0s ease-out, background-color 0.8s ease;
+        transition: all 2.0s ease-out;
 }
     }
 
@@ -222,14 +222,20 @@
     }
 
     .node-dot {
-        width: 12px;
-        height: 12px;
-        background-color: var(--light-blue-gray);
-        border-radius: 50%;
-        transition: all 0.2s ease;
-        position: relative;
-        z-index: 3;
-    }
+    width: 12px;
+    height: 12px;
+    background-color: var(--light-blue-gray);
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    position: relative;
+    z-index: 3;
+}
+
+.node:hover .node-dot {
+    background-color: var(--accent-blue);
+    transform: scale(2.5);
+    box-shadow: 0 0 0 6px rgba(90, 125, 154, 0.3), 0 0 0 12px rgba(90, 125, 154, 0.15);
+}
 
     .node-line {
         position: absolute;
@@ -255,7 +261,7 @@ position: absolute;
 white-space: nowrap;
 font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
 font-weight: 400;
-font-size: 1.6rem;
+font-size: 2.7rem;
 color: var(--text-secondary);
 transition: color 0.2s;
 writing-mode: vertical-lr;
@@ -266,16 +272,17 @@ transform: translateY(-50%);
 }
 
     .node-count {
-        font-size: 0.9rem;
+        font-size: 1.7rem;
         color: var(--gray-brown);
         margin-top: 8px;
     }
 
-    .node:hover .node-dot {
-        background-color: var(--accent-blue);
-        transform: scale(1.4);
-        box-shadow: 0 0 0 3px rgba(90, 125, 154, 0.3);
-    }
+.node-desc {
+    font-size: 1.1rem;
+    color: var(--gray-brown);
+    margin-top: 12px;
+    opacity: 0.7;
+}
     .node:hover .node-info {
         color: var(--accent-blue);
     }
@@ -371,6 +378,20 @@ transform: translateY(-50%);
 </head>
 <body>
 
+
+<!-- 顶部标语 -->
+<div style="position: fixed; top: 20px; left: 0; width: 100%; text-align: center; z-index: 100; pointer-events: none;">
+  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.5rem; letter-spacing: 4px; color: #6c7c8c; opacity: 0.7; margin: 0;">
+    ———— 美不能被量化，但可以被感知 ————
+  </p>
+  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.0rem; letter-spacing: 4px; color: #6c7c8c; opacity: 0.7; margin: 0;">
+    连接线长度关联文章数量，让知识变得可视。
+  </p>
+  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.0rem; letter-spacing: 4px; color: #6c7c8c; opacity: 0.7; margin: 0;">
+    鼠标悬浮在文章标题上时背景自动更改为该文章配图。
+  </p>
+
+</div>
 <!-- ========= 右上角导航 ========= -->
 <div class="corner-nav">
   <div class="nav-trigger" id="navTrigger">
@@ -408,12 +429,12 @@ transform: translateY(-50%);
 <script th:inline="javascript">
   // 固定6个分类
 const categories = [
-    { name: "导论", count: 0, articles: [] },
-    { name: "活动论", count: 0, articles: [] },
-    { name: "形态论", count: 0, articles: [] },
-    { name: "经验论", count: 0, articles: [] },
-    { name: "艺术论", count: 0, articles: [] },
-    { name: "教育论", count: 0, articles: [] }
+    { name: "导论", count: 0, articles: [], desc: "美学基本问题" },
+    { name: "活动论", count: 0, articles: [], desc: "审美活动本质" },
+    { name: "形态论", count: 0, articles: [], desc: "审美形态研究" },
+    { name: "经验论", count: 0, articles: [], desc: "审美经验分析" },
+    { name: "艺术论", count: 0, articles: [], desc: "艺术哲学思考" },
+    { name: "教育论", count: 0, articles: [], desc: "美育理论实践" }
 ];
 
 // 从后端获取数据并填充
@@ -519,16 +540,18 @@ for (let i = 0; i < categories.length; i++) {
           const dot = document.createElement('div');
           dot.className = 'node-dot';
           const line = document.createElement('div');
-          line.className = 'node-line';
-          const lineHeight = offset - 6;
-          line.style.height = `${lineHeight}px`;
-          const info = document.createElement('div');
-          info.className = 'node-info';
-          info.innerHTML = `${cat.name}<div class="node-count">${cat.count}篇</div>`;
+line.className = 'node-line';
+const lineHeight = offset - 6;
+line.style.height = `${lineHeight}px`;
 
-          nodeDiv.appendChild(dot);
-          nodeDiv.appendChild(line);
-          nodeDiv.appendChild(info);
+// 创建信息区
+const info = document.createElement('div');
+info.className = 'node-info';
+info.innerHTML = `${cat.name}<div class="node-count">${cat.count}篇</div><div class="node-desc">${cat.desc || ''}</div>`;
+
+nodeDiv.appendChild(dot);
+nodeDiv.appendChild(line);
+nodeDiv.appendChild(info);
 
           nodeDiv.dataset.name = cat.name;
           nodeDiv.dataset.articles = JSON.stringify(cat.articles);
@@ -587,7 +610,6 @@ setTimeout(() => {
                 document.body.style.backgroundImage = `url(${imgUrl})`;
                 document.body.style.backgroundSize = 'cover';
                 document.body.style.backgroundPosition = 'center';
-                document.body.style.backgroundColor = 'rgba(0,0,0,0.3)';
                 document.body.style.backgroundBlendMode = 'overlay';
             });
             item.addEventListener('mouseleave', () => {

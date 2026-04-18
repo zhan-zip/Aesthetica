@@ -6,13 +6,7 @@
 <body>
 <!--导航-->
 <nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="admin/_fragments :: menu(3)" ></nav>
-    <!--二级导航-->
-    <div class="ui attached md-pd-tb-mini menu">
-        <div class="ui container">
-            <a href="#" class="teal active item" th:href="@{/admin/blogs/input}">发布</a>
-            <a href="#" class="item" th:href="@{/admin/blogs}">列表</a>
-        </div>
-    </div>
+
 
     <!--内容-->
     <div class="md-pd-tb-massive">
@@ -81,23 +75,7 @@
         </div>
     </div>
 
-<!--底部-->
-<footer class="ui inverted vertical segment md-padded-tb-massive" th:replace="admin/_fragments :: footer">
-</footer>
-
-<th:block th:fragment="script">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6/dist/jquery.min.js"></script>
-    <!--markdown-->
-    <script th:src="@{/lib/editormd/editormd.min.js}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <!--下面引入tocbot目录工具-->
-    <script th:src="@{/lib/tocbot/tocbot.min.js}"></script>
-    <!--下面引入qrcode二维码生成-->
-    <script th:src="@{/lib/qrcode/qrcode.min.js}"></script>
-    <!--下面引入scrollto平滑滚动-->
-    <script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.3/jquery.scrollTo.min.js"></script>
-</th:block>
+<th:block th:replace="admin/_fragments :: script"></th:block>
 
 <!--底下这串我看不懂，做互动的-->
     <script>

@@ -18,11 +18,7 @@
         </div>
     </div>
 
-    <!--底部-->
-    <footer class="ui inverted vertical segment md-padded-tb-massive" th:replace="admin/_fragments :: footer">
-    </footer>
-<!--/*/<th:block th:replace="_fragments :: script">/*/-->
-<!--/*/</th:block>/*/-->
+<th:block th:replace="admin/_fragments :: script"></th:block>
 
 <!--底下这串我不太懂，做互动的-->
     <script>
@@ -30,11 +26,11 @@
         $('.menu.toggle').click(function(){
             $('.md-item').toggleClass('md-mobile-hide');
         });
-        
+
         /*头像下拉组件*/
         $('.ui.dropdown').dropdown();
     </script>
 
-    
+
 </body>
 </html>
