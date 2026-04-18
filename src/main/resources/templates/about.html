@@ -1,27 +1,632 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head th:replace="_fragments :: head('关于网站')">
-    <title>关于网站</title>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${blog != null ? blog.title + '后台' : '后台'}">后台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            font-family: 'Noto Serif SC', 'Source Han Serif SC', 'SimSun', serif;
+            line-height: 1.6;
+            padding: 3rem 2rem;
+            padding-top: 5rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ========= 右上角隐藏式导航 ========= */
+        .corner-nav {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 2000;
+        }
+
+        .nav-trigger {
+            width: 52px;
+            height: 52px;
+            background-color: #8fa0b8;
+            border-radius: 0;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(148, 143, 140, 0.15);
+        }
+
+        .nav-trigger:hover {
+            background-color: #677b8f;
+            transform: scale(1.02);
+        }
+
+        .nav-trigger span {
+            width: 24px;
+            height: 2px;
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .nav-trigger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .nav-trigger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-trigger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 25%;
+            height: 100vh;
+            background-color: #ffffff;
+            box-shadow: -4px 0 24px rgba(148, 143, 140, 0.15);
+            overflow-y: auto;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            z-index: 2001;
+        }
+
+        .nav-menu.open {
+            transform: translateX(0);
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            padding: 2rem 0;
+        }
+
+        .nav-menu li a {
+            display: block;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: #404e5b;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            transition: all 0.2s;
+            border-bottom: 1px solid #948f8c;
+            text-align: left;
+        }
+
+        .nav-menu li:first-child a {
+            border-top: 1px solid #948f8c;
+        }
+
+        .nav-menu li a:hover {
+            background-color: rgba(143, 160, 184, 0.15);
+            color: #5a7d9a;
+            padding-left: 2.5rem;
+        }
+
+        .nav-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            background-color: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6c7c8c;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-menu-close:hover {
+            color: #404e5b;
+            transform: rotate(90deg);
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.3);
+            backdrop-filter: blur(2px);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ========= 详情页主布局 ========= */
+        .detail-layout {
+            display: flex;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* ========= 右侧目录 ========= */
+        .toc-sidebar {
+            flex: 0 0 280px;
+            position: sticky;
+            top: 100px;
+            background-color: #FFFFFF;
+            border-radius: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            padding: 2rem 1.5rem;
+        }
+
+        .toc-title {
+            font-size: 0.75rem;
+            color: #A0AEC0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list li a {
+            text-decoration: none;
+            color: #4A5568;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: block;
+            padding: 0.6rem 0;
+            border-left: 2px solid transparent;
+            padding-left: 0.75rem;
+            cursor: pointer;
+        }
+
+        .toc-list li a:hover {
+            color: #718096;
+            border-left-color: #718096;
+            padding-left: 1rem;
+        }
+
+        .toc-list li.active a {
+            color: #2D3748;
+            border-left-color: #2D3748;
+            font-weight: 500;
+        }
+
+        .hero-section {
+            background-color: #FFFFFF;
+            padding: 3rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .hero-section h1 {
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            color: #2D3748;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 1rem;
+            color: #A0AEC0;
+            font-size: 1.1rem;
+        }
+
+        .unified-content {
+            background-color: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(0px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            padding: 2.8rem 4rem;
+        }
+
+        .unified-content h2 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #2D3748;
+            margin: 1.8rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #CBD5E0;
+            scroll-margin-top: 80px;
+        }
+
+        .unified-content h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .unified-content p {
+            color: #4A5568;
+            font-size: 0.98rem;
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+        }
+
+        .feature-section {
+            margin-top: 0.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        .feature-title {
+            font-size: 0.75rem;
+            color: #A0AEC0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #F7FAFC;
+        }
+
+        .feature-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #4A5568;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #CBD5E0;
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .toggle-switch input:checked + .toggle-slider {
+            background-color: #4A5568;
+        }
+
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+
+        /* 护眼模式 */
+        /* 护眼模式 - 暖黄色调 */
+body.eye-care-mode {
+    background-color: #FDF5E6 !important;  /* 暖米色背景 */
+    background-image: none !important;
+}
+
+body.eye-care-mode .toc-sidebar,
+body.eye-care-mode .hero-section {
+    background-color: #FFF8ED !important;
+}
+
+body.eye-care-mode .unified-content {
+    background-color: rgba(253, 245, 230, 0.95) !important;
+}
+
+body.eye-care-mode .toc-title,
+body.eye-care-mode .feature-title {
+    color: #8B7355;
+}
+
+body.eye-care-mode .toc-list li a {
+    color: #6B5B4A;
+}
+
+body.eye-care-mode .toc-list li a:hover,
+body.eye-care-mode .toc-list li.active a {
+    color: #D2691E;
+    border-left-color: #D2691E;
+}
+
+body.eye-care-mode .hero-section h1,
+body.eye-care-mode .unified-content h2,
+body.eye-care-mode .unified-content p,
+body.eye-care-mode .feature-label {
+    color: #5C4B3A;
+}
+
+body.eye-care-mode .hero-meta {
+    color: #A0896C;
+}
+
+body.eye-care-mode .toggle-slider {
+    background-color: #D4C4A8;
+}
+
+body.eye-care-mode .toggle-switch input:checked + .toggle-slider {
+    background-color: #CD853F;
+}
+
+
+        @media (max-width: 1000px) {
+            .detail-layout {
+                flex-direction: column;
+            }
+            .toc-sidebar {
+                position: relative;
+                top: 0;
+                width: 100%;
+            }
+            .unified-content {
+                padding: 1.8rem;
+            }
+            .hero-section h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1.5rem;
+                padding-top: 4rem;
+            }
+            .hero-section {
+                padding: 1.5rem;
+            }
+            .unified-content {
+                padding: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<!-- 导航 -->
-<nav th:replace="_fragments :: menu(1)"></nav>
 
-<!-- 内容 -->
-<div class="md-pd-tb-massive">
-    <div class="ui container">
-        <div class="ui segment">
-            <h1 class="ui header">关于网站</h1>
-            <p>美哉·美哉——美学知识科普平台</p>
-            <p>本网站致力于系统性地梳理美学知识，以《美学原理》教材为骨架，通过六大板块（导论、活动论、形态论、经验论、艺术论、教育论）呈现美学脉络。</p>
-            <p>团队成员：xxx、xxx、xxx</p>
-            <p>指导老师：xxx</p>
-            <p>© 2026 Aesthetica</p>
-        </div>
+<!-- ========= 右上角隐藏式导航 ========= -->
+<div class="corner-nav">
+    <div class="nav-trigger" id="navTrigger">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 </div>
 
-<!-- 底部 -->
-<footer th:replace="_fragments :: footer"></footer>
+<div class="nav-menu" id="navMenu">
+    <button class="nav-menu-close" id="navMenuClose">✕</button>
+    <ul>
+        <li><a href="/" th:href="@{/}">首页</a></li>
+        <li><a href="/bobbin" th:href="@{/bobbin}">知识线轴</a></li>
+        <li><a href="/admin" th:href="@{/admin}">后台</a></li>
+        <li><a href="/about" th:href="@{/about}">关于网站</a></li>
+    </ul>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<div class="container">
+    <div class="detail-layout">
+        <main class="main-content">
+            <div class="hero-section">
+                <h1 th:text="${blog != null ? blog.title : '美哉美哉——美学知识科普网站'}">美哉美哉——美学知识科普网站</h1>
+                <div class="hero-meta">美无法被量化，但可以被感知</div>
+            </div>
+
+            <div class="unified-content" id="unifiedBody">
+                <h2 id="section1">始于一个哲学问题</h2>
+                <p>美，是什么？</p>
+                <p>或许你在面对满是五彩灯光与模板化商业街的景区时，在面对大街小巷难以欣赏的墙绘时，在面对同质化到令人审美疲劳的这些作品时，也会忍不住去想这个问题。</p>
+                <p>许多哲学家也为此困惑，他们问美的本质是什么，问审美心理是什么，在此基础上，1750年鲍姆嘉登发表了《Aesthetics》，美学成为了一个独立学科，但"美"究竟是什么这个问题，仍然没有标准答案。</p>
+                <p>我们认为，"美"是极具个性化，差异化的，难以被量化的，因此我们无法做到以某种标准去教授什么是美，但，美是可以被感知的，认识美，是可以以美学知识为辅助的。</p>
+                <p>以此为设计灵感，我们建立了"美哉·美哉"这一美学知识科普网站。</p>
+
+                <h2 id="section2">网站理念</h2>
+                <p>简约的界面设计，是我们希望用户能够专注于美学知识，因此没有做过多的功能，例如可能会引起马太效应的点赞收藏功能，可能会引起争论的评论区，可能会增加门槛的登录系统…而为提高用户体验，我们在详情页中加入了护眼模式与音乐播放功能。</p>
+                <p>我们致力于为用户提供无心理负担的，无门槛的科普平台，不必拘泥于任何限制，无条件地向所有用户敞开网站内容。</p>
+                <p>我们认为，美不应该被判断，被界定一个标准，因此我们不会要求用户去填写任何试题，更不会对此进行判分，我们做的仅仅是将知识呈现在用户面前。</p>
+                <p>希望您在此开始或继续的美学探索之旅，可以有一个更好的体验。</p>
+
+                <h2 id="section3">关于开发者</h2>
+                <p>这个网站的基本理念设计和大部分功能与页面的开发，都是笔者利用课余时间完成的。</p>
+                <p>我本身是计算机科学与技术专业的大一学生，辅修汉语言文学，在带着一个初学者懵懂的视角去翻看教材时，我被美学这一近乎于哲学的学科深深吸引了。</p>
+                <p>与此同时，也感受到了考核对此带来的紧迫感，不再能以纯粹的目的去接触这些知识时，那股热情被隐约削减了。</p>
+                <p>因此，我想为大众提供这样一个，去紧迫感、去考核制度、去门槛化的，轻松随意的科普平台。</p>
+                <p>愿我们的真诚能为更多人提供一个接触美学的角落。</p>
+
+                <h2 id="section4">致谢</h2>
+                <p>感谢您点进这个网站，这正是它存在的意义。</p>
+
+                <h2 id="section5">如果您想联系我们</h2>
+                <p>本网站暂未开放评分功能，但我们希望得知您在使用中的真实感受，欢迎通过邮箱告诉我们您的感受与意见，或任何您想说的话，我们会认真阅读。</p>
+                <p>QQ邮箱:2899893413@qq.com</p>
+                <p>最新更新时间：2026年4月</p>
+            </div>
+        </main>
+
+        <aside class="toc-sidebar">
+            <div class="toc-title">目录</div>
+            <ul class="toc-list">
+                <li class="active"><a data-target="section1">始于一个哲学问题</a></li>
+                <li><a data-target="section2">网站理念</a></li>
+                <li><a data-target="section3">关于开发者</a></li>
+                <li><a data-target="section4">致谢</a></li>
+                <li><a data-target="section5">如果您想联系我们</a></li>
+            </ul>
+
+            <div class="feature-section">
+                <div class="feature-item">
+                    <div class="feature-label">
+                        <span>护眼模式</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="eyeCareToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<script>
+    // 导航交互
+    (function() {
+        const trigger = document.getElementById('navTrigger');
+        const menu = document.getElementById('navMenu');
+        const overlay = document.getElementById('navOverlay');
+        const closeBtn = document.getElementById('navMenuClose');
+
+        function openMenu() {
+            trigger.classList.add('open');
+            menu.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            trigger.classList.remove('open');
+            menu.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function toggleMenu() {
+            if (menu.classList.contains('open')) closeMenu();
+            else openMenu();
+        }
+
+        if (trigger) trigger.addEventListener('click', toggleMenu);
+        if (overlay) overlay.addEventListener('click', closeMenu);
+        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+
+        const menuLinks = menu.querySelectorAll('ul li a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+        });
+    })();
+
+    // 目录滚动高亮 + 平滑滚动
+    (function() {
+        const sections = ['section1', 'section2', 'section3', 'section4', 'section5'].map(id => document.getElementById(id)).filter(el => el);
+        const navLinks = document.querySelectorAll('.toc-list li a');
+
+        function updateActiveSection() {
+            const scrollPosition = window.scrollY + 120;
+            let current = '';
+            for (let i = 0; i < sections.length; i++) {
+                const section = sections[i];
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    current = section.getAttribute('id');
+                    break;
+                }
+            }
+            navLinks.forEach(link => {
+                const parentLi = link.parentElement;
+                if (parentLi) {
+                    parentLi.classList.remove('active');
+                    if (link.getAttribute('data-target') === current) {
+                        parentLi.classList.add('active');
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveSection);
+        updateActiveSection();
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-target');
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    })();
+
+    // 护眼模式
+    (function() {
+        const eyeCareToggle = document.getElementById('eyeCareToggle');
+        const body = document.body;
+        if (eyeCareToggle) {
+            const saved = localStorage.getItem('eyeCareMode');
+            if (saved === 'true') {
+                eyeCareToggle.checked = true;
+                body.classList.add('eye-care-mode');
+            }
+            eyeCareToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    body.classList.add('eye-care-mode');
+                    localStorage.setItem('eyeCareMode', 'true');
+                } else {
+                    body.classList.remove('eye-care-mode');
+                    localStorage.setItem('eyeCareMode', 'false');
+                }
+            });
+        }
+    })();
+</script>
 </body>
 </html>

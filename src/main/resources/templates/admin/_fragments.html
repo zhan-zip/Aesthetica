@@ -140,8 +140,6 @@
 </head>
 <body>
 
-<!-- ========= 隐藏式导航栏片段（替换原 menu 片段） ========= -->
-<!-- 注意：原调用方式为 <nav th:replace="admin/_fragments :: menu(3)"></nav>，会将 nav 标签替换为以下内容 -->
 <div th:fragment="menu(n)" style="display: block;">
     <div class="corner-nav">
         <div class="nav-trigger" id="navTrigger">
@@ -184,7 +182,7 @@
     <!--下面引入scrollto平滑滚动-->
     <script src="https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.3/jquery.scrollTo.min.js"></script>
 
-    <!-- 导航交互脚本 -->
+    <!-- 导航交互脚本，ai4-18 -->
     <script>
         (function() {
             const trigger = document.getElementById('navTrigger');
