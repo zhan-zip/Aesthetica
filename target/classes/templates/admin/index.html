@@ -4,33 +4,46 @@
     <title>管理员神秘区域</title>
 </head>
 <body>
-<!--导航-->
+
 <nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="admin/_fragments :: menu(1)">
 </nav>
 
-    <!--内容-->
-    <div class="md-pd-tb-massive">
-        <div class="ui container">
-            <div class="ui success large message">
-                <h2>欢迎登录！</h2>
-                <img src="../../static/images/back.jpg" class="ui fluid image" th:src="@{/images/back.jpg}">
-            </div>
+<!--内容-->
+<div class="md-pd-tb-massive">
+    <div class="ui container">
+
+        <!-- 欢迎卡片 - 顶部居中 -->
+        <div class="ui segment" style="text-align: center; background: #f9f9f9; max-width: 600px; margin: 0 auto 3rem auto;">
+            <h1 style="color: #404e5b; margin-top: 1rem;">欢迎回来</h1>
+            <p style="color: #6c7c8c; font-size: 1.1rem;">美哉·美哉 后台管理系统</p>
         </div>
+
+        <!-- 写新文章卡片 - 居中，整个卡片可点击 -->
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <a th:href="@{/admin/blogs/input}" style="width: 100%; max-width: 500px; text-decoration: none;">
+                <div class="ui card" style="width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.2s; cursor: pointer;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="content" style="text-align: center; padding: 3rem 2rem;">
+                        <div class="header" style="font-size: 1.8rem; margin-top: 1rem;">写新文章</div>
+                        <div class="description" style="font-size: 1.1rem; margin-top: 0.5rem;">撰写一篇新的美学文章</div>
+                    </div>
+                    <div class="extra content" style="text-align: center; background: #8fa0b8; color: white; padding: 0.8rem;">
+                        <i class="edit icon"></i> 开始写作
+                    </div>
+                </div>
+            </a>
+        </div>
+
     </div>
+</div>
 
 <th:block th:replace="admin/_fragments :: script"></th:block>
 
-<!--底下这串我不太懂，做互动的-->
-    <script>
-        /*做一个适应手机端的导航栏收缩按键*/
-        $('.menu.toggle').click(function(){
-            $('.md-item').toggleClass('md-mobile-hide');
-        });
-
-        /*头像下拉组件*/
-        $('.ui.dropdown').dropdown();
-    </script>
-
+<script>
+    $('.menu.toggle').click(function(){
+        $('.md-item').toggleClass('md-mobile-hide');
+    });
+    $('.ui.dropdown').dropdown();
+</script>
 
 </body>
 </html>

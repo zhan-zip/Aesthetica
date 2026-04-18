@@ -30,9 +30,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="field">
-                        <button type="button" id="search-button" class="ui teal button"><i class="search"></i>搜索</button>
+                        <button type="button" id="search-button" class="ui button" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b;"><i class="search"></i>搜索</button>
                     </div>
                 </div>
             </div>
@@ -49,6 +48,7 @@
                         <th>发布状态</th>
                         <th>更新时间</th>
                         <th>操作</th>
+                        <th>配图</th>
                     </tr>
                     </thead>
                     <!--内容-->
@@ -60,8 +60,11 @@
                         <td th:text="${blog.published} ? '发布' : '草稿'">草稿</td>
                         <td th:text="${blog.updateTime}">2026</td>
                         <td>
-                            <a href="#" class="ui teal button" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}">编辑</a>
-                            <a href="#" class="ui red button" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}">删除</a>
+                            <a href="#" class="ui button" style="background: #8fa0b8; border: none; border-radius: 0; color: white; margin-right: 4px;" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}">编辑</a>
+                            <a href="#" class="ui button" style="background: #677b8f; border: none; border-radius: 0; color: white;" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}">删除</a>
+                        </td>
+                        <td>
+                            <img th:src="@{${blog.firstPicture}}" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="previewImage(this.src)">
                         </td>
                     </tr>
 
@@ -70,11 +73,11 @@
                     <tfoot>
                     <tr>
                         <th colspan="7">
-                            <div class="ui pagination menu">
-                                <a onclick="page(this)" class="item" th:attr="data-page=${page.number -1}">上一页</a>
-                                <a onclick="page(this)" class="item" th:attr="data-page=${page.number +1}">下一页</a>
+                            <div class="ui pagination menu" style="border: none;">
+                                <a class="item" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b; margin-right: 4px;" th:attr="data-page=${page.number -1}">上一页</a>
+                                <a class="item" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b;" th:attr="data-page=${page.number +1}">下一页</a>
                             </div>
-                            <a href="#" class="ui right floated teal button" th:href="@{/admin/blogs/input}">新增</a>
+                            <a href="#" class="ui right floated button" style="background: #677b8f; border: none; border-radius: 0; color: white;" th:href="@{/admin/blogs/input}">新增</a>
                         </th>
                     </tr>
                     </tfoot>
@@ -114,6 +117,9 @@
                 page : $("[name='page']").val()
             });
         }
+        function previewImage(src) {
+    window.open(src);
+}
     </script>
 
     

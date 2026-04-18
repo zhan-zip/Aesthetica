@@ -18,4 +18,7 @@ public interface BlogService {
     Page<Blog> listBlog(Pageable pageable);
 
     List<Blog> getLatestBlogs(int limit);   //ai辅助4-16
+    long countByPublished(boolean published);
+    List<Blog> findByPublished(boolean published, Pageable pageable);   //ai4-18
+    long count();
 }

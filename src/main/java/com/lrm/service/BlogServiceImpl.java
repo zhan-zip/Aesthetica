@@ -100,4 +100,18 @@ public class BlogServiceImpl implements BlogService{
         Pageable pageable = PageRequest.of(0, limit, Sort.by(Sort.Direction.DESC, "updateTime"));
         return blogRepository.findAll(pageable).getContent();
     }
+
+    @Override
+    public long countByPublished(boolean published) {
+        return blogRepository.countByPublished(published);
+    }
+
+    @Override
+    public List<Blog> findByPublished(boolean published, Pageable pageable) {
+        return blogRepository.findByPublished(published, pageable);
+    }
+    @Override
+    public long count() {
+        return blogRepository.count();
+    }
 }

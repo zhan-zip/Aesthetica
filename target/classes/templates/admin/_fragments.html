@@ -18,6 +18,9 @@
 
     <!-- 隐藏式导航栏样式（与前台 index 相同） -->
     <style>
+        body {
+    background-color: #e8e6e4;
+}
         .corner-nav {
             position: fixed;
             top: 24px;
@@ -152,7 +155,8 @@
         <ul>
             <li><a href="/" th:href="@{/}">前台首页</a></li>
             <li><a href="/bobbin" th:href="@{/bobbin}">知识线轴</a></li>
-            <li><a href="/admin/types" th:href="@{/admin/types}">分类</a></li>
+            <li><a href="/admin/index" th:href="@{/admin/index}">后台首页</a></li>
+            <!--因为分类数量固定了所以给删掉了<li><a href="/admin/types" th:href="@{/admin/types}">分类</a></li>-->
             <li><a href="/admin/blogs" th:href="@{/admin/blogs}">文章</a></li>
             <li><a href="/admin/logout" th:href="@{/admin/logout}">退出登录</a></li>
             <li><a href="/about" th:href="@{/about}">关于网站</a></li>
