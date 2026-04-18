@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-新增了“关于网站”页面，并添加了方法和跳转链接">
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-新的提交">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/util/MD5Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/util/MD5Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/vo/BlogQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/vo/BlogQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/archives.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index--.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -425,7 +429,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776430249643</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="-新的提交">
+      <option name="closed" value="true" />
+      <created>1776489018450</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1776489018450</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -455,7 +467,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="summary:完成前台首页推荐功能和博客详情页动态展示&#10;- 首页右侧分类按博客数量排序&#10;- 首页推荐内容暂时写死ID（252,253,254）&#10;- 博客详情页动态显示标题、作者、时间、分类、内容&#10;- 修复博客详情页空指针异常" />
     <MESSAGE value="砍掉了写死的评论区域。" />
     <MESSAGE value="砍掉了首页标签区域。" />
     <MESSAGE value="首页博客数目显示" />
@@ -480,7 +491,8 @@
     <MESSAGE value="-为线轴页的导航栏新增了后台选项&#10;-实现了将后端文章数据传入线轴页&#10;-为线轴页的文章列表添加了跳转链接&#10;-修改了线轴页文章列表为空时的默认连接线长度&#10;-修改了线轴页文章列表浮窗的位置" />
     <MESSAGE value="-修改了首页跳转到线轴页的问题&#10;-添加了线轴页文章列表鼠标悬浮时显示对应背景图片的功能" />
     <MESSAGE value="-新增了“关于网站”页面，并添加了方法和跳转链接" />
-    <option name="LAST_COMMIT_MESSAGE" value="-新增了“关于网站”页面，并添加了方法和跳转链接" />
+    <MESSAGE value="-新的提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="-新的提交" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

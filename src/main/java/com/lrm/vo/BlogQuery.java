@@ -1,4 +1,4 @@
-package com.lrm.vo;
+package com.lrm.vo;     //ai辅助-4-17解决懒加载问题
 
 public class BlogQuery {
     private String title;
