@@ -31,7 +31,10 @@
                             <input type="password" name="password" placeholder="密码">
                         </div>
                     </div>
-                    <button class="ui fluid large button" type="submit" style="background: white; border: 1px solid #404e5b; border-radius: 0; color: #404e5b;">登录</button>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="/" class="ui fluid large button" style="background: white; border: 1px solid #404e5b; border-radius: 0; color: #404e5b; text-align: center; line-height: 1.5; padding: 0.7857em 1.5em;">返回首页</a>
+                        <button class="ui fluid large button" type="submit" style="background: white; border: 1px solid #404e5b; border-radius: 0; color: #404e5b;">登录</button>
+                    </div>
                 </div>
                 <div class="ui error message" th:if="${message}" th:text="${message}"></div>
 

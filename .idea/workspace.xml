@@ -4,28 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-更改了后台导航栏">
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-对后台区域样式进行了修改&#10;-注释掉了分类功能&#10;-增加了文章列表显示配图缩略图&#10;-修改了后台首页&#10;-导航栏新增了后台首页选项">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/Dao/BlogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/Dao/BlogRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/service/BlogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/service/BlogService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/service/BlogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/service/BlogServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/_fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/_fragments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs-input.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs-input.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/types-input.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/types-input.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/types.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/types.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lrm/Dao/BlogRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lrm/Dao/BlogRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lrm/service/BlogService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lrm/service/BlogService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lrm/service/BlogServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lrm/service/BlogServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/_fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/_fragments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/blogs-input.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/blogs-input.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/blogs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/types-input.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/types-input.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/types.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/types.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -469,7 +452,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776501762895</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="-对后台区域样式进行了修改&#10;-注释掉了分类功能&#10;-增加了文章列表显示配图缩略图&#10;-修改了后台首页&#10;-导航栏新增了后台首页选项">
+      <option name="closed" value="true" />
+      <created>1776513097007</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1776513097007</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -499,7 +490,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="首页博客数目显示" />
     <MESSAGE value="后台归档页一页数量改为6" />
     <MESSAGE value="修复了首页显示博客数量显示的是草稿+发布总数量的问题，改为只显示发布状态的数量，" />
     <MESSAGE value="-将首页显示博客数目改为4&#10;-修复了首页中显示博客内容多余的静态部分代码&#10;-博客展示部分砍掉了作者，头像，浏览量部分&#10;-增加了博客标题和图片链接跳转详情页" />
@@ -524,7 +514,8 @@
     <MESSAGE value="-新的提交" />
     <MESSAGE value="-新增和修改注释" />
     <MESSAGE value="-更改了后台导航栏" />
-    <option name="LAST_COMMIT_MESSAGE" value="-更改了后台导航栏" />
+    <MESSAGE value="-对后台区域样式进行了修改&#10;-注释掉了分类功能&#10;-增加了文章列表显示配图缩略图&#10;-修改了后台首页&#10;-导航栏新增了后台首页选项" />
+    <option name="LAST_COMMIT_MESSAGE" value="-对后台区域样式进行了修改&#10;-注释掉了分类功能&#10;-增加了文章列表显示配图缩略图&#10;-修改了后台首页&#10;-导航栏新增了后台首页选项" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
