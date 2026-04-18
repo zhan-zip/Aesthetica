@@ -17,67 +17,9 @@
 </head>
 <body>
 
-<!--导航-->
-<nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:fragment="menu(n)">
-    <div class="ui container">
-        <div class="ui inverted secondary stackable menu">
-            <h1 class="ui teal header item">One_Zhan&Blog</h1>
-            <a href="#" class="item md-mobile-hide md-item" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>首页</a>
-            <a href="#" class="item md-mobile-hide md-item" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a>
-            <a href="#" class="item md-mobile-hide md-item" th:classappend="${n==3} ? 'active'"><i class="clone icon"></i>归档</a>
-            <a href="#" class="item md-mobile-hide md-item" th:classappend="${n==4} ? 'active'"><i class="tags icon"></i>标签</a>
-            <a href="#" class="item md-mobile-hide md-item" th:classappend="${n==5} ? 'active'"><i class="info icon"></i>关于我</a>
-            <div class="right item">
-                <div class="ui icon inverted transparent input">
-                    <input type="text" placeholder="来搜索吧！">
-                    <i class="search link icon"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a href="#" class="ui menu toggle inverted icon button md-right-top md-mobile-show">
-        <i class="sidebar icon"></i>
-    </a>
-</nav>
 
 
-<!--底部-->
-<footer class="ui inverted vertical segment md-padded-tb-massive" th:fragement="footer">
-    <div class="ui center aligned container">
-        <div class="ui inverted divided stackable grid">
-            <div class="three wide column">
-                <img src="../static/images/wechat.jpg" class="ui rounded image" alt="" style="width:300px" th:src="@{/images/wechat.jpg}">
-            </div>
-            <div class="four wide column">
-                <h2 class="ui inverted header">最新博客抢先看</h2>
-                <div class="ui inverted link list">
-                    <a href="#" class="item">我不知道</a>
-                    <a href="#" class="item">写点啥</a>
-                    <a href="#" class="item">先这样</a>
-                    <a href="#" class="item">再见</a>
-                    <a href="#" class="item">左边是我微信</a>
-                </div>
-            </div>
-            <div class="four wide column">
-                <h2 class="ui inverted header">最新博客抢先看</h2>
-                <div class="ui inverted link list">
-                    <a href="#" class="item">我不知道</a>
-                    <a href="#" class="item">写点啥</a>
-                    <a href="#" class="item">先这样</a>
-                    <a href="#" class="item">再见</a>
-                    <a href="#" class="item">左边是我微信</a>
-                </div>
-            </div>
-            <div class="five wide column">
-                <h2 class="ui inverted header">标题</h2>
-                <p>字字字字字</p>
-            </div>
-        </div>
-        <div class="ui inverted section divider">
-            <p class="md-tt-lined md-tt-spaced md-tt-thin md-opacity-mini">其实这里应该放版权声明你知道吗</p>
-        </div>
-    </div>
-</footer>
+
 
 <th:block th:fragment="script">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6/dist/jquery.min.js"></script>

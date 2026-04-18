@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>归档线轴 | Aesthetica</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>   // 以下由AI辅助生成：DeepSeek-网页版, 2026-4-15
+  <style>
     * {
         margin: 0;
         padding: 0;
@@ -36,7 +36,6 @@
         margin: 0;
         padding: 2rem;
         transition: all 2.0s ease-out;
-}
     }
 
     h1, h2, h3, h4, .serif {
@@ -45,138 +44,138 @@
     }
 
     /* ========= 右上角方块导航 ========= */
-.corner-nav {
-    position: fixed;
-    top: 24px;
-    right: 24px;
-    z-index: 2000;
-}
+    .corner-nav {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        z-index: 2000;
+    }
 
-.nav-trigger {
-    width: 52px;
-    height: 52px;
-    background-color: #8fa0b8;
-    border-radius: 0;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px var(--shadow);
-}
+    .nav-trigger {
+        width: 52px;
+        height: 52px;
+        background-color: #8fa0b8;
+        border-radius: 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px var(--shadow);
+    }
 
-.nav-trigger:hover {
-    background-color: #677b8f;
-    transform: scale(1.02);
-}
+    .nav-trigger:hover {
+        background-color: #677b8f;
+        transform: scale(1.02);
+    }
 
-.nav-trigger span {
-    width: 24px;
-    height: 2px;
-    background-color: #fff;
-    transition: all 0.3s ease;
-}
+    .nav-trigger span {
+        width: 24px;
+        height: 2px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+    }
 
-.nav-trigger.open span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
+    .nav-trigger.open span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
 
-.nav-trigger.open span:nth-child(2) {
-    opacity: 0;
-}
+    .nav-trigger.open span:nth-child(2) {
+        opacity: 0;
+    }
 
-.nav-trigger.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
+    .nav-trigger.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
 
-/* ========= 弹出菜单 ========= */
-.nav-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 25%;
-    height: 100vh;
-    background-color: var(--card-bg);
-    box-shadow: -4px 0 24px var(--shadow);
-    overflow-y: auto;
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    z-index: 2001;
-}
+    /* ========= 弹出菜单 ========= */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 25%;
+        height: 100vh;
+        background-color: var(--card-bg);
+        box-shadow: -4px 0 24px var(--shadow);
+        overflow-y: auto;
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        z-index: 2001;
+    }
 
-.nav-menu.open {
-    transform: translateX(0);
-}
+    .nav-menu.open {
+        transform: translateX(0);
+    }
 
-.nav-menu ul {
-    list-style: none;
-    padding: 2rem 0;
-}
+    .nav-menu ul {
+        list-style: none;
+        padding: 2rem 0;
+    }
 
-.nav-menu li a {
-    display: block;
-    padding: 1rem 2rem;
-    text-decoration: none;
-    color: var(--primary);
-    font-size: 1rem;
-    letter-spacing: 2px;
-    transition: all 0.2s;
-    border-bottom: 1px solid var(--gray-brown);
-    text-align: left;
-}
+    .nav-menu li a {
+        display: block;
+        padding: 1rem 2rem;
+        text-decoration: none;
+        color: var(--primary);
+        font-size: 1rem;
+        letter-spacing: 2px;
+        transition: all 0.2s;
+        border-bottom: 1px solid var(--gray-brown);
+        text-align: left;
+    }
 
-.nav-menu li:first-child a {
-    border-top: 1px solid var(--gray-brown);
-}
+    .nav-menu li:first-child a {
+        border-top: 1px solid var(--gray-brown);
+    }
 
-.nav-menu li a:hover {
-    background-color: rgba(143, 160, 184, 0.15);
-    color: var(--accent-blue);
-    padding-left: 2.5rem;
-}
+    .nav-menu li a:hover {
+        background-color: rgba(143, 160, 184, 0.15);
+        color: var(--accent-blue);
+        padding-left: 2.5rem;
+    }
 
-.nav-menu-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 36px;
-    height: 36px;
-    background-color: transparent;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-secondary);
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .nav-menu-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 36px;
+        height: 36px;
+        background-color: transparent;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--text-secondary);
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.nav-menu-close:hover {
-    color: var(--primary);
-    transform: rotate(90deg);
-}
+    .nav-menu-close:hover {
+        color: var(--primary);
+        transform: rotate(90deg);
+    }
 
-.nav-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.3);
-    backdrop-filter: blur(2px);
-    z-index: 1999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.3);
+        backdrop-filter: blur(2px);
+        z-index: 1999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
 
-.nav-overlay.open {
-    opacity: 1;
-    visibility: visible;
-}
+    .nav-overlay.open {
+        opacity: 1;
+        visibility: visible;
+    }
 
     .timeline-zoom {
         width: 100%;
@@ -184,6 +183,7 @@
         margin: 0 auto;
         transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         transform-origin: center center;
+        will-change: transform;  /* 硬件加速 */
     }
 
     .timeline {
@@ -219,23 +219,24 @@
         top: 50%;
         transform-origin: center center;
         transition: transform 0.2s;
+        will-change: transform;  /* 硬件加速 */
     }
 
     .node-dot {
-    width: 12px;
-    height: 12px;
-    background-color: var(--light-blue-gray);
-    border-radius: 50%;
-    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    position: relative;
-    z-index: 3;
-}
+        width: 12px;
+        height: 12px;
+        background-color: var(--light-blue-gray);
+        border-radius: 50%;
+        transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        position: relative;
+        z-index: 3;
+    }
 
-.node:hover .node-dot {
-    background-color: var(--accent-blue);
-    transform: scale(2.5);
-    box-shadow: 0 0 0 6px rgba(90, 125, 154, 0.3), 0 0 0 12px rgba(90, 125, 154, 0.15);
-}
+    .node:hover .node-dot {
+        background-color: var(--accent-blue);
+        transform: scale(2.5);
+        box-shadow: 0 0 0 6px rgba(90, 125, 154, 0.3), 0 0 0 12px rgba(90, 125, 154, 0.15);
+    }
 
     .node-line {
         position: absolute;
@@ -257,19 +258,19 @@
     }
 
     .node-info {
-position: absolute;
-white-space: nowrap;
-font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
-font-weight: 400;
-font-size: 2.7rem;
-color: var(--text-secondary);
-transition: color 0.2s;
-writing-mode: vertical-lr;
-text-orientation: upright;
-left: 30px;
-top: 50%;
-transform: translateY(-50%);
-}
+        position: absolute;
+        white-space: nowrap;
+        font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
+        font-weight: 400;
+        font-size: 2.7rem;
+        color: var(--text-secondary);
+        transition: color 0.2s;
+        writing-mode: vertical-lr;
+        text-orientation: upright;
+        left: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
     .node-count {
         font-size: 1.7rem;
@@ -277,12 +278,12 @@ transform: translateY(-50%);
         margin-top: 8px;
     }
 
-.node-desc {
-    font-size: 1.1rem;
-    color: var(--gray-brown);
-    margin-top: 12px;
-    opacity: 0.7;
-}
+    .node-desc {
+        font-size: 1.1rem;
+        color: var(--gray-brown);
+        margin-top: 12px;
+        opacity: 0.7;
+    }
     .node:hover .node-info {
         color: var(--accent-blue);
     }
@@ -378,7 +379,6 @@ transform: translateY(-50%);
 </head>
 <body>
 
-
 <!-- 顶部标语 -->
 <div style="position: fixed; top: 20px; left: 0; width: 100%; text-align: center; z-index: 100; pointer-events: none;">
   <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.5rem; letter-spacing: 4px; color: #6c7c8c; opacity: 0.7; margin: 0;">
@@ -390,8 +390,8 @@ transform: translateY(-50%);
   <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.0rem; letter-spacing: 4px; color: #6c7c8c; opacity: 0.7; margin: 0;">
     鼠标悬浮在文章标题上时背景自动更改为该文章配图。
   </p>
-
 </div>
+
 <!-- ========= 右上角导航 ========= -->
 <div class="corner-nav">
   <div class="nav-trigger" id="navTrigger">
@@ -411,6 +411,7 @@ transform: translateY(-50%);
   </ul>
 </div>
 <div class="nav-overlay" id="navOverlay"></div>
+
 <div class="timeline-zoom" id="timelineZoom">
   <div class="timeline">
     <div class="axis"></div>
@@ -428,52 +429,52 @@ transform: translateY(-50%);
 
 <script th:inline="javascript">
   // 固定6个分类
-const categories = [
+  const categories = [
     { name: "导论", count: 0, articles: [], desc: "美学基本问题" },
     { name: "活动论", count: 0, articles: [], desc: "审美活动本质" },
     { name: "形态论", count: 0, articles: [], desc: "审美形态研究" },
     { name: "经验论", count: 0, articles: [], desc: "审美经验分析" },
     { name: "艺术论", count: 0, articles: [], desc: "艺术哲学思考" },
     { name: "教育论", count: 0, articles: [], desc: "美育理论实践" }
-];
+  ];
 
-// 从后端获取数据并填充
-const categoryData = /*[[${categoryData}]]*/ {};
-for (let i = 0; i < categories.length; i++) {
+  // 从后端获取数据并填充
+  const categoryData = /*[[${categoryData}]]*/ {};
+  for (let i = 0; i < categories.length; i++) {
     const name = categories[i].name;
     if (categoryData[name]) {
-        categories[i].count = categoryData[name].count;
-        categories[i].articles = categoryData[name].articles;
+      categories[i].count = categoryData[name].count;
+      categories[i].articles = categoryData[name].articles;
     }
-}
+  }
 
   // 导航交互
-(function() {
+  (function() {
     const trigger = document.getElementById('navTrigger');
     const menu = document.getElementById('navMenu');
     const overlay = document.getElementById('navOverlay');
     const closeBtn = document.getElementById('navMenuClose');
 
     function openMenu() {
-        trigger.classList.add('open');
-        menu.classList.add('open');
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
+      trigger.classList.add('open');
+      menu.classList.add('open');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeMenu() {
-        trigger.classList.remove('open');
-        menu.classList.remove('open');
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
+      trigger.classList.remove('open');
+      menu.classList.remove('open');
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
     }
 
     function toggleMenu() {
-        if (menu.classList.contains('open')) {
-            closeMenu();
-        } else {
-            openMenu();
-        }
+      if (menu.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     }
 
     if (trigger) trigger.addEventListener('click', toggleMenu);
@@ -482,19 +483,18 @@ for (let i = 0; i < categories.length; i++) {
 
     const menuLinks = menu.querySelectorAll('ul li a');
     menuLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
+      link.addEventListener('click', closeMenu);
     });
 
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && menu.classList.contains('open')) {
-            closeMenu();
-        }
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        closeMenu();
+      }
     });
-})();
+  })();
 
-
-  const BASE_OFFSET = 80;   //基础连接线长度
-  const UNIT = 40;    //一篇文章增加的值
+  const BASE_OFFSET = 80;
+  const UNIT = 40;
   const ZOOM_SCALE = 2.1;
   const POPUP_WIDTH = 240;
   const SIDE_MARGIN_PERCENT = 5;
@@ -512,248 +512,245 @@ for (let i = 0; i < categories.length; i++) {
   let isAnimating = false;
 
   function getNodeOffset(count) {
-      return BASE_OFFSET + count * UNIT;
+    return BASE_OFFSET + count * UNIT;
   }
 
   function buildNodes() {
-      const nodeCount = categories.length;
-      const start = SIDE_MARGIN_PERCENT;
-      const end = 100 - SIDE_MARGIN_PERCENT;
-      const step = (end - start) / (nodeCount - 1);
+    const nodeCount = categories.length;
+    const start = SIDE_MARGIN_PERCENT;
+    const end = 100 - SIDE_MARGIN_PERCENT;
+    const step = (end - start) / (nodeCount - 1);
 
-      categories.forEach((cat, idx) => {
-          const offset = getNodeOffset(cat.count);
-          const nodeDiv = document.createElement('div');
-          nodeDiv.className = 'node';
-          const centerPercent = start + idx * step;
-          nodeDiv.style.left = `${centerPercent}%`;
-          let translateY;
-          if (idx % 2 === 0) {
-              nodeDiv.classList.add('above');
-              translateY = -offset;
-          } else {
-              nodeDiv.classList.add('below');
-              translateY = offset;
-          }
-          nodeDiv.style.transform = `translateX(-50%) translateY(${translateY}px)`;
+    // 使用 DocumentFragment 批量插入，减少 DOM 重排
+    const fragment = document.createDocumentFragment();
 
-          const dot = document.createElement('div');
-          dot.className = 'node-dot';
-          const line = document.createElement('div');
-line.className = 'node-line';
-const lineHeight = offset - 6;
-line.style.height = `${lineHeight}px`;
+    categories.forEach((cat, idx) => {
+      const offset = getNodeOffset(cat.count);
+      const nodeDiv = document.createElement('div');
+      nodeDiv.className = 'node';
+      const centerPercent = start + idx * step;
+      nodeDiv.style.left = `${centerPercent}%`;
+      let translateY;
+      if (idx % 2 === 0) {
+        nodeDiv.classList.add('above');
+        translateY = -offset;
+      } else {
+        nodeDiv.classList.add('below');
+        translateY = offset;
+      }
+      nodeDiv.style.transform = `translateX(-50%) translateY(${translateY}px)`;
 
-// 创建信息区
-const info = document.createElement('div');
-info.className = 'node-info';
-info.innerHTML = `${cat.name}<div class="node-count">${cat.count}篇</div><div class="node-desc">${cat.desc || ''}</div>`;
+      const dot = document.createElement('div');
+      dot.className = 'node-dot';
 
-nodeDiv.appendChild(dot);
-nodeDiv.appendChild(line);
-nodeDiv.appendChild(info);
+      const line = document.createElement('div');
+      line.className = 'node-line';
+      const lineHeight = offset - 6;
+      line.style.height = `${lineHeight}px`;
 
-          nodeDiv.dataset.name = cat.name;
-          nodeDiv.dataset.articles = JSON.stringify(cat.articles);
-          nodeDiv.dataset.count = cat.count;
-          nodeDiv.dataset.index = idx;
+      const info = document.createElement('div');
+      info.className = 'node-info';
+      info.innerHTML = `${cat.name}<div class="node-count">${cat.count}篇</div><div class="node-desc">${cat.desc || ''}</div>`;
 
-          nodeDiv.addEventListener('click', (e) => {
-              e.stopPropagation();
-              zoomToNode(nodeDiv, cat);
-          });
+      nodeDiv.appendChild(dot);
+      nodeDiv.appendChild(line);
+      nodeDiv.appendChild(info);
 
-          nodesContainer.appendChild(nodeDiv);
+      nodeDiv.dataset.name = cat.name;
+      nodeDiv.dataset.articles = JSON.stringify(cat.articles);
+      nodeDiv.dataset.count = cat.count;
+      nodeDiv.dataset.index = idx;
+
+      nodeDiv.addEventListener('click', (e) => {
+        e.stopPropagation();
+        zoomToNode(nodeDiv, cat);
       });
+
+      fragment.appendChild(nodeDiv);
+    });
+
+    // 一次性插入所有节点
+    nodesContainer.appendChild(fragment);
   }
 
   function hidePopup() {
-      popup.classList.remove('visible');
+    popup.classList.remove('visible');
   }
 
   function showPopup(node, cat) {
-      const rect = node.getBoundingClientRect();
-      let left, top;
-      // 获取节点索引
+    const rect = node.getBoundingClientRect();
+    let left, top;
     const nodeIndex = parseInt(node.dataset.index);
 
-    // 第一个节点（导论）特殊处理：显示在右侧
     if (nodeIndex === 0) {
-        const rightSpace = window.innerWidth - rect.right;
-        if (rightSpace < POPUP_WIDTH + 20) {
-            left = rect.left - POPUP_WIDTH - 12;
-        } else {
-            left = rect.right + 170;
-        }
+      const rightSpace = window.innerWidth - rect.right;
+      if (rightSpace < POPUP_WIDTH + 20) {
+        left = rect.left - POPUP_WIDTH - 12;
+      } else {
+        left = rect.right + 170;
+      }
     } else {
-        // 其他节点显示在左侧
-        left = rect.left - POPUP_WIDTH - 35;
-        if (left < 10) left = 10;
+      left = rect.left - POPUP_WIDTH - 35;
+      if (left < 10) left = 10;
     }
-      top = rect.top;
-      if (top + 200 > window.innerHeight) top = window.innerHeight - 210;
-      if (top < 10) top = 10;
-      popup.style.left = `${left}px`;
-      popup.style.top = `${top}px`;
-      popupTitle.textContent = cat.name;
-      popupList.innerHTML = cat.articles.map(a => `<li><a href="/blog/${a.id}" data-image="${a.firstPicture || ''}">${a.title}</a></li>`).join('');
-      popup.offsetHeight;
-      popup.classList.add('visible');
+    top = rect.top;
+    if (top + 200 > window.innerHeight) top = window.innerHeight - 210;
+    if (top < 10) top = 10;
+    popup.style.left = `${left}px`;
+    popup.style.top = `${top}px`;
+    popupTitle.textContent = cat.name;
+    popupList.innerHTML = cat.articles.map(a => `<li><a href="/blog/${a.id}" data-image="${a.firstPicture || ''}">${a.title}</a></li>`).join('');
+    popup.offsetHeight;
+    popup.classList.add('visible');
 
-      // 显示浮层后，绑定悬浮事件
-setTimeout(() => {
-    const items = popupList.querySelectorAll('li a');
-    items.forEach(item => {
+    setTimeout(() => {
+      const items = popupList.querySelectorAll('li a');
+      items.forEach(item => {
         const imgUrl = item.dataset.image;
         if (imgUrl) {
-            item.addEventListener('mouseenter', () => {
-                document.body.style.backgroundImage = `url(${imgUrl})`;
-                document.body.style.backgroundSize = 'cover';
-                document.body.style.backgroundPosition = 'center';
-                document.body.style.backgroundBlendMode = 'overlay';
-            });
-            item.addEventListener('mouseleave', () => {
-                document.body.style.backgroundImage = '';
-                document.body.style.backgroundColor = 'var(--bg-color)';
-                document.body.style.backgroundBlendMode = 'normal';
-            });
+          item.addEventListener('mouseenter', () => {
+            document.body.style.backgroundImage = `url(${imgUrl})`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundBlendMode = 'overlay';
+          });
+          item.addEventListener('mouseleave', () => {
+            document.body.style.backgroundImage = '';
+            document.body.style.backgroundColor = 'var(--bg-color)';
+            document.body.style.backgroundBlendMode = 'normal';
+          });
         }
-    });
-}, 50);
+      });
+    }, 50);
   }
 
   function updateNavButtons() {
-      if (!isZoomed) {
-          navPrev.classList.remove('visible');
-          navNext.classList.remove('visible');
-          return;
-      }
-      navPrev.classList.add('visible');
-      navNext.classList.add('visible');
-      const currentIndex = parseInt(currentZoomedNode.dataset.index);
-      if (currentIndex === 0) {
-          navPrev.classList.add('disabled');
-      } else {
-          navPrev.classList.remove('disabled');
-      }
-      if (currentIndex === categories.length - 1) {
-          navNext.classList.add('disabled');
-      } else {
-          navNext.classList.remove('disabled');
-      }
+    if (!isZoomed) {
+      navPrev.classList.remove('visible');
+      navNext.classList.remove('visible');
+      return;
+    }
+    navPrev.classList.add('visible');
+    navNext.classList.add('visible');
+    const currentIndex = parseInt(currentZoomedNode.dataset.index);
+    if (currentIndex === 0) {
+      navPrev.classList.add('disabled');
+    } else {
+      navPrev.classList.remove('disabled');
+    }
+    if (currentIndex === categories.length - 1) {
+      navNext.classList.add('disabled');
+    } else {
+      navNext.classList.remove('disabled');
+    }
   }
 
-  // 修正缩放变换：使节点中心精确移动到视口中心
   function applyZoomTransform(node) {
-      const rect = node.getBoundingClientRect();
-      const nodeCenterX = rect.left + rect.width / 2;
-      const nodeCenterY = rect.top + rect.height / 2;
-      const viewportCenterX = window.innerWidth / 2;
-      const viewportCenterY = window.innerHeight / 2;
+    const rect = node.getBoundingClientRect();
+    const nodeCenterX = rect.left + rect.width / 2;
+    const nodeCenterY = rect.top + rect.height / 2;
+    const viewportCenterX = window.innerWidth / 2;
+    const viewportCenterY = window.innerHeight / 2;
 
-      // 计算从当前节点中心到视口中心的偏移量（相对于缩放前的画布）
-      const deltaX = viewportCenterX - nodeCenterX;
-      const deltaY = viewportCenterY - nodeCenterY;
+    const deltaX = viewportCenterX - nodeCenterX;
+    const deltaY = viewportCenterY - nodeCenterY;
 
-      // 由于缩放后坐标会变化，实际需要的平移量 = 当前平移量 + (deltaX / ZOOM_SCALE)
-      // 获取当前的 transform 矩阵（默认为无）
-      let currentTranslateX = 0, currentTranslateY = 0;
-      const transform = timelineZoom.style.transform;
-      if (transform !== '') {
-          const match = transform.match(/translate\(([^,]+),([^)]+)\)/);
-          if (match) {
-              currentTranslateX = parseFloat(match[1]);
-              currentTranslateY = parseFloat(match[2]);
-          }
+    let currentTranslateX = 0, currentTranslateY = 0;
+    const transform = timelineZoom.style.transform;
+    if (transform !== '') {
+      const match = transform.match(/translate\(([^,]+),([^)]+)\)/);
+      if (match) {
+        currentTranslateX = parseFloat(match[1]);
+        currentTranslateY = parseFloat(match[2]);
       }
+    }
 
-      // 新平移量
-      const newTranslateX = currentTranslateX + (deltaX / ZOOM_SCALE);
-      const newTranslateY = currentTranslateY + (deltaY / ZOOM_SCALE);
+    const newTranslateX = currentTranslateX + (deltaX / ZOOM_SCALE);
+    const newTranslateY = currentTranslateY + (deltaY / ZOOM_SCALE);
 
-      timelineZoom.style.transform = `scale(${ZOOM_SCALE}) translate(${newTranslateX}px, ${newTranslateY}px)`;
+    timelineZoom.style.transform = `scale(${ZOOM_SCALE}) translate(${newTranslateX}px, ${newTranslateY}px)`;
   }
 
   function zoomToNode(node, cat) {
-      if (isAnimating) return;
-      if (currentZoomedNode === node && isZoomed) {
-          hidePopup();
-          showPopup(node, cat);
-          return;
-      }
-
-      isAnimating = true;
+    if (isAnimating) return;
+    if (currentZoomedNode === node && isZoomed) {
       hidePopup();
-      applyZoomTransform(node);
+      showPopup(node, cat);
+      return;
+    }
 
-      const onTransitionEnd = () => {
-          timelineZoom.removeEventListener('transitionend', onTransitionEnd);
-          isZoomed = true;
-          currentZoomedNode = node;
-          updateNavButtons();
-          showPopup(node, cat);
-          isAnimating = false;
-      };
-      timelineZoom.addEventListener('transitionend', onTransitionEnd, { once: true });
-      setTimeout(() => {
-          if (isAnimating) {
-              timelineZoom.removeEventListener('transitionend', onTransitionEnd);
-              onTransitionEnd();
-          }
-      }, 500);
+    isAnimating = true;
+    hidePopup();
+    applyZoomTransform(node);
+
+    const onTransitionEnd = () => {
+      timelineZoom.removeEventListener('transitionend', onTransitionEnd);
+      isZoomed = true;
+      currentZoomedNode = node;
+      updateNavButtons();
+      showPopup(node, cat);
+      isAnimating = false;
+    };
+    timelineZoom.addEventListener('transitionend', onTransitionEnd, { once: true });
+    setTimeout(() => {
+      if (isAnimating) {
+        timelineZoom.removeEventListener('transitionend', onTransitionEnd);
+        onTransitionEnd();
+      }
+    }, 500);
   }
 
   function resetView() {
-      if (isAnimating) return;
-      isAnimating = true;
-      hidePopup();
-      timelineZoom.style.transform = 'scale(1) translate(0, 0)';
-      const onResetEnd = () => {
-          timelineZoom.removeEventListener('transitionend', onResetEnd);
-          isZoomed = false;
-          currentZoomedNode = null;
-          navPrev.classList.remove('visible');
-          navNext.classList.remove('visible');
-          isAnimating = false;
-      };
-      timelineZoom.addEventListener('transitionend', onResetEnd, { once: true });
-      setTimeout(() => {
-          if (isAnimating) {
-              timelineZoom.removeEventListener('transitionend', onResetEnd);
-              onResetEnd();
-          }
-      }, 500);
+    if (isAnimating) return;
+    isAnimating = true;
+    hidePopup();
+    timelineZoom.style.transform = 'scale(1) translate(0, 0)';
+    const onResetEnd = () => {
+      timelineZoom.removeEventListener('transitionend', onResetEnd);
+      isZoomed = false;
+      currentZoomedNode = null;
+      navPrev.classList.remove('visible');
+      navNext.classList.remove('visible');
+      isAnimating = false;
+    };
+    timelineZoom.addEventListener('transitionend', onResetEnd, { once: true });
+    setTimeout(() => {
+      if (isAnimating) {
+        timelineZoom.removeEventListener('transitionend', onResetEnd);
+        onResetEnd();
+      }
+    }, 500);
   }
 
   function goPrev() {
-      if (!isZoomed || isAnimating) return;
-      const currentIndex = parseInt(currentZoomedNode.dataset.index);
-      if (currentIndex <= 0) return;
-      const prevNode = document.querySelector(`.node[data-index='${currentIndex - 1}']`);
-      const prevCat = categories[currentIndex - 1];
-      if (prevNode) {
-          zoomToNode(prevNode, prevCat);
-      }
+    if (!isZoomed || isAnimating) return;
+    const currentIndex = parseInt(currentZoomedNode.dataset.index);
+    if (currentIndex <= 0) return;
+    const prevNode = document.querySelector(`.node[data-index='${currentIndex - 1}']`);
+    const prevCat = categories[currentIndex - 1];
+    if (prevNode) {
+      zoomToNode(prevNode, prevCat);
+    }
   }
 
   function goNext() {
-      if (!isZoomed || isAnimating) return;
-      const currentIndex = parseInt(currentZoomedNode.dataset.index);
-      if (currentIndex >= categories.length - 1) return;
-      const nextNode = document.querySelector(`.node[data-index='${currentIndex + 1}']`);
-      const nextCat = categories[currentIndex + 1];
-      if (nextNode) {
-          zoomToNode(nextNode, nextCat);
-      }
+    if (!isZoomed || isAnimating) return;
+    const currentIndex = parseInt(currentZoomedNode.dataset.index);
+    if (currentIndex >= categories.length - 1) return;
+    const nextNode = document.querySelector(`.node[data-index='${currentIndex + 1}']`);
+    const nextCat = categories[currentIndex + 1];
+    if (nextNode) {
+      zoomToNode(nextNode, nextCat);
+    }
   }
 
   document.addEventListener('click', (e) => {
-      const isNode = e.target.closest('.node');
-      const isPopup = e.target.closest('.popup');
-      const isNavBtn = e.target.closest('.nav-switch');
-      if (!isNode && !isPopup && !isNavBtn && isZoomed && !isAnimating) {
-          resetView();
-      }
+    const isNode = e.target.closest('.node');
+    const isPopup = e.target.closest('.popup');
+    const isNavBtn = e.target.closest('.nav-switch');
+    if (!isNode && !isPopup && !isNavBtn && isZoomed && !isAnimating) {
+      resetView();
+    }
   });
 
   navPrev.addEventListener('click', goPrev);
@@ -761,33 +758,27 @@ setTimeout(() => {
 
   buildNodes();
 
-  //接受参数放大节点
-  // 获取 URL 参数中的分类名称
-function getUrlParameter(name) {
+  function getUrlParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
-}
+  }
 
-// 页面加载完成后，检查是否有指定分类
-document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const typeName = getUrlParameter('type');
     if (typeName) {
-        // 找到对应的节点
-        const targetNode = Array.from(document.querySelectorAll('.node')).find(node => {
-            return node.querySelector('.node-info')?.innerText.includes(typeName);
-        });
-        if (targetNode) {
-            // 找到对应的分类数据
-            const targetCat = categories.find(cat => cat.name === typeName);
-            if (targetCat) {
-                // 延迟执行，确保节点已渲染完成
-                setTimeout(() => {
-                    zoomToNode(targetNode, targetCat);
-                }, 100);
-            }
+      const targetNode = Array.from(document.querySelectorAll('.node')).find(node => {
+        return node.querySelector('.node-info')?.innerText.includes(typeName);
+      });
+      if (targetNode) {
+        const targetCat = categories.find(cat => cat.name === typeName);
+        if (targetCat) {
+          setTimeout(() => {
+            zoomToNode(targetNode, targetCat);
+          }, 100);
         }
+      }
     }
-});
+  });
 </script>
 </body>
 </html>

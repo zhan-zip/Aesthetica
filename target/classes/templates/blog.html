@@ -1,159 +1,252 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head th:replace="_fragments :: head('详情页')">
-    <title>详情页</title>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${blog != null ? blog.title + ' · 美学详情页' : '美学详情页'}">美学详情页</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-size: cover; background-position: center; background-attachment: fixed;
+            font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
+            line-height: 1.6; padding: 5rem 2rem 3rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* 右上角返回按钮 */
+        .corner-nav { position: fixed; top: 24px; right: 24px; z-index: 2000; }
+        .back-btn {
+            width: 52px; height: 52px; background-color: #4A5568; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: none;
+        }
+        .back-btn:hover { background-color: #718096; transform: scale(1.02); }
+        .back-btn span { color: #fff; font-size: 1.5rem; }
+        .back-tooltip {
+            position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+            background-color: #4A5568; color: #fff; font-size: 0.7rem;
+            padding: 4px 10px; white-space: nowrap; opacity: 0; visibility: hidden;
+            transition: all 0.2s ease; pointer-events: none;
+        }
+        .back-btn:hover .back-tooltip { opacity: 1; visibility: visible; right: 65px; }
+
+        /* 主布局 */
+        .detail-layout { display: flex; gap: 3rem; align-items: flex-start; }
+
+        /* 左侧目录 */
+        .toc-sidebar {
+            flex: 0 0 280px; position: sticky; top: 100px;
+            background-color: #FFFFFF; padding: 2rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .toc-title {
+            font-size: 0.75rem; color: #A0AEC0; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem; border-bottom: 1px solid #E2E8F0;
+        }
+        .toc-list {
+            list-style: none;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        .toc-list li { margin-bottom: 0.5rem; }
+        .toc-list li a {
+            text-decoration: none; color: #4A5568; font-size: 0.85rem;
+            display: block; padding: 0.3rem 0; border-left: 2px solid transparent;
+            padding-left: 0.75rem; cursor: pointer; transition: all 0.2s;
+        }
+        .toc-list li a:hover { color: #718096; border-left-color: #718096; padding-left: 1rem; }
+        .toc-list li.active a { color: #2D3748; border-left-color: #2D3748; font-weight: 500; }
+
+        /* 右侧主内容 */
+        .main-content { flex: 1; display: flex; flex-direction: column; gap: 2rem; }
+        .hero-section { background-color: #FFFFFF; padding: 3rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .hero-section h1 { font-size: 2.2rem; font-weight: 400; letter-spacing: 4px; color: #2D3748; margin-bottom: 1rem; }
+        .hero-meta { display: flex; gap: 1.5rem; margin-top: 1rem; color: #A0AEC0; font-size: 0.8rem; flex-wrap: wrap; }
+
+        /* 正文大框 */
+        .unified-content {
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            padding: 2.8rem 4rem;
+        }
+        .unified-content h2 {
+            font-size: 1.6rem; font-weight: 400; letter-spacing: 3px;
+            color: #2D3748; margin: 1.8rem 0 1rem; padding-bottom: 0.5rem;
+            border-bottom: 1px solid #CBD5E0;
+            scroll-margin-top: 80px;
+        }
+        .unified-content h2:first-of-type { margin-top: 0; }
+        .unified-content p { color: #4A5568; font-size: 0.98rem; line-height: 1.8; margin-bottom: 1.2rem; }
+        .unified-content img { max-width: 100%; height: auto; margin: 1rem 0; }
+
+        /* 页脚 */
+        .footer { text-align: center; padding: 20px; color: #A0AEC0; font-size: 14px; border-top: 1px solid #E2E8F0; margin-top: 40px; }
+
+        /* 护眼模式开关 */
+        .feature-section { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #E2E8F0; }
+        .feature-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; }
+        .feature-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #4A5568; }
+        .toggle-switch { position: relative; width: 44px; height: 24px; cursor: pointer; }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #CBD5E0; border-radius: 24px; transition: all 0.3s ease;
+        }
+        .toggle-slider:before {
+            content: ""; position: absolute; height: 18px; width: 18px;
+            left: 3px; bottom: 3px; background-color: white; border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .toggle-switch input:checked + .toggle-slider { background-color: #4A5568; }
+        .toggle-switch input:checked + .toggle-slider:before { transform: translateX(20px); }
+
+        body.eye-care-mode { background-color: #C7EDCC !important; background-image: none !important; }
+        body.eye-care-mode .toc-sidebar, body.eye-care-mode .hero-section { background-color: #E8F5E9 !important; }
+        body.eye-care-mode .unified-content { background-color: rgba(232, 245, 233, 0.9) !important; }
+        body.eye-care-mode .hero-section h1, body.eye-care-mode .unified-content h2 { color: #1B5E20; }
+        body.eye-care-mode .unified-content p, body.eye-care-mode .feature-label { color: #33691E; }
+
+        @media (max-width: 1000px) { .detail-layout { flex-direction: column; } .unified-content { padding: 1.8rem; } }
+        @media (max-width: 600px) { body { padding: 4rem 1rem 1rem; } .back-btn { width: 44px; height: 44px; } .unified-content { padding: 1.2rem; } .back-tooltip { display: none; } }
+    </style>
 </head>
 <body>
-    <!--导航-->
-    <nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="_fragments :: menu(1)">
-    </nav>
 
-    <!--内容-->
-    <div class="md-pd-tb-massive">
-        <div class="ui container">
-            <!--头部-->
-            <div class="ui top attached segment">
-                <div class="ui horizontal list">
-                    <div class="item">
-                        <div class="content">
-                            <a href="#" class="header md-tt-thin" th:text="${blog.user != null ? blog.user.nickname : '匿名'}">作者名</a>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <span th:text="${blog.updateTime != null ? #dates.format(blog.updateTime, 'yyyy-MM-dd HH:mm') : '未知'}">日期</span>
-                    </div>
-                    <div class="item">
-                        <div th:if="${blog.type != null}">
-                            分类：<span th:text="${blog.type.name}">未分类</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--图片-->
-            <div class="ui attached segment">
-                <img src="../static/images/back.jpg" class="ui fluid image" th:src="@{/images/back.jpg}">
-            </div>
-            <!--内容-->
-            <div class="ui attached segment">
-                <div class="ui basic segment">
-                    <div class="ui teal label md-right-top">图标</div>
-                </div>
-                <h3 class="ui center aligned header" th:text="${blog.title}">标题</h3>
-                <div id="content" class="typo typo-selection js-toc-content md-pd-lr md-pd-tb-massive" th:utext="${blog.content}">
-                </div>
-                <!--赞赏-->
-                <div class="ui center aligned segment">
-                    <button class="ui red basic button" id="PayButton">爆点金币支持我</button>
-                </div>
+<div class="corner-nav">
+    <button class="back-btn" id="backToHomeBtn" th:onclick="'location.href=\'' + @{/} + '\''">
+        <span>←</span>
+        <span class="back-tooltip">返回首页</span>
+    </button>
+</div>
 
-                <div class="ui PayButtonShow flowing popup transition hidden">
-                    <div class="ui orange basic label">
-                        <div class="ui images" style="font-size: inherit !important;">
-                            <div class="image">
-                                <img src="../static/images/wechat.jpg" alt="" class="ui image" style="width: 120px;" th:src="@{/images/wechat.jpg}">
-                                <div>微信</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="container">
+    <div class="detail-layout">
 
-            </div>
-            <!--信息-->
-            <div class="ui message">
-                <div class="ui middle aligned grid">
-                    <div class="eleven wide column">
-                        <ui class="list">
-                            <li>其实这里应该放文章信息的</li>
-                            <li>但是我没有</li>
-                            <li>放几行假装我写了</li>
-                        </ui>
-                    </div>
-                    <div class="five wide column">
-                        <img src="../static/images/wechat.jpg" alt="" class="ui floated right image" style="width: 120px;">
-                    </div>
+        <!-- 左侧目录（动态生成） -->
+        <aside class="toc-sidebar">
+            <div class="toc-title">目录</div>
+            <ul class="toc-list" id="dynamicToc">
+                <li>加载中...</li>
+            </ul>
+            <div class="feature-section">
+                <div class="feature-item">
+                    <div class="feature-label"><span>👁️</span><span>护眼模式</span></div>
+                    <label class="toggle-switch"><input type="checkbox" id="eyeCareToggle"><span class="toggle-slider"></span></label>
                 </div>
             </div>
-            <!--评论-->
-        <div class="ui vertical icon buttons md-fixed md-right-bottom">
-            <button type="button" class="ui toc teal button">目录</button>
-            <a href="#comment-container" class="ui teal button">评论</a>
-            <button class="ui wechat teal button"><i class="weixin icon"></i></button>
-            <a id="toTop-button" class="ui teal button"><i class="chevron up icon"></i></a>
-            
-        </div>
+        </aside>
+
+        <!-- 右侧主内容 -->
+        <main class="main-content">
+            <div class="hero-section">
+                <h1 th:text="${blog.title}">文章标题</h1>
+                <div class="hero-meta">
+                    <span th:text="${blog.user != null ? '✍️ ' + blog.user.nickname : '✍️ 匿名'}">✍️ 作者</span>
+                    <span th:text="${blog.type != null ? '🏷️ 类型：' + blog.type.name : '🏷️ 类型：未分类'}">🏷️ 类型</span>
+                    <span th:text="${blog.updateTime != null ? #dates.format(blog.updateTime, 'yyyy-MM-dd') : ''}">日期</span>
+                </div>
+            </div>
+
+            <div class="unified-content" id="unifiedBody">
+                <div th:utext="${blog.content}">文章内容将显示在这里</div>
+            </div>
+        </main>
     </div>
+</div>
 
-    <!--存放目录内容-->
-    <div class="ui toc-container flowing popup transition hidden" style="width: 300px;">
-        <ol class="js-toc">
-        </ol>
-    </div>
+<div class="footer">
+    <p>美学知识库 © 2026 | 探索美的无限可能</p>
+</div>
 
-    <!--存放弹出的微信-->
-    <div id="qrcode" class="ui wechat-image flowing popup transition hidden" style="width: 150px;" >
-        <!--img src="../static/images/wechat.jpg" alt=""  style="width: 130px;" th:src="@{/images/wechat.jpg}"-->
-    </div>
-    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6/dist/jquery.min.js"></script>
+<script>
+    // 目录自动生成（基于正文中的 h2 标签）
+    (function() {
+        const contentDiv = document.getElementById('unifiedBody');
+        const tocContainer = document.getElementById('dynamicToc');
+        if (!contentDiv || !tocContainer) return;
 
-    <!--底部-->
-    <footer class="ui inverted vertical segment md-padded-tb-massive" th:replace="_fragments :: footer">
-    </footer>
-    <!--/*/<th:block th:replace="_fragments :: script">/*/-->
-    <!--/*/</th:block>/*/-->
+        // 获取所有 h2 标题（注意：内容是通过 th:utext 动态渲染的，所以需要等待 DOM 更新）
+        // 使用 setTimeout 确保内容已渲染
+        setTimeout(() => {
+            const headings = contentDiv.querySelectorAll('h2');
+            if (headings.length === 0) {
+                tocContainer.innerHTML = '<li>无目录</li>';
+                return;
+            }
 
-<!--底下这串我看不懂，做互动的-->
-    <script>
-        /*做一个适应手机端的导航栏收缩按键*/
-        $('.menu.toggle').click(function(){
-            $('.md-item').toggleClass('md-mobile-hide');
+            // 为每个 h2 生成 id（如果没有）
+            headings.forEach((heading, idx) => {
+                if (!heading.id) heading.id = 'section-' + idx;
+            });
+
+            // 生成目录 HTML
+            let tocHtml = '';
+            headings.forEach(heading => {
+                const title = heading.textContent;
+                const id = heading.id;
+                tocHtml += `<li><a data-target="${id}">${title}</a></li>`;
+            });
+            tocContainer.innerHTML = tocHtml;
+
+            // 绑定点击事件
+            const links = document.querySelectorAll('.toc-list li a');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('data-target');
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // 滚动高亮当前章节
+            function updateActive() {
+                let current = '';
+                const scrollPos = window.scrollY + 150;
+                for (let i = 0; i < headings.length; i++) {
+                    const section = headings[i];
+                    const top = section.offsetTop;
+                    const bottom = top + section.offsetHeight;
+                    if (scrollPos >= top && scrollPos < bottom) {
+                        current = section.id;
+                        break;
+                    }
+                }
+                links.forEach(link => {
+                    const li = link.parentElement;
+                    li.classList.remove('active');
+                    if (link.getAttribute('data-target') === current) {
+                        li.classList.add('active');
+                    }
+                });
+            }
+            window.addEventListener('scroll', updateActive);
+            updateActive();
+        }, 100); // 延迟确保 th:utext 渲染完成
+    })();
+
+    // 护眼模式
+    (function() {
+        const toggle = document.getElementById('eyeCareToggle');
+        if (!toggle) return;
+        if (localStorage.getItem('eyeCareMode') === 'true') {
+            toggle.checked = true;
+            document.body.classList.add('eye-care-mode');
+        }
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('eye-care-mode');
+                localStorage.setItem('eyeCareMode', 'true');
+            } else {
+                document.body.classList.remove('eye-care-mode');
+                localStorage.setItem('eyeCareMode', 'false');
+            }
         });
-        /*一个赞赏探出二维码*/
-        $('#PayButton').popup({
-            popup : $('.PayButtonShow.popup'),
-            on : 'click',
-            position: 'bottom center'
-        });
-        /*弹出微信*/
-        $('.wechat').popup({
-            popup : $('.wechat-image.popup'),
-            position: 'bottom center'
-        });
-
-        /*生成二维码*/
-        var qrcode = new QRCode("qrcode", {
-	        text: "https://www.luogu.com.cn/",
-	        width: 128,
-	        height: 128,
-	        colorDark : "#000000",
-	        colorLight : "#ffffff",
-	        correctLevel : QRCode.CorrectLevel.H
-        });
-
-        $('#toTop-button').click(function(){
-            $(window).scrollTo(0,500);
-        });
-
-
-        /*用于初始化tocbot*/
-        tocbot.init({
-  // Where to render the table of contents.
-  tocSelector: '.js-toc',
-  // Where to grab the headings to build the table of contents.
-  contentSelector: '.js-toc-content',
-  // Which headings to grab inside of the contentSelector element.
-  headingSelector: 'h1, h2, h3',
-  // For headings inside relative or absolute positioned containers within content.
-  hasInnerContainers: true,
-});
-        /*用于弹出目录*/
-        $('.toc.button').popup({
-            popup : $('.toc-container.popup'),
-            on : 'click',
-            position: 'left center'
-        });
-    </script>
-    
-
-    
+    })();
+</script>
 </body>
 </html>
