@@ -35,7 +35,7 @@ public class IndexController {
         model.addAttribute("page",blogService.listBlog(pageable));
         model.addAttribute("types",typeService.listTypeTop(6));
 
-        List<Long> recommendIds = Arrays.asList(1L, 2L, 3L,252L,253L,254L,302L,352L,402L);  // 这里写了的推荐博客id
+        List<Long> recommendIds = Arrays.asList(1L, 2L, 3L,4L,5L,6L);  // 这里写了的推荐博客id
         List<Blog> recommendBlogs = new ArrayList<>();
         for (Long id : recommendIds) {
             Blog b = blogService.getBlog(id);
