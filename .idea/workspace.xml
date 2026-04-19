@@ -4,21 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-调整了详情页和about的细节显示问题">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lrm/Dao/GlossaryRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lrm/po/Glossary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lrm/service/GlossaryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lrm/service/GlossaryServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/GlossaryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/glossaries.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/glossary-input.html" afterDir="false" />
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-实现专有名词浮窗功能&#10;-专有名词和文章列表均修改为一页10个">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/BlogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/BlogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/IndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/_fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/_fragments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/music/backgroundmusic.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/music/background.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/_fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/_fragments.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/blog.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -520,7 +509,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776565307817</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="-实现专有名词浮窗功能&#10;-专有名词和文章列表均修改为一页10个">
+      <option name="closed" value="true" />
+      <created>1776569316331</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1776569316331</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,7 +547,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-测试写死的文章id能不能在主页推送内容显示" />
     <MESSAGE value="-增加了代码使用ai等的说明注释" />
     <MESSAGE value="-增加了代码使用ai等的说明注释&#10;-上传了新的首页前端" />
     <MESSAGE value="-更改了注释部分，显示异常问题" />
@@ -575,7 +571,8 @@
     <MESSAGE value="-删掉了前台不需要的复用&#10;-修改了详情页报错的部分" />
     <MESSAGE value="-更改了about的部分字体细节" />
     <MESSAGE value="-调整了详情页和about的细节显示问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="-调整了详情页和about的细节显示问题" />
+    <MESSAGE value="-实现专有名词浮窗功能&#10;-专有名词和文章列表均修改为一页10个" />
+    <option name="LAST_COMMIT_MESSAGE" value="-实现专有名词浮窗功能&#10;-专有名词和文章列表均修改为一页10个" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

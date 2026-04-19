@@ -71,11 +71,11 @@
     flex: 0 0 250px;
     position: sticky;
     top: 100px;
-    background-color: rgba(255, 255, 255, 0.75);  /* 原来 #FFFFFF，改为半透明 */
+    background-color: rgba(255, 255, 255, 0.75);
     padding: 2rem 1.5rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     min-height: 75vh;
-    backdrop-filter: blur(2px); /* 可选：增加毛玻璃效果，让文字更清晰 */
+    backdrop-filter: blur(2px);
 }
         .toc-title {
             font-size: 1.2rem; color: #404e5b; letter-spacing: 3px;
@@ -94,13 +94,12 @@
 
         .main-content { flex: 1; display: flex; flex-direction: column; gap: 2rem; }
         .hero-section {
-    background-color: rgba(255, 255, 255, 0.75);  /* 原来 #FFFFFF */
+    background-color: rgba(255, 255, 255, 0.75);
     padding: 3rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
-
 .hero-section h1 {
-    font-size: 2。3rem;
+    font-size: 2.3rem;
     font-weight: 400;
     letter-spacing: 4px;
     color: #404e5b;
@@ -109,13 +108,12 @@
         .hero-meta { display: flex; gap: 1.5rem; margin-top: 1rem; color: #A0AEC0; font-size: 1.2rem; flex-wrap: wrap; }
 
         .unified-content {
-    background-color: rgba(255, 255, 255, 0.85);  /* 原来 0.5，改为 0.85 */
+    background-color: rgba(255, 255, 255, 0.85);
     box-shadow: 0 8px 24px rgba(0,0,0,0.04);
     padding: 2.8rem 4rem;
 }
-
         .unified-content h2 {
-    font-size: 1.8rem;  /* 原来1.6rem */
+    font-size: 1.8rem;
     font-weight: 400;
     letter-spacing: 3px;
     color: #2D3748;
@@ -143,6 +141,32 @@
         }
         .toggle-switch input:checked + .toggle-slider { background-color: #4A5568; }
         .toggle-switch input:checked + .toggle-slider:before { transform: translateX(20px); }
+
+        /* 音量控制 */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0 0 1.5rem;
+            font-size: 0.85rem;
+            color: #4A5568;
+        }
+        .volume-control input[type="range"] {
+            flex: 1;
+            height: 4px;
+            -webkit-appearance: none;
+            background: #CBD5E0;
+            border-radius: 2px;
+            outline: none;
+        }
+        .volume-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: #4A5568;
+            border-radius: 50%;
+            cursor: pointer;
+        }
 
         /* 术语高亮样式 */
 .glossary-term {
@@ -188,19 +212,19 @@ body.eye-care-mode .unified-content {
         body.eye-care-mode .toggle-switch input:checked + .toggle-slider { background-color: #CD853F; }
         /* 护眼模式下浮窗样式 */
 body.eye-care-mode .glossary-tooltip {
-    background-color: white;
+    background-color: #FFF8ED;
     border: 1px solid #D4C4A8;
     color: #5C4B3A;
 }
         /* 护眼模式 - 导航栏适中暖色调 */
 body.eye-care-mode .nav-trigger {
-    background-color: #9A7C67;  /* 适中暖褐 */
+    background-color: #9A7C67;
 }
 body.eye-care-mode .nav-trigger:hover {
     background-color: #8B5A2B;
 }
 body.eye-care-mode .nav-menu {
-    background-color: #FDF5E6;  /* 米色，与正文统一 */
+    background-color: #FDF5E6;
 }
 body.eye-care-mode .nav-menu li a {
     color: #5C4B3A;
@@ -215,6 +239,16 @@ body.eye-care-mode .nav-menu-close {
 }
 body.eye-care-mode .nav-menu-close:hover {
     color: #A06941;
+}
+/* 护眼模式下音量控件 */
+body.eye-care-mode .volume-control {
+    color: #6B5B4A;
+}
+body.eye-care-mode .volume-control input[type="range"] {
+    background: #D4C4A8;
+}
+body.eye-care-mode .volume-control input[type="range"]::-webkit-slider-thumb {
+    background: #CD853F;
 }
 
         @media (max-width: 1000px) { .detail-layout { flex-direction: column; } .unified-content { padding: 1.8rem; } }
@@ -251,6 +285,16 @@ body.eye-care-mode .nav-menu-close:hover {
                 <div class="feature-item">
                     <div class="feature-label"><span>护眼模式</span></div>
                     <label class="toggle-switch"><input type="checkbox" id="eyeCareToggle"><span class="toggle-slider"></span></label>
+                </div>
+                <!-- 音乐播放控制 -->
+                <div class="feature-item">
+                    <div class="feature-label"><span>背景音乐</span></div>
+                    <label class="toggle-switch"><input type="checkbox" id="musicToggle"><span class="toggle-slider"></span></label>
+                </div>
+                <div class="volume-control" id="volumeControl" style="display: none;">
+
+                    <input type="range" id="volumeSlider" min="0" max="100" value="50">
+                    <span id="volumeValue">50%</span>
                 </div>
             </div>
         </aside>
@@ -302,7 +346,6 @@ function replaceTermsWithTooltips(html, glossaries) {
     sorted.forEach(item => {
         const term = item.term;
         const def = escapeHtml(item.definition);
-        // 移除 \b，直接匹配术语文本（全局替换）
         const regex = new RegExp(`(${escapeRegExp(term)})`, 'g');
         result = result.replace(regex, `<span class="glossary-term" data-def="${def}">$1</span>`);
     });
@@ -312,7 +355,6 @@ function replaceTermsWithTooltips(html, glossaries) {
 // 为术语绑定悬浮浮窗
 function attachTooltips() {
     const terms = document.querySelectorAll('.glossary-term');
-    // 移除已有的 tooltip 避免重复
     const oldTooltips = document.querySelectorAll('.glossary-tooltip');
     oldTooltips.forEach(t => t.remove());
 
@@ -325,11 +367,11 @@ function attachTooltips() {
         document.body.appendChild(tooltip);
 
         term.addEventListener('mouseenter', (e) => {
-    const rect = term.getBoundingClientRect();
-    tooltip.style.left = rect.left + 'px';
-    tooltip.style.top = (rect.top - tooltip.offsetHeight - 40) + 'px';
-    tooltip.style.display = 'block';
-});
+            const rect = term.getBoundingClientRect();
+            tooltip.style.left = rect.left + 'px';
+            tooltip.style.top = (rect.top - tooltip.offsetHeight - 40) + 'px';
+            tooltip.style.display = 'block';
+        });
         term.addEventListener('mouseleave', () => {
             tooltip.style.display = 'none';
         });
@@ -343,9 +385,7 @@ function attachTooltips() {
     if (sourceDiv && targetDiv) {
         const markdown = sourceDiv.innerText;
         let html = marked.parse(markdown);
-        // 从后端获取术语列表
         const glossaries = /*[[${glossaries}]]*/ [];
-        console.log('术语列表:', glossaries);  // 调试用
         if (glossaries && glossaries.length > 0) {
             html = replaceTermsWithTooltips(html, glossaries);
         }
@@ -360,7 +400,6 @@ function attachTooltips() {
         const tocContainer = document.getElementById('dynamicToc');
         if (!contentDiv || !tocContainer) return;
 
-        // 等待 DOM 更新后生成目录
         setTimeout(() => {
             const headings = contentDiv.querySelectorAll('h2');
             if (headings.length === 0) {
@@ -431,6 +470,54 @@ function attachTooltips() {
                 document.body.classList.remove('eye-care-mode');
                 localStorage.setItem('eyeCareMode', 'false');
             }
+        });
+    })();
+
+    // 背景音乐功能
+    (function() {
+        const musicToggle = document.getElementById('musicToggle');
+        const volumeControl = document.getElementById('volumeControl');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeValue = document.getElementById('volumeValue');
+        if (!musicToggle) return;
+
+        const audio = new Audio('/music/background.mp3');
+        audio.loop = true;
+        audio.volume = 0.5;
+
+        const savedMusic = localStorage.getItem('musicEnabled');
+        const savedVolume = localStorage.getItem('musicVolume');
+        if (savedVolume) {
+            volumeSlider.value = savedVolume;
+            volumeValue.textContent = savedVolume + '%';
+            audio.volume = savedVolume / 100;
+        }
+        if (savedMusic === 'true') {
+            musicToggle.checked = true;
+            volumeControl.style.display = 'flex';
+            audio.play().catch(e => console.log('自动播放被阻止，需要用户交互'));
+        }
+
+        musicToggle.addEventListener('change', function() {
+            if (this.checked) {
+                volumeControl.style.display = 'flex';
+                audio.play().catch(() => {
+                    alert('请点击页面任意位置后再试');
+                    this.checked = false;
+                });
+                localStorage.setItem('musicEnabled', 'true');
+            } else {
+                volumeControl.style.display = 'none';
+                audio.pause();
+                localStorage.setItem('musicEnabled', 'false');
+            }
+        });
+
+        volumeSlider.addEventListener('input', function() {
+            const val = this.value;
+            volumeValue.textContent = val + '%';
+            audio.volume = val / 100;
+            localStorage.setItem('musicVolume', val);
         });
     })();
 
