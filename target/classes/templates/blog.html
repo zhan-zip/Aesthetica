@@ -292,7 +292,6 @@ body.eye-care-mode .volume-control input[type="range"]::-webkit-slider-thumb {
                     <label class="toggle-switch"><input type="checkbox" id="musicToggle"><span class="toggle-slider"></span></label>
                 </div>
                 <div class="volume-control" id="volumeControl" style="display: none;">
-
                     <input type="range" id="volumeSlider" min="0" max="100" value="50">
                     <span id="volumeValue">50%</span>
                 </div>
@@ -323,76 +322,101 @@ body.eye-care-mode .volume-control input[type="range"]::-webkit-slider-thumb {
 <script th:inline="javascript">
 
     // 转义正则表达式特殊字符
-function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
 
-// 转义 HTML 特殊字符（防止 XSS）
-function escapeHtml(text) {
-    return text.replace(/[&<>]/g, function(m) {
-        if (m === '&') return '&amp;';
-        if (m === '<') return '&lt;';
-        if (m === '>') return '&gt;';
-        return m;
-    });
-}
+    // 转义 HTML 特殊字符（防止 XSS）
+    function escapeHtml(text) {
+        return text.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
 
-// 将术语替换为带 data-def 的 span
+    // 将术语替换为带 data-def 的 span（保护 h2 标题，且支持长术语优先匹配）
 function replaceTermsWithTooltips(html, glossaries) {
     if (!glossaries || glossaries.length === 0) return html;
-    // 按术语长度降序排序，避免短词先替换导致长词被部分替换
-    const sorted = [...glossaries].sort((a, b) => b.term.length - a.term.length);
-    let result = html;
-    sorted.forEach(item => {
-        const term = item.term;
-        const def = escapeHtml(item.definition);
-        const regex = new RegExp(`(${escapeRegExp(term)})`, 'g');
-        result = result.replace(regex, `<span class="glossary-term" data-def="${def}">$1</span>`);
+
+    // 1. 临时保护 h2 标题内容
+    const placeholders = [];
+    let idx = 0;
+    const h2Regex = /<h2([^>]*)>([\s\S]*?)<\/h2>/gi;
+    let processedHtml = html.replace(h2Regex, (match, attrs, content) => {
+        const key = `__TERM_PLACEHOLDER_${idx++}__`;
+        placeholders.push({ key, content });
+        return `<h2${attrs}>${key}</h2>`;
     });
+
+    // 2. 按术语长度降序排序（保证长术语优先匹配）
+    const sorted = [...glossaries].sort((a, b) => b.term.length - a.term.length);
+    // 构建一个正则表达式，同时匹配所有术语（按长度降序，但由于正则引擎从左到右，分组顺序无关紧要，关键是要匹配最长）
+    const pattern = sorted.map(item => escapeRegExp(item.term)).join('|');
+    const regex = new RegExp(`(${pattern})`, 'g');
+
+    // 替换所有匹配的术语
+    let result = processedHtml;
+    result = result.replace(regex, (match) => {
+        // 找到匹配到的术语对应的定义
+        const matchedItem = sorted.find(item => item.term === match);
+        if (matchedItem) {
+            const def = escapeHtml(matchedItem.definition);
+            return `<span class="glossary-term" data-def="${def}">${match}</span>`;
+        }
+        return match; // 理论上不会走到这里
+    });
+
+    // 3. 恢复 h2 标题
+    placeholders.forEach(({ key, content }) => {
+        result = result.replace(key, content);
+    });
+
     return result;
 }
 
-// 为术语绑定悬浮浮窗
-function attachTooltips() {
-    const terms = document.querySelectorAll('.glossary-term');
-    const oldTooltips = document.querySelectorAll('.glossary-tooltip');
-    oldTooltips.forEach(t => t.remove());
+    // 为术语绑定悬浮浮窗
+    function attachTooltips() {
+        const terms = document.querySelectorAll('.glossary-term');
+        const oldTooltips = document.querySelectorAll('.glossary-tooltip');
+        oldTooltips.forEach(t => t.remove());
 
-    terms.forEach(term => {
-        const def = term.getAttribute('data-def');
-        if (!def) return;
-        const tooltip = document.createElement('div');
-        tooltip.className = 'glossary-tooltip';
-        tooltip.innerHTML = def;
-        document.body.appendChild(tooltip);
+        terms.forEach(term => {
+            const def = term.getAttribute('data-def');
+            if (!def) return;
+            const tooltip = document.createElement('div');
+            tooltip.className = 'glossary-tooltip';
+            tooltip.innerHTML = def;
+            document.body.appendChild(tooltip);
 
-        term.addEventListener('mouseenter', (e) => {
-            const rect = term.getBoundingClientRect();
-            tooltip.style.left = rect.left + 'px';
-            tooltip.style.top = (rect.top - tooltip.offsetHeight - 40) + 'px';
-            tooltip.style.display = 'block';
+            term.addEventListener('mouseenter', (e) => {
+                const rect = term.getBoundingClientRect();
+                tooltip.style.left = rect.left + 'px';
+                tooltip.style.top = (rect.top - tooltip.offsetHeight - 40) + 'px';
+                tooltip.style.display = 'block';
+            });
+            term.addEventListener('mouseleave', () => {
+                tooltip.style.display = 'none';
+            });
         });
-        term.addEventListener('mouseleave', () => {
-            tooltip.style.display = 'none';
-        });
-    });
-}
+    }
 
     // 解析 Markdown 并渲染，同时替换术语
-(function() {
-    const sourceDiv = document.getElementById('markdown-source');
-    const targetDiv = document.getElementById('rendered-content');
-    if (sourceDiv && targetDiv) {
-        const markdown = sourceDiv.innerText;
-        let html = marked.parse(markdown);
-        const glossaries = /*[[${glossaries}]]*/ [];
-        if (glossaries && glossaries.length > 0) {
-            html = replaceTermsWithTooltips(html, glossaries);
+    (function() {
+        const sourceDiv = document.getElementById('markdown-source');
+        const targetDiv = document.getElementById('rendered-content');
+        if (sourceDiv && targetDiv) {
+            const markdown = sourceDiv.innerText;
+            let html = marked.parse(markdown);
+            const glossaries = /*[[${glossaries}]]*/ [];
+            if (glossaries && glossaries.length > 0) {
+                html = replaceTermsWithTooltips(html, glossaries);
+            }
+            targetDiv.innerHTML = html;
+            attachTooltips();
         }
-        targetDiv.innerHTML = html;
-        attachTooltips();
-    }
-})();
+    })();
 
     // 目录自动生成（基于渲染后的 h2 标签）
     (function() {
