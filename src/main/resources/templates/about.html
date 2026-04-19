@@ -20,6 +20,7 @@
             line-height: 1.6;
             padding: 3rem 2rem;
             padding-top: 5rem;
+            color: #404e5b;  /* 灰蓝色主文字 */
         }
 
         .container {
@@ -101,7 +102,7 @@
             display: block;
             padding: 1rem 2rem;
             text-decoration: none;
-            color: #404e5b;
+            color: #404e5b;  /* 灰蓝色 */
             font-size: 1rem;
             letter-spacing: 2px;
             transition: all 0.2s;
@@ -115,7 +116,7 @@
 
         .nav-menu li a:hover {
             background-color: rgba(143, 160, 184, 0.15);
-            color: #5a7d9a;
+            color: #5a7d9a;  /* 柔和蓝 */
             padding-left: 2.5rem;
         }
 
@@ -187,7 +188,7 @@
 
         .toc-title {
             font-size: 0.75rem;
-            color: #A0AEC0;
+            color: #5a7d9a;  /* 灰蓝色调 */
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 1.5rem;
@@ -205,7 +206,7 @@
 
         .toc-list li a {
             text-decoration: none;
-            color: #4A5568;
+            color: #404e5b;  /* 灰蓝色 */
             font-size: 0.9rem;
             transition: all 0.2s;
             display: block;
@@ -216,14 +217,14 @@
         }
 
         .toc-list li a:hover {
-            color: #718096;
-            border-left-color: #718096;
+            color: #5a7d9a;
+            border-left-color: #5a7d9a;
             padding-left: 1rem;
         }
 
         .toc-list li.active a {
-            color: #2D3748;
-            border-left-color: #2D3748;
+            color: #5a7d9a;  /* 激活状态柔和蓝 */
+            border-left-color: #5a7d9a;
             font-weight: 500;
         }
 
@@ -237,7 +238,7 @@
             font-size: 2.2rem;
             font-weight: 400;
             letter-spacing: 4px;
-            color: #2D3748;
+            color: #404e5b;  /* 灰蓝色 */
             margin-bottom: 1rem;
             line-height: 1.3;
         }
@@ -246,7 +247,7 @@
             display: flex;
             justify-content: flex-end;
             margin-top: 1rem;
-            color: #A0AEC0;
+            color: #5a7d9a;  /* 灰蓝色调 */
             font-size: 1.1rem;
         }
 
@@ -261,7 +262,7 @@
             font-size: 1.6rem;
             font-weight: 400;
             letter-spacing: 3px;
-            color: #2D3748;
+            color: #404e5b;  /* 灰蓝色 */
             margin: 1.8rem 0 1rem 0;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid #CBD5E0;
@@ -273,7 +274,7 @@
         }
 
         .unified-content p {
-            color: #4A5568;
+            color: #404e5b;  /* 灰蓝色 */
             font-size: 0.98rem;
             line-height: 1.8;
             margin-bottom: 1.2rem;
@@ -287,7 +288,7 @@
 
         .feature-title {
             font-size: 0.75rem;
-            color: #A0AEC0;
+            color: #5a7d9a;  /* 灰蓝色调 */
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 1rem;
@@ -306,7 +307,7 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 0.9rem;
-            color: #4A5568;
+            color: #404e5b;  /* 灰蓝色 */
         }
 
         .toggle-switch {
@@ -347,63 +348,61 @@
         }
 
         .toggle-switch input:checked + .toggle-slider {
-            background-color: #4A5568;
+            background-color: #404e5b;  /* 灰蓝色 */
         }
 
         .toggle-switch input:checked + .toggle-slider:before {
             transform: translateX(20px);
         }
 
-        /* 护眼模式 */
-        /* 护眼模式 - 暖黄色调 */
-body.eye-care-mode {
-    background-color: #FDF5E6 !important;  /* 暖米色背景 */
-    background-image: none !important;
-}
+        /* 护眼模式 - 暖黄色调（文字颜色保留原护眼色，不覆盖） */
+        body.eye-care-mode {
+            background-color: #FDF5E6 !important;
+            background-image: none !important;
+        }
 
-body.eye-care-mode .toc-sidebar,
-body.eye-care-mode .hero-section {
-    background-color: #FFF8ED !important;
-}
+        body.eye-care-mode .toc-sidebar,
+        body.eye-care-mode .hero-section {
+            background-color: #FFF8ED !important;
+        }
 
-body.eye-care-mode .unified-content {
-    background-color: rgba(253, 245, 230, 0.95) !important;
-}
+        body.eye-care-mode .unified-content {
+            background-color: rgba(253, 245, 230, 0.95) !important;
+        }
 
-body.eye-care-mode .toc-title,
-body.eye-care-mode .feature-title {
-    color: #8B7355;
-}
+        body.eye-care-mode .toc-title,
+        body.eye-care-mode .feature-title {
+            color: #8B7355;
+        }
 
-body.eye-care-mode .toc-list li a {
-    color: #6B5B4A;
-}
+        body.eye-care-mode .toc-list li a {
+            color: #6B5B4A;
+        }
 
-body.eye-care-mode .toc-list li a:hover,
-body.eye-care-mode .toc-list li.active a {
-    color: #D2691E;
-    border-left-color: #D2691E;
-}
+        body.eye-care-mode .toc-list li a:hover,
+        body.eye-care-mode .toc-list li.active a {
+            color: #D2691E;
+            border-left-color: #D2691E;
+        }
 
-body.eye-care-mode .hero-section h1,
-body.eye-care-mode .unified-content h2,
-body.eye-care-mode .unified-content p,
-body.eye-care-mode .feature-label {
-    color: #5C4B3A;
-}
+        body.eye-care-mode .hero-section h1,
+        body.eye-care-mode .unified-content h2,
+        body.eye-care-mode .unified-content p,
+        body.eye-care-mode .feature-label {
+            color: #5C4B3A;
+        }
 
-body.eye-care-mode .hero-meta {
-    color: #A0896C;
-}
+        body.eye-care-mode .hero-meta {
+            color: #A0896C;
+        }
 
-body.eye-care-mode .toggle-slider {
-    background-color: #D4C4A8;
-}
+        body.eye-care-mode .toggle-slider {
+            background-color: #D4C4A8;
+        }
 
-body.eye-care-mode .toggle-switch input:checked + .toggle-slider {
-    background-color: #CD853F;
-}
-
+        body.eye-care-mode .toggle-switch input:checked + .toggle-slider {
+            background-color: #CD853F;
+        }
 
         @media (max-width: 1000px) {
             .detail-layout {
@@ -437,7 +436,6 @@ body.eye-care-mode .toggle-switch input:checked + .toggle-slider {
     </style>
 </head>
 <body>
-
 
 <!-- ========= 右上角隐藏式导航 ========= -->
 <div class="corner-nav">

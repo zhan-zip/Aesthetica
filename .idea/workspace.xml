@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-删掉了后台导航栏的关于网站选项">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/music/backgroundmusic.mp3" afterDir="false" />
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-删掉了前台不需要的复用&#10;-修改了详情页报错的部分">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/_fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/_fragments.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/_fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/_fragments.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -489,7 +483,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776514645810</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="-删掉了前台不需要的复用&#10;-修改了详情页报错的部分">
+      <option name="closed" value="true" />
+      <created>1776518977799</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1776518977799</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -519,7 +521,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-新增了上一页下一页跳转&#10;-砍掉了没用的头像图片" />
     <MESSAGE value="-简单修改了一些无伤大雅的细节问题" />
     <MESSAGE value="-为了重新上传到新的git仓库做了一些修改" />
     <MESSAGE value="-测试写死的文章id能不能在主页推送内容显示" />
@@ -544,7 +545,8 @@
     <MESSAGE value="-后台首页新增返回首页功能" />
     <MESSAGE value="-修改了部分注释&#10;-将关于网站页面改为正式内容&#10;-修改了护眼模式" />
     <MESSAGE value="-删掉了后台导航栏的关于网站选项" />
-    <option name="LAST_COMMIT_MESSAGE" value="-删掉了后台导航栏的关于网站选项" />
+    <MESSAGE value="-删掉了前台不需要的复用&#10;-修改了详情页报错的部分" />
+    <option name="LAST_COMMIT_MESSAGE" value="-删掉了前台不需要的复用&#10;-修改了详情页报错的部分" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
