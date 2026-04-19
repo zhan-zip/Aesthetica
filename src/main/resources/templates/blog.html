@@ -9,81 +9,124 @@
         body {
             background-size: cover; background-position: center; background-attachment: fixed;
             font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
-            line-height: 1.6; padding: 5rem 2rem 3rem;
+            line-height: 1.6;
+            padding: 5rem 2rem 3rem;
+            font-size: 1.1rem;
         }
         .container { max-width: 1200px; margin: 0 auto; }
 
-        /* 右上角返回按钮 */
-        .corner-nav { position: fixed; top: 24px; right: 24px; z-index: 2000; }
-        .back-btn {
-            width: 52px; height: 52px; background-color: #4A5568; cursor: pointer;
+        /* 隐藏式导航栏样式 */
+        .corner-nav {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 2000;
+        }
+        .nav-trigger {
+            width: 52px; height: 52px; background-color: #8fa0b8; border-radius: 0;
+            cursor: pointer; display: flex; flex-direction: column; align-items: center;
+            justify-content: center; gap: 6px; transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(148,143,140,0.15);
+        }
+        .nav-trigger:hover { background-color: #677b8f; transform: scale(1.02); }
+        .nav-trigger span { width: 24px; height: 2px; background-color: #fff; transition: all 0.3s ease; }
+        .nav-trigger.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .nav-trigger.open span:nth-child(2) { opacity: 0; }
+        .nav-trigger.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+        .nav-menu {
+            position: fixed; top: 0; right: 0; width: 25%; height: 100vh;
+            background-color: #ffffff; box-shadow: -4px 0 24px rgba(148,143,140,0.15);
+            overflow-y: auto; transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.2,0.9,0.4,1.1); z-index: 2001;
+        }
+        .nav-menu.open { transform: translateX(0); }
+        .nav-menu ul { list-style: none; padding: 2rem 0; }
+        .nav-menu li a {
+            display: block; padding: 1rem 2rem; text-decoration: none; color: #404e5b;
+            font-size: 1rem; letter-spacing: 2px; transition: all 0.2s;
+            border-bottom: 1px solid #948f8c; text-align: left;
+        }
+        .nav-menu li:first-child a { border-top: 1px solid #948f8c; }
+        .nav-menu li a:hover {
+            background-color: rgba(143,160,184,0.15); color: #5a7d9a; padding-left: 2.5rem;
+        }
+        .nav-menu-close {
+            position: absolute; top: 20px; right: 20px; width: 36px; height: 36px;
+            background-color: transparent; border: none; font-size: 1.5rem;
+            cursor: pointer; color: #6c7c8c; transition: all 0.2s;
             display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: none;
         }
-        .back-btn:hover { background-color: #718096; transform: scale(1.02); }
-        .back-btn span { color: #fff; font-size: 1.5rem; }
-        .back-tooltip {
-            position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
-            background-color: #4A5568; color: #fff; font-size: 0.7rem;
-            padding: 4px 10px; white-space: nowrap; opacity: 0; visibility: hidden;
-            transition: all 0.2s ease; pointer-events: none;
+        .nav-menu-close:hover { color: #404e5b; transform: rotate(90deg); }
+        .nav-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.3); backdrop-filter: blur(2px);
+            z-index: 1999; opacity: 0; visibility: hidden; transition: all 0.3s ease;
         }
-        .back-btn:hover .back-tooltip { opacity: 1; visibility: visible; right: 65px; }
+        .nav-overlay.open { opacity: 1; visibility: visible; }
 
         /* 主布局 */
-        .detail-layout { display: flex; gap: 3rem; align-items: flex-start; }
-
-        /* 左侧目录 */
+        .detail-layout { display: flex; gap: 5rem; align-items: flex-start; }
         .toc-sidebar {
-            flex: 0 0 280px; position: sticky; top: 100px;
-            background-color: #FFFFFF; padding: 2rem 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
+    flex: 0 0 250px;
+    position: sticky;
+    top: 100px;
+    background-color: rgba(255, 255, 255, 0.75);  /* 原来 #FFFFFF，改为半透明 */
+    padding: 2rem 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    min-height: 75vh;
+    backdrop-filter: blur(2px); /* 可选：增加毛玻璃效果，让文字更清晰 */
+}
         .toc-title {
-            font-size: 0.75rem; color: #A0AEC0; letter-spacing: 3px;
+            font-size: 1.2rem; color: #404e5b; letter-spacing: 3px;
             text-transform: uppercase; margin-bottom: 1.5rem;
             padding-bottom: 0.75rem; border-bottom: 1px solid #E2E8F0;
         }
-        .toc-list {
-            list-style: none;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
+        .toc-list { list-style: none; max-height: 70vh; overflow-y: auto; }
         .toc-list li { margin-bottom: 0.5rem; }
         .toc-list li a {
-            text-decoration: none; color: #4A5568; font-size: 0.85rem;
+            text-decoration: none; color: #4A5568; font-size: 1.1rem;
             display: block; padding: 0.3rem 0; border-left: 2px solid transparent;
             padding-left: 0.75rem; cursor: pointer; transition: all 0.2s;
         }
         .toc-list li a:hover { color: #718096; border-left-color: #718096; padding-left: 1rem; }
         .toc-list li.active a { color: #2D3748; border-left-color: #2D3748; font-weight: 500; }
 
-        /* 右侧主内容 */
         .main-content { flex: 1; display: flex; flex-direction: column; gap: 2rem; }
-        .hero-section { background-color: #FFFFFF; padding: 3rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-        .hero-section h1 { font-size: 2.2rem; font-weight: 400; letter-spacing: 4px; color: #2D3748; margin-bottom: 1rem; }
-        .hero-meta { display: flex; gap: 1.5rem; margin-top: 1rem; color: #A0AEC0; font-size: 0.8rem; flex-wrap: wrap; }
+        .hero-section {
+    background-color: rgba(255, 255, 255, 0.75);  /* 原来 #FFFFFF */
+    padding: 3rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
 
-        /* 正文大框 */
+.hero-section h1 {
+    font-size: 2。3rem;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: #404e5b;
+    margin-bottom: 1rem;
+}
+        .hero-meta { display: flex; gap: 1.5rem; margin-top: 1rem; color: #A0AEC0; font-size: 1.2rem; flex-wrap: wrap; }
+
         .unified-content {
-            background-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
-            padding: 2.8rem 4rem;
-        }
-        .unified-content h2 {
-            font-size: 1.6rem; font-weight: 400; letter-spacing: 3px;
-            color: #2D3748; margin: 1.8rem 0 1rem; padding-bottom: 0.5rem;
-            border-bottom: 1px solid #CBD5E0;
-            scroll-margin-top: 80px;
-        }
-        .unified-content h2:first-of-type { margin-top: 0; }
-        .unified-content p { color: #4A5568; font-size: 0.98rem; line-height: 1.8; margin-bottom: 1.2rem; }
-        .unified-content img { max-width: 100%; height: auto; margin: 1rem 0; }
+    background-color: rgba(255, 255, 255, 0.85);  /* 原来 0.5，改为 0.85 */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    padding: 2.8rem 4rem;
+}
 
-        /* 页脚 */
+        .unified-content h2 {
+    font-size: 1.8rem;  /* 原来1.6rem */
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: #2D3748;
+    margin: 1.8rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #CBD5E0;
+    scroll-margin-top: 80px;
+}
+        .unified-content p { color: #4A5568; font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.2rem; }
         .footer { text-align: center; padding: 20px; color: #A0AEC0; font-size: 14px; border-top: 1px solid #E2E8F0; margin-top: 40px; }
 
-        /* 护眼模式开关 */
         .feature-section { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #E2E8F0; }
         .feature-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; }
         .feature-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: #4A5568; }
@@ -101,87 +144,133 @@
         .toggle-switch input:checked + .toggle-slider { background-color: #4A5568; }
         .toggle-switch input:checked + .toggle-slider:before { transform: translateX(20px); }
 
-        body.eye-care-mode { background-color: #C7EDCC !important; background-image: none !important; }
-        body.eye-care-mode .toc-sidebar, body.eye-care-mode .hero-section { background-color: #E8F5E9 !important; }
-        body.eye-care-mode .unified-content { background-color: rgba(232, 245, 233, 0.9) !important; }
-        body.eye-care-mode .hero-section h1, body.eye-care-mode .unified-content h2 { color: #1B5E20; }
-        body.eye-care-mode .unified-content p, body.eye-care-mode .feature-label { color: #33691E; }
+        /* 护眼模式暖色调 */
+        body.eye-care-mode { background-color: #FDF5E6 !important; background-image: none !important; }
+        body.eye-care-mode .toc-sidebar,
+body.eye-care-mode .hero-section,
+body.eye-care-mode .unified-content {
+    background-color: #FFF8ED !important;
+}
+        body.eye-care-mode .toc-title, body.eye-care-mode .feature-title { color: #8B7355; }
+        body.eye-care-mode .toc-list li a { color: #6B5B4A; }
+        body.eye-care-mode .toc-list li a:hover, body.eye-care-mode .toc-list li.active a { color: #D2691E; border-left-color: #D2691E; }
+        body.eye-care-mode .hero-section h1, body.eye-care-mode .unified-content h2,
+        body.eye-care-mode .unified-content p, body.eye-care-mode .feature-label { color: #5C4B3A; }
+        body.eye-care-mode .hero-meta { color: #A0896C; }
+        body.eye-care-mode .toggle-slider { background-color: #D4C4A8; }
+        body.eye-care-mode .toggle-switch input:checked + .toggle-slider { background-color: #CD853F; }
+        /* 护眼模式 - 导航栏适中暖色调 */
+body.eye-care-mode .nav-trigger {
+    background-color: #9A7C67;  /* 适中暖褐 */
+}
+body.eye-care-mode .nav-trigger:hover {
+    background-color: #8B5A2B;
+}
+body.eye-care-mode .nav-menu {
+    background-color: #FDF5E6;  /* 米色，与正文统一 */
+}
+body.eye-care-mode .nav-menu li a {
+    color: #5C4B3A;
+    border-bottom-color: #E6D5B8;
+}
+body.eye-care-mode .nav-menu li a:hover {
+    background-color: rgba(160, 105, 65, 0.1);
+    color: #A06941;
+}
+body.eye-care-mode .nav-menu-close {
+    color: #8B7355;
+}
+body.eye-care-mode .nav-menu-close:hover {
+    color: #A06941;
+}
 
         @media (max-width: 1000px) { .detail-layout { flex-direction: column; } .unified-content { padding: 1.8rem; } }
-        @media (max-width: 600px) { body { padding: 4rem 1rem 1rem; } .back-btn { width: 44px; height: 44px; } .unified-content { padding: 1.2rem; } .back-tooltip { display: none; } }
+        @media (max-width: 600px) { body { padding: 4rem 1rem 1rem; } .unified-content { padding: 1.2rem; } }
     </style>
 </head>
-<body>
+<body th:style="'background-image: url(' + (${blog.firstPicture} != null ? @{${blog.firstPicture}} : '') + '); background-size: cover; background-position: center; background-attachment: fixed;'">
 
+<!-- 隐藏式导航栏 -->
 <div class="corner-nav">
-    <button class="back-btn" id="backToHomeBtn" th:onclick="'location.href=\'' + @{/} + '\''">
-        <span>←</span>
-        <span class="back-tooltip">返回首页</span>
-    </button>
+    <div class="nav-trigger" id="navTrigger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 </div>
+<div class="nav-menu" id="navMenu">
+    <button class="nav-menu-close" id="navMenuClose">✕</button>
+    <ul>
+        <li><a href="/" th:href="@{/}">首页</a></li>
+        <li><a href="/bobbin" th:href="@{/bobbin}">知识线轴</a></li>
+        <li><a href="/admin" th:href="@{/admin}">后台</a></li>
+        <li><a href="/about" th:href="@{/about}">关于网站</a></li>
+    </ul>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
 
 <div class="container">
     <div class="detail-layout">
-
-        <!-- 左侧目录（动态生成） -->
         <aside class="toc-sidebar">
             <div class="toc-title">目录</div>
-            <ul class="toc-list" id="dynamicToc">
-                <li>加载中...</li>
-            </ul>
+            <ul class="toc-list" id="dynamicToc"><li>加载中...</li></ul>
             <div class="feature-section">
                 <div class="feature-item">
-                    <div class="feature-label"><span>👁️</span><span>护眼模式</span></div>
+                    <div class="feature-label"><span>护眼模式</span></div>
                     <label class="toggle-switch"><input type="checkbox" id="eyeCareToggle"><span class="toggle-slider"></span></label>
                 </div>
             </div>
         </aside>
 
-        <!-- 右侧主内容 -->
         <main class="main-content">
             <div class="hero-section">
                 <h1 th:text="${blog.title}">文章标题</h1>
                 <div class="hero-meta">
-                    <span th:text="${blog.user != null ? '✍️ ' + blog.user.nickname : '✍️ 匿名'}">✍️ 作者</span>
-                    <span th:text="${blog.type != null ? '🏷️ 类型：' + blog.type.name : '🏷️ 类型：未分类'}">🏷️ 类型</span>
-                    <span th:text="${blog.updateTime != null ? #dates.format(blog.updateTime, 'yyyy-MM-dd') : ''}">日期</span>
+                    <span th:text="${blog.type != null ? blog.type.name : '未分类'}"></span>
+                    <span th:text="${blog.updateTime != null ? #dates.format(blog.updateTime, 'yyyy-MM-dd') : ''}"></span>
                 </div>
             </div>
 
             <div class="unified-content" id="unifiedBody">
-                <div th:utext="${blog.content}">文章内容将显示在这里</div>
+                <!-- 原始 Markdown 内容（隐藏） -->
+                <div id="markdown-source" style="display:none;" th:text="${blog.content}"></div>
+                <!-- 渲染后的 HTML 内容 -->
+                <div id="rendered-content"></div>
             </div>
         </main>
     </div>
 </div>
 
-<div class="footer">
-    <p>美学知识库 © 2026 | 探索美的无限可能</p>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-    // 目录自动生成（基于正文中的 h2 标签）
+    // 解析 Markdown 并渲染
     (function() {
-        const contentDiv = document.getElementById('unifiedBody');
+        const sourceDiv = document.getElementById('markdown-source');
+        const targetDiv = document.getElementById('rendered-content');
+        if (sourceDiv && targetDiv) {
+            const markdown = sourceDiv.innerText;
+            const html = marked.parse(markdown);
+            targetDiv.innerHTML = html;
+        }
+    })();
+
+    // 目录自动生成（基于渲染后的 h2 标签）
+    (function() {
+        const contentDiv = document.getElementById('rendered-content');
         const tocContainer = document.getElementById('dynamicToc');
         if (!contentDiv || !tocContainer) return;
 
-        // 获取所有 h2 标题（注意：内容是通过 th:utext 动态渲染的，所以需要等待 DOM 更新）
-        // 使用 setTimeout 确保内容已渲染
+        // 等待 DOM 更新后生成目录
         setTimeout(() => {
             const headings = contentDiv.querySelectorAll('h2');
             if (headings.length === 0) {
                 tocContainer.innerHTML = '<li>无目录</li>';
                 return;
             }
-
-            // 为每个 h2 生成 id（如果没有）
             headings.forEach((heading, idx) => {
                 if (!heading.id) heading.id = 'section-' + idx;
             });
-
-            // 生成目录 HTML
             let tocHtml = '';
             headings.forEach(heading => {
                 const title = heading.textContent;
@@ -190,7 +279,6 @@
             });
             tocContainer.innerHTML = tocHtml;
 
-            // 绑定点击事件
             const links = document.querySelectorAll('.toc-list li a');
             links.forEach(link => {
                 link.addEventListener('click', function(e) {
@@ -203,7 +291,6 @@
                 });
             });
 
-            // 滚动高亮当前章节
             function updateActive() {
                 let current = '';
                 const scrollPos = window.scrollY + 150;
@@ -226,7 +313,7 @@
             }
             window.addEventListener('scroll', updateActive);
             updateActive();
-        }, 100); // 延迟确保 th:utext 渲染完成
+        }, 200);
     })();
 
     // 护眼模式
@@ -245,6 +332,39 @@
                 document.body.classList.remove('eye-care-mode');
                 localStorage.setItem('eyeCareMode', 'false');
             }
+        });
+    })();
+
+    // 导航栏交互
+    (function() {
+        const trigger = document.getElementById('navTrigger');
+        const menu = document.getElementById('navMenu');
+        const overlay = document.getElementById('navOverlay');
+        const closeBtn = document.getElementById('navMenuClose');
+
+        function openMenu() {
+            trigger.classList.add('open');
+            menu.classList.add('open');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            trigger.classList.remove('open');
+            menu.classList.remove('open');
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        function toggleMenu() {
+            if (menu.classList.contains('open')) closeMenu();
+            else openMenu();
+        }
+        if (trigger) trigger.addEventListener('click', toggleMenu);
+        if (overlay) overlay.addEventListener('click', closeMenu);
+        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+        const menuLinks = menu.querySelectorAll('ul li a');
+        menuLinks.forEach(link => link.addEventListener('click', closeMenu));
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
         });
     })();
 </script>
