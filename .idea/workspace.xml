@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-修复了术语表的bug" />
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-更改了推荐内容的id" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -536,7 +536,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776606584176</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="-更改了推荐内容的id">
+      <option name="closed" value="true" />
+      <created>1776608112048</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1776608112048</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -566,7 +574,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-新增了线轴页和导航栏链接" />
     <MESSAGE value="-修改了线轴中每多一篇增长的线段长度" />
     <MESSAGE value="-去掉了显示异常的注释" />
     <MESSAGE value="-改了一些高大上的文字" />
@@ -591,7 +598,8 @@
     <MESSAGE value="-实现音乐播放功能" />
     <MESSAGE value="-新增文章列表id列" />
     <MESSAGE value="-修复了术语表的bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="-修复了术语表的bug" />
+    <MESSAGE value="-更改了推荐内容的id" />
+    <option name="LAST_COMMIT_MESSAGE" value="-更改了推荐内容的id" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
