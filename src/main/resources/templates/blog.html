@@ -144,6 +144,33 @@
         .toggle-switch input:checked + .toggle-slider { background-color: #4A5568; }
         .toggle-switch input:checked + .toggle-slider:before { transform: translateX(20px); }
 
+        /* 术语高亮样式 */
+.glossary-term {
+    color: #5a7d9a;
+    border-bottom: 1px dashed #5a7d9a;
+    cursor: help;
+    position: relative;
+}
+
+/* 浮窗样式 */
+.glossary-tooltip {
+    position: fixed;
+    background: #ffffff;
+    border: 1px solid #8fa0b8;
+    border-radius: 0;
+    padding: 8px 12px;
+    max-width: 300px;
+    font-size: 0.85rem;
+    color: #404e5b;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 10000;
+    display: none;
+    pointer-events: none;
+    line-height: 1.4;
+    top: auto;
+    bottom: auto;
+}
+
         /* 护眼模式暖色调 */
         body.eye-care-mode { background-color: #FDF5E6 !important; background-image: none !important; }
         body.eye-care-mode .toc-sidebar,
@@ -159,6 +186,12 @@ body.eye-care-mode .unified-content {
         body.eye-care-mode .hero-meta { color: #A0896C; }
         body.eye-care-mode .toggle-slider { background-color: #D4C4A8; }
         body.eye-care-mode .toggle-switch input:checked + .toggle-slider { background-color: #CD853F; }
+        /* 护眼模式下浮窗样式 */
+body.eye-care-mode .glossary-tooltip {
+    background-color: white;
+    border: 1px solid #D4C4A8;
+    color: #5C4B3A;
+}
         /* 护眼模式 - 导航栏适中暖色调 */
 body.eye-care-mode .nav-trigger {
     background-color: #9A7C67;  /* 适中暖褐 */
@@ -243,17 +276,83 @@ body.eye-care-mode .nav-menu-close:hover {
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-    // 解析 Markdown 并渲染
-    (function() {
-        const sourceDiv = document.getElementById('markdown-source');
-        const targetDiv = document.getElementById('rendered-content');
-        if (sourceDiv && targetDiv) {
-            const markdown = sourceDiv.innerText;
-            const html = marked.parse(markdown);
-            targetDiv.innerHTML = html;
+<script th:inline="javascript">
+
+    // 转义正则表达式特殊字符
+function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// 转义 HTML 特殊字符（防止 XSS）
+function escapeHtml(text) {
+    return text.replace(/[&<>]/g, function(m) {
+        if (m === '&') return '&amp;';
+        if (m === '<') return '&lt;';
+        if (m === '>') return '&gt;';
+        return m;
+    });
+}
+
+// 将术语替换为带 data-def 的 span
+function replaceTermsWithTooltips(html, glossaries) {
+    if (!glossaries || glossaries.length === 0) return html;
+    // 按术语长度降序排序，避免短词先替换导致长词被部分替换
+    const sorted = [...glossaries].sort((a, b) => b.term.length - a.term.length);
+    let result = html;
+    sorted.forEach(item => {
+        const term = item.term;
+        const def = escapeHtml(item.definition);
+        // 移除 \b，直接匹配术语文本（全局替换）
+        const regex = new RegExp(`(${escapeRegExp(term)})`, 'g');
+        result = result.replace(regex, `<span class="glossary-term" data-def="${def}">$1</span>`);
+    });
+    return result;
+}
+
+// 为术语绑定悬浮浮窗
+function attachTooltips() {
+    const terms = document.querySelectorAll('.glossary-term');
+    // 移除已有的 tooltip 避免重复
+    const oldTooltips = document.querySelectorAll('.glossary-tooltip');
+    oldTooltips.forEach(t => t.remove());
+
+    terms.forEach(term => {
+        const def = term.getAttribute('data-def');
+        if (!def) return;
+        const tooltip = document.createElement('div');
+        tooltip.className = 'glossary-tooltip';
+        tooltip.innerHTML = def;
+        document.body.appendChild(tooltip);
+
+        term.addEventListener('mouseenter', (e) => {
+    const rect = term.getBoundingClientRect();
+    tooltip.style.left = rect.left + 'px';
+    tooltip.style.top = (rect.top - tooltip.offsetHeight - 40) + 'px';
+    tooltip.style.display = 'block';
+});
+        term.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+    });
+}
+
+    // 解析 Markdown 并渲染，同时替换术语
+(function() {
+    const sourceDiv = document.getElementById('markdown-source');
+    const targetDiv = document.getElementById('rendered-content');
+    if (sourceDiv && targetDiv) {
+        const markdown = sourceDiv.innerText;
+        let html = marked.parse(markdown);
+        // 从后端获取术语列表
+        const glossaries = /*[[${glossaries}]]*/ [];
+        console.log('术语列表:', glossaries);  // 调试用
+        if (glossaries && glossaries.length > 0) {
+            html = replaceTermsWithTooltips(html, glossaries);
         }
-    })();
+        targetDiv.innerHTML = html;
+        attachTooltips();
+    }
+})();
 
     // 目录自动生成（基于渲染后的 h2 标签）
     (function() {

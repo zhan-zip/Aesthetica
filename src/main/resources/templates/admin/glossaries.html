@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head th:replace="admin/_fragments :: head('术语管理')"></head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="admin/_fragments :: menu(4)"></nav>
+
+<!--内容-->
+<div class="md-pd-tb-massive">
+  <div class="ui container">
+    <!-- 提示消息 -->
+    <div class="ui success message" th:if="${message}" th:text="${message}"></div>
+
+    <!-- 表格 -->
+    <div id="table-container">
+      <table class="ui table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>术语</th>
+          <th>解释</th>
+          <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${page.content}">
+          <td th:text="${item.id}"></td>
+          <td th:text="${item.term}"></td>
+          <td th:text="${item.definition}"></td>
+          <td>
+            <a th:href="@{/admin/glossaries/{id}/input(id=${item.id})}" class="ui button" style="background: #8fa0b8; border: none; border-radius: 0; color: white; margin-right: 4px;">编辑</a>
+            <a th:href="@{/admin/glossaries/{id}/delete(id=${item.id})}" class="ui button" style="background: #677b8f; border: none; border-radius: 0; color: white;">删除</a>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <th colspan="4">
+            <div class="ui pagination menu" style="border: none;">
+              <a class="item" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b; margin-right: 4px;" th:href="@{/admin/glossaries(page=${page.number - 1})}" th:unless="${page.first}">上一页</a>
+              <a class="item" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b;" th:href="@{/admin/glossaries(page=${page.number + 1})}" th:unless="${page.last}">下一页</a>
+            </div>
+            <a href="#" class="ui right floated button" style="background: #677b8f; border: none; border-radius: 0; color: white;" th:href="@{/admin/glossaries/input}">新增术语</a>
+          </th>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--底部-->
+<footer th:replace="admin/_fragments :: footer"></footer>
+<th:block th:replace="admin/_fragments :: script"></th:block>
+</body>
+</html>

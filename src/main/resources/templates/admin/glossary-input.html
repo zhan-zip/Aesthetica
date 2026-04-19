@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head th:replace="admin/_fragments :: head('术语')"></head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="admin/_fragments :: menu(4)"></nav>
+
+<!--内容-->
+<div class="md-pd-tb-massive">
+    <div class="ui container">
+        <form th:action="${glossary.id} == null ? @{/admin/glossaries} : @{/admin/glossaries/{id}(id=${glossary.id})}"
+              method="post" class="ui form" th:object="${glossary}">
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- 术语字段 -->
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui basic label" style="background: white; border: 1px solid #8fa0b8; border-right: none; border-radius: 0; color: #404e5b;">术语</label>
+                    <input type="text" name="term" placeholder="请输入术语" th:field="*{term}"
+                           id="termInput" onblur="checkTerm()"
+                           style="border: 1px solid #8fa0b8; border-left: none; border-radius: 0;">
+                </div>
+                <div id="termError" style="color: #d9534f; font-size: 12px; margin-top: 5px; display: none;"></div>
+            </div>
+
+            <!-- 解释字段 -->
+            <div class="required field">
+                <div class="ui left labeled input">
+                    <label class="ui basic label" style="background: white; border: 1px solid #8fa0b8; border-right: none; border-radius: 0; color: #404e5b;">解释</label>
+                    <textarea rows="5" placeholder="输入解释内容" th:field="*{definition}" style="border: 1px solid #8fa0b8; border-left: none; border-radius: 0; width: 100%; padding: 0.6rem;"></textarea>
+                </div>
+            </div>
+
+            <!-- 表单错误信息显示 -->
+            <div class="ui error message"></div>
+
+            <!-- 保存返回 -->
+            <div class="ui right aligned container">
+                <button type="button" class="ui button" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b;" onclick="window.history.go(-1)">返回</button>
+                <button type="submit" id="submitBtn" class="ui button" style="background: #8fa0b8; border: none; border-radius: 0; color: white;">保存</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--底部-->
+<footer th:replace="admin/_fragments :: footer"></footer>
+<th:block th:replace="admin/_fragments :: script"></th:block>
+
+<script th:inline="javascript">
+    // 从后端获取已存在的术语列表
+    var existingTerms = /*[[${existingTerms}]]*/ [];
+
+    function checkTerm() {
+        var term = $('#termInput').val().trim();
+        var errorDiv = $('#termError');
+        var submitBtn = $('#submitBtn');
+
+        if (term === '') {
+            errorDiv.hide();
+            submitBtn.prop('disabled', false);
+            return;
+        }
+
+        // 检查是否已存在（编辑时排除当前术语自身）
+        var currentId = /*[[${glossary.id}]]*/ null;
+        var isDuplicate = false;
+
+        if (currentId) {
+            // 编辑模式：需要排除当前术语自身
+            // 这里需要后端配合或前端判断，简单起见先用现有逻辑
+            isDuplicate = existingTerms.includes(term);
+        } else {
+            // 新增模式：直接检查
+            isDuplicate = existingTerms.includes(term);
+        }
+
+        if (isDuplicate) {
+            errorDiv.text('该术语已存在，请勿重复添加').show();
+            submitBtn.prop('disabled', true);
+        } else {
+            errorDiv.hide();
+            submitBtn.prop('disabled', false);
+        }
+    }
+
+    // 表单验证（可选）
+    $('.ui.form').form({
+        fields: {
+            term: {
+                identifier: 'term',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入术语'
+                }]
+            },
+            definition: {
+                identifier: 'definition',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入解释'
+                }]
+            }
+        }
+    });
+
+    // 页面加载时，如果是编辑模式，需要从 existingTerms 中移除当前术语（避免编辑时提示重复）
+    $(function() {
+        var currentId = /*[[${glossary.id}]]*/ null;
+        var currentTerm = $('#termInput').val();
+        if (currentId && currentTerm && existingTerms.includes(currentTerm)) {
+            // 编辑模式下，从数组中移除当前术语，避免误判
+            var index = existingTerms.indexOf(currentTerm);
+            if (index > -1) {
+                existingTerms.splice(index, 1);
+            }
+        }
+    });
+</script>
+</body>
+</html>

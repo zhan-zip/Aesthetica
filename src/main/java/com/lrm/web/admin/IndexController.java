@@ -3,8 +3,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.lrm.po.Blog;
+import com.lrm.po.Glossary;
 import com.lrm.po.Type;
 import com.lrm.service.BlogService;
+import com.lrm.service.GlossaryService;
 import com.lrm.service.TypeService;
 import com.lrm.vo.BlogQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class IndexController {
 
     @Autowired
     private TypeService typeService;
+
+    @Autowired
+    private GlossaryService glossaryService;
 
     @GetMapping("/")            //以下部分代码为AI辅助生成：DeepSeek, 2026-3
     public String index(@PageableDefault(size = 4,sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model) {
@@ -60,6 +65,12 @@ public class IndexController {
             return "error/404";
         }
         model.addAttribute("blog", blog);
+        List<Glossary> glossaries = glossaryService.listAllGlossaries();
+        System.out.println("=== 术语数量: " + glossaries.size());
+        for (Glossary g : glossaries) {
+            System.out.println("术语: " + g.getTerm() + " -> " + g.getDefinition());
+        }
+        model.addAttribute("glossaries", glossaries);
         return "blog";
     }
 
@@ -90,6 +101,8 @@ public class IndexController {
         model.addAttribute("categoryData", categoryData);
         return "bobbin";
     }
+
+
 
     @GetMapping("/tag")
     public String tag() {
