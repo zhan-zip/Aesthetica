@@ -4,27 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-更改了推荐内容的id">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/background-1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/background-2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/background-3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/background.jpg" afterDir="false" />
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-修复了后台上一页下一页按钮">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/me_define.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/me_define.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/back.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/_fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/_fragments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/lrm/web/admin/IndexController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/me_define.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/me_define.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/images/back.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/_fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/_fragments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/types-input.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/types.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/types.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/blogs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/types-input.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/types.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/types.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -574,7 +563,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776609632523</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="-更改了一些显示细节问题">
+      <option name="closed" value="true" />
+      <created>1776661285393</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1776661285393</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +601,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-修改了线轴中每多一篇增长的线段长度" />
     <MESSAGE value="-去掉了显示异常的注释" />
     <MESSAGE value="-改了一些高大上的文字" />
     <MESSAGE value="-新增了ai使用说明注释" />
@@ -629,7 +625,8 @@
     <MESSAGE value="-新增文章列表id列" />
     <MESSAGE value="-修复了术语表的bug" />
     <MESSAGE value="-更改了推荐内容的id" />
-    <option name="LAST_COMMIT_MESSAGE" value="-更改了推荐内容的id" />
+    <MESSAGE value="-更改了一些显示细节问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="-更改了一些显示细节问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
