@@ -25,7 +25,7 @@
     }
 
     body {
-        background-color: var(--bg-color);
+        background:url('../images/background-3.jpg') no-repeat fixed center;
         font-family: 'Inter', 'Source Han Sans SC', sans-serif;
         color: var(--text-main);
         min-height: 100vh;
@@ -267,7 +267,7 @@
         transition: color 0.2s;
         writing-mode: vertical-lr;
         text-orientation: upright;
-        left: 30px;
+        left: 20px;
         top: 50%;
         transform: translateY(-50%);
     }
@@ -280,9 +280,8 @@
 
     .node-desc {
         font-size: 1.1rem;
-        color: var(--gray-brown);
-        margin-top: 12px;
-        opacity: 0.7;
+        color: #404e5b;
+        margin-top: 30px;
     }
     .node:hover .node-info {
         color: var(--accent-blue);
@@ -381,13 +380,13 @@
 
 <!-- 顶部标语 -->
 <div style="position: fixed; top: 20px; left: 0; width: 100%; text-align: center; z-index: 100; pointer-events: none;">
-  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.5rem; letter-spacing: 4px; color: #6c7c8c; opacity: 0.7; margin: 0;">
+  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.5rem; letter-spacing: 4px; color: #404e5b; margin: 0;">
     ———— 美不能被量化，但可以被感知 ————
   </p>
-  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.0rem; letter-spacing: 4px; color: #6c7c8c; opacity: 0.7; margin: 0;">
+  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.0rem; letter-spacing: 4px; color: #404e5b;opacity: 0.9; margin: 0;">
     连接线长度关联文章数量，让知识变得可视。
   </p>
-  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.0rem; letter-spacing: 4px; color: #6c7c8c; opacity: 0.7; margin: 0;">
+  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.0rem; letter-spacing: 4px; color: #404e5b; opacity: 0.9; margin: 0;">
     鼠标悬浮在文章标题上时背景自动更改为该文章配图。
   </p>
 </div>
@@ -430,12 +429,12 @@
 <script th:inline="javascript">
   // 固定6个分类
   const categories = [
-    { name: "导论", count: 0, articles: [], desc: "美学基本问题" },
-    { name: "活动论", count: 0, articles: [], desc: "审美活动本质" },
-    { name: "形态论", count: 0, articles: [], desc: "审美形态研究" },
-    { name: "经验论", count: 0, articles: [], desc: "审美经验分析" },
-    { name: "艺术论", count: 0, articles: [], desc: "艺术哲学思考" },
-    { name: "教育论", count: 0, articles: [], desc: "美育理论实践" }
+    { name: "导论", count: 0, articles: [], desc: "旅程的起点" },
+    { name: "活动论", count: 0, articles: [], desc: "审美活动不是旁观，而是参与和体验" },
+    { name: "形态论", count: 0, articles: [], desc: "一场穿越形态的巡礼" },
+    { name: "经验论", count: 0, articles: [], desc: "感官与心灵的共振" },
+    { name: "艺术论", count: 0, articles: [], desc: "艺术如何成为美的化身？" },
+    { name: "教育论", count: 0, articles: [], desc: "美育，让美在生命中生根发芽" }
   ];
 
   // 从后端获取数据并填充
@@ -493,8 +492,8 @@
     });
   })();
 
-  const BASE_OFFSET = 80;
-  const UNIT = 40;
+  const BASE_OFFSET = 120;
+  const UNIT = 50;
   const ZOOM_SCALE = 2.1;
   const POPUP_WIDTH = 240;
   const SIDE_MARGIN_PERCENT = 5;

@@ -28,13 +28,19 @@
        }
 
        body {
-           background-color: #ffffff;
-           font-family: 'Inter', 'Source Han Sans SC', '思源黑体', -apple-system, BlinkMacSystemFont, sans-serif;
-           color: var(--text-main);
-           line-height: 1.6;
-           padding: 3rem 1rem 3rem 0;
-           padding-top: 5rem;
-       }
+    background:url('../images/background-3.jpg') no-repeat fixed center;
+    font-family: 'Inter', 'Source Han Sans SC', '思源黑体', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 3rem 1rem 3rem 0;
+    padding-top: 5rem;       /* 恢复顶部空间 */
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+}
+
+
 
        h1, h2, h3, h4, .serif {
            font-family: 'Noto Serif SC', 'Source Han Serif SC', '思源宋体', Georgia, serif;
@@ -305,7 +311,7 @@
            background-color: rgba(255, 255, 255, 0.88);
            padding: 3rem 3rem;
            box-shadow: 0 4px 12px var(--shadow);
-           margin-bottom: 3rem;
+           margin-bottom: 0.6rem;
        }
 
        .intro-box h1 {
@@ -323,6 +329,28 @@
            font-weight: 400;
            line-height: 1.4;
        }
+
+       /* 关于网站框 - 与介绍框样式一致 */
+.about-box {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 3rem;
+    box-shadow: 0 4px 12px var(--shadow);
+    margin-bottom: 5rem;
+}
+.about-box h2 {
+    font-size: 1.7rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+.about-box p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
 
        .featured-box {
            flex: 1;
@@ -359,7 +387,7 @@
            display: flex;
            justify-content: space-between;
            align-items: center;
-           padding: 0.8rem 0;
+           padding: 0.7rem 0;
            border-bottom: 1px solid var(--gray-brown);
        }
 
@@ -370,7 +398,7 @@
        .featured-item a {
            color: var(--text-main);
            text-decoration: none;
-           font-size: 0.9rem;
+           font-size: 1.1rem;
        }
 
        .featured-item a:hover {
@@ -381,7 +409,7 @@
            font-size: 0.7rem;
            color: var(--text-secondary);
            background-color: rgba(143, 160, 184, 0.15);
-           padding: 0.2rem 0.6rem;
+           padding: 0.4rem 0.4rem;
        }
 
        .category-list {
@@ -404,7 +432,7 @@
        .category-item a {
            color: var(--text-main);
            text-decoration: none;
-           font-size: 0.9rem;
+           font-size: 1.1rem;
        }
 
        .category-item a:hover {
@@ -412,7 +440,7 @@
        }
 
        .category-count {
-           font-size: 0.7rem;
+           font-size: 1rem;
            color: var(--text-secondary);
            background-color: rgba(143, 160, 184, 0.15);
            padding: 0.2rem 0.6rem;
@@ -500,16 +528,15 @@
                 <div class="sixteen wide column">
                     <div class="intro-box">
                         <h1>美哉·美哉——美学知识科普平台</h1>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aesthetica，意为感性学，即美学，该词由德国理性主义哲学家鲍姆嘉通发明，1750年同名著作的发表代表着美学学科的建立。</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;致力于构建一个去门槛、去量化的美学知识角落，让美学变得可感可知。</p>
                     </div>
                 </div>
 
                 <!-- 关于网站框（静态） -->
                 <div class="sixteen wide column">
                     <div class="about-box">
-                        <h2>关于网站</h2>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;美哉·美哉——美学知识科普平台正为让抽象的美学知识可感可知而努力，既为美学爱好者提供一方角落，也致力于让每个人都能走进美学的世界。</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您可以从左侧选取一张图片进入对应的美学世界。</p>
+                        <h2>美学学科的诞生</h2>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aesthetica，意为感性学，即美学，该词由德国理性主义哲学家鲍姆嘉通发明，1750年同名著作的发表代表着美学学科的建立。自此，美学作为一个独立学科被人们所研究。</p>
                     </div>
                 </div>
 
