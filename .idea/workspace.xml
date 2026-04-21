@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-修复了后台上一页下一页按钮">
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-修改了线轴页的基础长度和关联长度">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs-input.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs-input.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/blogs-input.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/blogs-input.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/blogs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,22 +180,6 @@
       <workItem from="1774171192221" duration="103000" />
       <workItem from="1774271981217" duration="927000" />
       <workItem from="1775444627631" duration="7000" />
-    </task>
-    <task id="LOCAL-00001" summary="add gitignore">
-      <option name="closed" value="true" />
-      <created>1775475225710</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1775475225710</updated>
-    </task>
-    <task id="LOCAL-00002" summary="第一次提交博客项目">
-      <option name="closed" value="true" />
-      <created>1775475382574</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1775475382574</updated>
     </task>
     <task id="LOCAL-00003" summary="前台首页分类按数量显示功能">
       <option name="closed" value="true" />
@@ -577,7 +557,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776694897118</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="-优化了部分代码&#10;-修改了线轴页的基础长度和关联长度">
+      <option name="closed" value="true" />
+      <created>1776747021607</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1776747021607</updated>
+    </task>
+    <task id="LOCAL-00051" summary="-修改了线轴页的基础长度和关联长度">
+      <option name="closed" value="true" />
+      <created>1776747073537</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1776747073537</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -607,8 +603,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-改了一些高大上的文字" />
-    <MESSAGE value="-新增了ai使用说明注释" />
     <MESSAGE value="-新增了写死的推荐id列表用于在本地测试详情页" />
     <MESSAGE value="-调整了首页左侧轮换图上的标题和简介内容，与文章关联&#10;-实现配图与文章关联内容&#10;-实现配图不仅限于链接输入而能直接上传的功能" />
     <MESSAGE value="-修改了Index部分细节问题" />
@@ -632,7 +626,9 @@
     <MESSAGE value="-更改了推荐内容的id" />
     <MESSAGE value="-更改了一些显示细节问题" />
     <MESSAGE value="-修复了后台上一页下一页按钮" />
-    <option name="LAST_COMMIT_MESSAGE" value="-修复了后台上一页下一页按钮" />
+    <MESSAGE value="-优化了部分代码&#10;-修改了线轴页的基础长度和关联长度" />
+    <MESSAGE value="-修改了线轴页的基础长度和关联长度" />
+    <option name="LAST_COMMIT_MESSAGE" value="-修改了线轴页的基础长度和关联长度" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

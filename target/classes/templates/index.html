@@ -6,6 +6,8 @@
     <title>首页 | Aesthetica</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 引入 Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         // 以下由AI辅助生成：DeepSeek-网页版, 2026-4-15
         /* ========= 所有样式保持不变 ========= */
@@ -25,6 +27,7 @@
             --text-secondary: #6c7c8c;
             --card-bg: #ffffff;
             --shadow: rgba(148, 143, 140, 0.15);
+            --animate-duration: 0.7s;
         }
 
         body {
@@ -203,7 +206,6 @@
             visibility: hidden;
         }
 
-        /* 新增：让内部图片容器填满整个区域 */
         .carousel-item-vertical > a,
         .carousel-item-vertical > a > div {
             width: 100%;
@@ -320,7 +322,6 @@
             line-height: 1.4;
         }
 
-        /* 关于网站框 - 与介绍框样式一致 */
         .about-box {
             background-color: rgba(255,255,255,0.9);
             padding: 0.5rem 3rem;
@@ -349,6 +350,7 @@
             background-color: var(--card-bg);
             padding: 2rem 2rem 1rem 2rem;
             box-shadow: 0 4px 12px var(--shadow);
+            height: 100%;
         }
 
         .categories-box {
@@ -356,6 +358,7 @@
             background-color: var(--card-bg);
             padding: 2rem 2rem 1rem 2rem;
             box-shadow: 0 4px 12px var(--shadow);
+            height: 100%;
         }
 
         .section-label {
@@ -375,16 +378,32 @@
             margin-top: 40px;
         }
 
+        /* 推荐列表项悬浮效果 */
         .featured-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.7rem 0;
+            padding: 0.8rem 0;
             border-bottom: 1px solid var(--gray-brown);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .featured-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px var(--shadow);
         }
 
-        .featured-item:last-child {
-            border-bottom: none;
+        /* 分类列表项悬浮效果 */
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--gray-brown);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .category-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px var(--shadow);
         }
 
         .featured-item a {
@@ -401,24 +420,12 @@
             font-size: 0.7rem;
             color: var(--text-secondary);
             background-color: rgba(143,160,184,0.15);
-            padding: 0.4rem 0.4rem;
+            padding: 0.2rem 0.5rem;
         }
 
         .category-list {
             display: flex;
             flex-direction: column;
-        }
-
-        .category-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--gray-brown);
-        }
-
-        .category-item:last-child {
-            border-bottom: none;
         }
 
         .category-item a {
@@ -432,10 +439,26 @@
         }
 
         .category-count {
-            font-size: 1rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
             background-color: rgba(143,160,184,0.15);
-            padding: 0.2rem 0.6rem;
+            padding: 0.2rem 0.5rem;
+        }
+
+        /* 右侧四个框悬浮卡片效果 */
+        .intro-box,
+        .about-box,
+        .featured-box,
+        .categories-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .intro-box:hover,
+        .about-box:hover,
+        .featured-box:hover,
+        .categories-box:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 12px 24px var(--shadow);
         }
 
         @media (max-width: 1000px) {
@@ -494,16 +517,13 @@
 <div class="ui container">
     <div class="ui grid">
         <!-- 左侧轮播图（动态绑定最新10篇文章） -->
-        <div class="four wide column">
+        <div class="four wide column animate__animated animate__fadeInLeft">
             <div class="left-roll" id="verticalCarousel">
                 <div class="carousel-container-vertical">
                     <div th:each="blog, iterStat : ${latestBlogs}" class="carousel-item-vertical" th:classappend="${iterStat.first} ? 'active'">
                         <a th:href="@{/blog/{id}(id=${blog.id})}" style="display: block; width: 100%; height: 100%; position: relative; text-decoration: none;">
-                            <!-- 背景图：占满整个框，居中裁剪，z-index 设为 0 放在最底层 -->
                             <div th:style="'background-image: url(' + (${blog.firstPicture} != null ? @{${blog.firstPicture}} : '/images/back.jpg') + '); background-size: cover; background-position: center; width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 0;'"></div>
-                            <!-- 左上角标题（竖向） -->
                             <div class="carousel-title-vertical" th:text="${blog.title}">标题</div>
-                            <!-- 右上角简介（竖向） -->
                             <div class="carousel-subtitle-vertical" th:text="${#strings.abbreviate(blog.content, 50)}">简介</div>
                         </a>
                     </div>
@@ -517,7 +537,7 @@
         <div class="twelve wide column">
             <div class="ui grid" style="height: 100%;">
                 <!-- 介绍框（静态） -->
-                <div class="sixteen wide column">
+                <div class="sixteen wide column animate__animated animate__fadeInUp">
                     <div class="intro-box">
                         <h1>美哉·美哉——美学知识科普平台</h1>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;致力于构建一个去门槛、去量化的美学知识角落，让美学变得可感可知。</p>
@@ -525,7 +545,7 @@
                 </div>
 
                 <!-- 关于网站框（静态） -->
-                <div class="sixteen wide column">
+                <div class="sixteen wide column animate__animated animate__fadeInUp">
                     <div class="about-box">
                         <h2>美学学科的诞生</h2>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aesthetica，意为感性学，即美学，该词由德国理性主义哲学家鲍姆嘉通发明，1750年同名著作的发表代表着美学学科的建立。自此，美学作为一个独立学科被人们所研究。</p>
@@ -537,7 +557,7 @@
                     <div class="sixteen wide column">
                         <div style="display: flex; gap: 2rem;">
                             <!-- 推荐内容区域 -->
-                            <div style="flex: 1;">
+                            <div style="flex: 1;" class="animate__animated animate__fadeInUp">
                                 <div class="featured-box">
                                     <div class="section-label">或许你会感兴趣</div>
                                     <div style="border-top: 1px solid var(--gray-brown); margin: 0.5rem 0 1rem 0;"></div>
@@ -546,7 +566,6 @@
                                             <a th:href="@{/blog/{id}(id=${blog.id})}" th:text="${blog.title}">文章标题</a>
                                             <span class="featured-category" th:text="${blog.type.name}">分类</span>
                                         </div>
-                                        <!-- 如果推荐内容为空，显示占位提示 -->
                                         <div th:if="${#lists.isEmpty(recommendBlogs)}" class="featured-item">
                                             <span>暂无推荐内容</span>
                                         </div>
@@ -555,7 +574,7 @@
                             </div>
 
                             <!-- 分类区域 -->
-                            <div style="flex: 1;">
+                            <div style="flex: 1;" class="animate__animated animate__fadeInUp">
                                 <div class="categories-box">
                                     <div class="section-label">分类</div>
                                     <div style="border-top: 1px solid var(--gray-brown); margin: 0.5rem 0 1rem 0;"></div>
@@ -576,13 +595,15 @@
 </div>
 
 <script>
-    // 上下轮播图逻辑（保持不变）
+    // 上下轮播图逻辑（自动轮播 + 手动切换）
     (function() {
         const items = document.querySelectorAll('.carousel-item-vertical');
         const prevBtn = document.getElementById('carouselPrev');
         const nextBtn = document.getElementById('carouselNext');
         let currentIndex = 0;
         const totalItems = items.length;
+        let autoTimer = null;
+        const AUTO_INTERVAL = 3000; // 3秒切换
 
         function showItem(index) {
             items.forEach((item, i) => {
@@ -597,15 +618,31 @@
         function nextItem() {
             currentIndex = (currentIndex + 1) % totalItems;
             showItem(currentIndex);
+            resetAutoTimer();
         }
 
         function prevItem() {
             currentIndex = (currentIndex - 1 + totalItems) % totalItems;
             showItem(currentIndex);
+            resetAutoTimer();
+        }
+
+        function startAutoTimer() {
+            if (autoTimer) clearInterval(autoTimer);
+            autoTimer = setInterval(nextItem, AUTO_INTERVAL);
+        }
+
+        function resetAutoTimer() {
+            if (autoTimer) {
+                clearInterval(autoTimer);
+                startAutoTimer();
+            }
         }
 
         if (prevBtn) prevBtn.addEventListener('click', prevItem);
         if (nextBtn) nextBtn.addEventListener('click', nextItem);
+
+        startAutoTimer();
     })();
 
     // 导航交互（保持不变）

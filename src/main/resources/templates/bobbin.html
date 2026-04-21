@@ -290,23 +290,35 @@
         background-color: var(--accent-blue);
     }
 
-    .popup {
-        position: fixed;
-        background-color: var(--card-bg);
-        border: 1px solid var(--gray-brown);
-        padding: 1rem;
-        min-width: 220px;
-        max-width: 280px;
-        z-index: 1000;
-        box-shadow: 0 4px 12px var(--shadow);
+    /* 弹窗缩放弹入动画 */
+@keyframes popZoomIn {
+    from {
         opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s ease, visibility 0.2s ease;
+        transform: scale(0.3);
     }
-    .popup.visible {
+    to {
         opacity: 1;
-        visibility: visible;
+        transform: scale(1);
     }
+}
+
+.popup {
+    position: fixed;
+    background-color: var(--card-bg);
+    border: 1px solid var(--gray-brown);
+    padding: 1rem;
+    min-width: 220px;
+    max-width: 280px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+}
+.popup.visible {
+    opacity: 1;
+    visibility: visible;
+    animation: popZoomIn 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
     .popup h4 {
         font-family: 'Noto Serif SC', serif;
         color: var(--primary);
@@ -374,6 +386,23 @@
     .nav-next {
         right: 20px;
     }
+
+    /* ========= 线轴所有字体加粗（符合需求，不影响导航栏及其他区域） ========= */
+    .timeline .node .node-info,
+    .timeline .node .node-count,
+    .timeline .node .node-desc,
+    .popup,
+    .popup h4,
+    .popup ul li a {
+        font-weight: 700 !important;
+    }
+
+    /* 确保节点内所有派生文本也强制粗体，同时保留原有字族和排版 */
+    .timeline .node .node-info,
+    .timeline .node .node-info * {
+        font-weight: 700 !important;
+    }
+
   </style>
 </head>
 <body>
@@ -582,15 +611,15 @@
     const nodeIndex = parseInt(node.dataset.index);
 
     if (nodeIndex === 0) {
-      const rightSpace = window.innerWidth - rect.right;
-      if (rightSpace < POPUP_WIDTH + 20) {
-        left = rect.left - POPUP_WIDTH - 12;
-      } else {
-        left = rect.right + 170;
-      }
+        const rightSpace = window.innerWidth - rect.right;
+        if (rightSpace < POPUP_WIDTH + 20) {
+            left = rect.left - POPUP_WIDTH - 12;
+        } else {
+            left = rect.right + 170;
+        }
     } else {
-      left = rect.left - POPUP_WIDTH - 35;
-      if (left < 10) left = 10;
+        left = rect.left - POPUP_WIDTH - 35;
+        if (left < 10) left = 10;
     }
     top = rect.top;
     if (top + 200 > window.innerHeight) top = window.innerHeight - 210;
@@ -599,29 +628,34 @@
     popup.style.top = `${top}px`;
     popupTitle.textContent = cat.name;
     popupList.innerHTML = cat.articles.map(a => `<li><a href="/blog/${a.id}" data-image="${a.firstPicture || ''}">${a.title}</a></li>`).join('');
-    popup.offsetHeight;
+
+    // 先移除 visible 类（如果存在），强制重绘后重新添加，以重新触发动画
+    popup.classList.remove('visible');
+    // 强制重绘
+    void popup.offsetWidth;
     popup.classList.add('visible');
 
+    // 绑定悬浮事件等保持不变...
     setTimeout(() => {
-      const items = popupList.querySelectorAll('li a');
-      items.forEach(item => {
-        const imgUrl = item.dataset.image;
-        if (imgUrl) {
-          item.addEventListener('mouseenter', () => {
-            document.body.style.backgroundImage = `url(${imgUrl})`;
-            document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundPosition = 'center';
-            document.body.style.backgroundBlendMode = 'overlay';
-          });
-          item.addEventListener('mouseleave', () => {
-            document.body.style.backgroundImage = '';
-            document.body.style.backgroundColor = 'var(--bg-color)';
-            document.body.style.backgroundBlendMode = 'normal';
-          });
-        }
-      });
+        const items = popupList.querySelectorAll('li a');
+        items.forEach(item => {
+            const imgUrl = item.dataset.image;
+            if (imgUrl) {
+                item.addEventListener('mouseenter', () => {
+                    document.body.style.backgroundImage = `url(${imgUrl})`;
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundPosition = 'center';
+                    document.body.style.backgroundBlendMode = 'overlay';
+                });
+                item.addEventListener('mouseleave', () => {
+                    document.body.style.backgroundImage = '';
+                    document.body.style.backgroundColor = 'var(--bg-color)';
+                    document.body.style.backgroundBlendMode = 'normal';
+                });
+            }
+        });
     }, 50);
-  }
+}
 
   function updateNavButtons() {
     if (!isZoomed) {
