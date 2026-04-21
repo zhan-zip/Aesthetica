@@ -9,122 +9,116 @@
 </nav>
 
 
-    <!--内容-->
-    <div class="md-pd-tb-massive">
-        <div class="ui container">
-            <!--头部表单-->
+<!--内容-->
+<div class="md-pd-tb-massive">
+    <div class="ui container">
+        <!--头部表单-->
 
-            <div class="ui segment form">
-                <input type="hidden" name="page">
-                <div class="md-inline-block fields">
-                    <div class="field">
-                        <input type="text" name="title" placeholder="标题">
-                    </div>
-                    <div class="field">
-                       <div class="ui selection dropdown">
-                            <input type="hidden" name="typeId">
-                            <i class="dropdown icon"></i>
-                            <div class="default text">分类</div>
-                            <div class="menu">
-                                <div class="item" data-value="1" th:each="types : ${types}" th:data-value="${types.id}" th:text="${types.name}">开发者手册</div>
-                            </div>
+        <div class="ui segment form">
+            <input type="hidden" name="page">
+            <div class="md-inline-block fields">
+                <div class="field">
+                    <input type="text" name="title" placeholder="标题">
+                </div>
+                <div class="field">
+                    <div class="ui selection dropdown">
+                        <input type="hidden" name="typeId">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">分类</div>
+                        <div class="menu">
+                            <div class="item" data-value="1" th:each="types : ${types}" th:data-value="${types.id}" th:text="${types.name}">开发者手册</div>
                         </div>
                     </div>
-                    <div class="field">
-                        <button type="button" id="search-button" class="ui button" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b;"><i class="search"></i>搜索</button>
-                    </div>
+                </div>
+                <div class="field">
+                    <button type="button" id="search-button" class="ui button" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b;"><i class="search"></i>搜索</button>
                 </div>
             </div>
-
-            <!--表格-->
-            <div id="table-container">
-                <table class="ui table" th:fragment="blogList">
-                    <!--表头-->
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>标题</th>
-                        <th>分类</th>
-                        <th>ID</th>
-                        <th>发布状态</th>
-                        <th>更新时间</th>
-                        <th>操作</th>
-                        <th>配图</th>
-                    </tr>
-                    </thead>
-                    <!--内容-->
-                    <tbody>
-                    <tr th:each="blog,iterStat : ${page.content}">
-                        <td th:text="${iterStat.count}">1</td>
-                        <td th:text="${blog.title}">133</td>
-
-                        <td th:text="${blog.type.name}">分类</td>
-                        <td th:text="${blog.id}">133</td>
-                        <td th:text="${blog.published} ? '发布' : '草稿'">草稿</td>
-                        <td th:text="${blog.updateTime}">2026</td>
-                        <td>
-                            <a href="#" class="ui button" style="background: #8fa0b8; border: none; border-radius: 0; color: white; margin-right: 4px;" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}">编辑</a>
-                            <a href="#" class="ui button" style="background: #677b8f; border: none; border-radius: 0; color: white;" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}">删除</a>
-                        </td>
-                        <td>
-                            <img th:src="@{${blog.firstPicture}}" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="previewImage(this.src)">
-                        </td>
-                    </tr>
-
-                    </tbody>
-                    <!--表底部-->
-                    <tfoot>
-                    <tr>
-                        <th colspan="7">
-                            <div class="ui pagination menu" style="border: none;">
-                                <a class="item" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b; margin-right: 4px;" th:href="@{/admin/blogs(page=${page.number - 1})}" th:unless="${page.first}">上一页</a>
-                                <a class="item" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b;" th:href="@{/admin/blogs(page=${page.number + 1})}" th:unless="${page.last}">下一页</a>
-                            </div>
-                            <a href="#" class="ui right floated button" style="background: #677b8f; border: none; border-radius: 0; color: white;" th:href="@{/admin/blogs/input}">新增</a>
-                        </th>
-                    </tr>
-                    </tfoot>
-                </table>
-            </div>
-
         </div>
+
+        <!--表格-->
+        <div id="table-container">
+            <table class="ui table" th:fragment="blogList">
+                <!--表头-->
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>标题</th>
+                    <th>分类</th>
+                    <th>ID</th>
+                    <th>发布状态</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                    <th>配图</th>
+                </tr>
+                </thead>
+                <!--内容-->
+                <tbody>
+                <tr th:each="blog,iterStat : ${page.content}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${blog.title}">133</td>
+                    <td th:text="${blog.type.name}">分类</td>
+                    <td th:text="${blog.id}">133</td>
+                    <td th:text="${blog.published} ? '发布' : '草稿'">草稿</td>
+                    <td th:text="${blog.updateTime}">2026</td>
+                    <td>
+                        <a href="#" class="ui button" style="background: #8fa0b8; border: none; border-radius: 0; color: white; margin-right: 4px;" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}">编辑</a>
+                        <a href="#" class="ui button" style="background: #677b8f; border: none; border-radius: 0; color: white;" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}">删除</a>
+                    </td>
+                    <td>
+                        <img th:src="@{${blog.firstPicture}}" style="width: 50px; height: 50px; object-fit: cover; cursor: pointer;" onclick="previewImage(this.src)">
+                    </td>
+                </tr>
+
+                </tbody>
+                <!--表底部-->
+                <tfoot>
+                <tr>
+                    <th colspan="7">
+                        <div class="ui pagination menu" style="border: none;">
+                            <a class="item" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b; margin-right: 4px;" th:href="@{/admin/blogs(page=${page.number - 1})}" th:unless="${page.first}">上一页</a>
+                            <a class="item" style="background: white; border: 1px solid #8fa0b8; border-radius: 0; color: #404e5b;" th:href="@{/admin/blogs(page=${page.number + 1})}" th:unless="${page.last}">下一页</a>
+                        </div>
+                        <a href="#" class="ui right floated button" style="background: #677b8f; border: none; border-radius: 0; color: white;" th:href="@{/admin/blogs/input}">新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
     </div>
+</div>
 
 <th:block th:replace="admin/_fragments :: script"></th:block>
 <!--底下这串我看不懂，做互动的-->
-    <script>
-        /*做一个适应手机端的导航栏收缩按键*/
-        $('.menu.toggle').click(function(){
-            $('.md-item').toggleClass('md-mobile-hide');
+<script>
+    /*做一个适应手机端的导航栏收缩按键*/
+    $('.menu.toggle').click(function(){
+        $('.md-item').toggleClass('md-mobile-hide');
+    });
+
+    /*头像下拉组件*/
+    $('.ui.dropdown').dropdown();
+
+    /*点击搜索button事件*/
+    $("#search-button").click(function () {
+        loaddata();
+    });
+
+    /*发送请求*/
+    function loaddata() {
+        $("#table-container").load(/*[[@{admin/blogs/search}]]*/"/admin/blogs/search", {
+            title : $("[name='title']").val(),
+            typeId : $("[name='typeId']").val(),
+            recommend : $("[name='recommend']").prop('checked'),
+            page : $("[name='page']").val()
         });
-        
-        /*头像下拉组件*/
-        $('.ui.dropdown').dropdown();
+    }
+    function previewImage(src) {
+        window.open(src);
+    }
+</script>
 
-        function page(obj) {
-            $("[name='page']").val($(obj).data("page"));
-            loaddata();
-        }
 
-        /*点击搜索button事件*/
-        $("#search-button").click(function () {
-            loaddata();
-        });
-
-        /*发送请求*/
-        function loaddata() {
-            $("#table-container").load(/*[[@{admin/blogs/search}]]*/"/admin/blogs/search", {
-                title : $("[name='title']").val(),
-                typeId : $("[name='typeId']").val(),
-                recommend : $("[name='recommend']").prop('checked'),
-                page : $("[name='page']").val()
-            });
-        }
-        function previewImage(src) {
-    window.open(src);
-}
-    </script>
-
-    
 </body>
 </html>
