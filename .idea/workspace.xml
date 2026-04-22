@@ -4,25 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-首页增加了毛玻璃效果&#10;-文章列表增加了浏览量">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/lrm/web/admin/StatisticsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/statistics.html" afterDir="false" />
+    <list default="true" id="41a6a882-9fa8-450e-aaa2-4dacd0d392cc" name="更改" comment="-增加了浏览量统计页面&#10;-增加了线轴页细节显示&#10;-给各个页面增加了交互效果">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/Dao/TypeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/Dao/TypeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/service/TypeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/service/TypeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/lrm/service/TypeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lrm/service/TypeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/me_define.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/me_define.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/background-2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/background-2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/wechat.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/_fragments.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/_fragments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/blogs.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/glossaries.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/glossaries.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/blog.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/blog.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/bobbin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,14 +179,6 @@
       <workItem from="1774171192221" duration="103000" />
       <workItem from="1774271981217" duration="927000" />
       <workItem from="1775444627631" duration="7000" />
-    </task>
-    <task id="LOCAL-00005" summary="砍掉了写死的评论区域。">
-      <option name="closed" value="true" />
-      <created>1776160499590</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1776160499590</updated>
     </task>
     <task id="LOCAL-00006" summary="砍掉了首页标签区域。">
       <option name="closed" value="true" />
@@ -589,7 +564,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776829087716</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="-增加了浏览量统计页面&#10;-增加了线轴页细节显示&#10;-给各个页面增加了交互效果">
+      <option name="closed" value="true" />
+      <created>1776836522347</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1776836522347</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -619,7 +602,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="-修改了Index部分细节问题" />
     <MESSAGE value="-为线轴页的导航栏新增了后台选项&#10;-实现了将后端文章数据传入线轴页&#10;-为线轴页的文章列表添加了跳转链接&#10;-修改了线轴页文章列表为空时的默认连接线长度&#10;-修改了线轴页文章列表浮窗的位置" />
     <MESSAGE value="-修改了首页跳转到线轴页的问题&#10;-添加了线轴页文章列表鼠标悬浮时显示对应背景图片的功能" />
     <MESSAGE value="-新增了“关于网站”页面，并添加了方法和跳转链接" />
@@ -644,7 +626,8 @@
     <MESSAGE value="-修改了线轴页的基础长度和关联长度" />
     <MESSAGE value="-添加了交互效果" />
     <MESSAGE value="-首页增加了毛玻璃效果&#10;-文章列表增加了浏览量" />
-    <option name="LAST_COMMIT_MESSAGE" value="-首页增加了毛玻璃效果&#10;-文章列表增加了浏览量" />
+    <MESSAGE value="-增加了浏览量统计页面&#10;-增加了线轴页细节显示&#10;-给各个页面增加了交互效果" />
+    <option name="LAST_COMMIT_MESSAGE" value="-增加了浏览量统计页面&#10;-增加了线轴页细节显示&#10;-给各个页面增加了交互效果" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
