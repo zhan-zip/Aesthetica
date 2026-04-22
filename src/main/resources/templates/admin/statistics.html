@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/_fragments :: head('浏览量统计')">
+  <meta charset="UTF-8">
+  <title>统计</title>
+  <!-- 引入 Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    body {
+        padding: 2rem 1rem !important; /* 减小左右内边距 */
+    }
+    /* 全局动画时长 0.7 秒 */
+    :root {
+        --animate-duration: 0.7s;
+    }
+  </style>
+</head>
+<body>
+<!-- 引入导航栏片段 -->
+<nav th:replace="admin/_fragments :: menu(6)"></nav>
+
+<!-- 添加动画类：淡入上浮，无延迟 -->
+<div class="animate__animated animate__fadeInUp" style="width: 90%; max-width: 1400px; margin: 2rem auto; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 2rem;">
+  <h1 style="text-align: center; color: #404e5b; margin-bottom: 2rem;">各分类文章总浏览量统计</h1>
+  <div id="chart" style="width: 100%; height: 750px;"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<!-- 引入脚本片段（包含 jQuery、Semantic UI 等） -->
+<th:block th:replace="admin/_fragments :: script"></th:block>
+
+<!-- 统计页专用脚本 -->
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var categoryData = /*[[${categoryData}]]*/ [];
+  var categories = categoryData.map(item => item.name);
+  var views = categoryData.map(item => item.totalViews);
+  /*]]>*/
+
+  // 确保 ECharts 已加载
+  if (typeof echarts !== 'undefined') {
+      var chartDom = document.getElementById('chart');
+      var myChart = echarts.init(chartDom);
+      var option = {
+          title: {
+              text: '分类文章浏览量柱状图',
+              left: 'center',
+              textStyle: { color: '#404e5b' }
+          },
+          tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+          xAxis: { type: 'category', data: categories, name: '分类', axisLabel: { rotate: 30, interval: 0 } },
+          yAxis: { type: 'value', name: '总浏览量' },
+          series: [{
+              name: '浏览量',
+              type: 'bar',
+              data: views,
+              itemStyle: { color: '#8fa0b8', borderRadius: [4,4,0,0] },
+              label: { show: true, position: 'top' }
+          }]
+      };
+      myChart.setOption(option);
+  } else {
+      console.error('ECharts 未加载');
+  }
+</script>
+</body>
+</html>

@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>关于网站</title>
+    <!-- 引入 Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
+        :root { --animate-duration: 0.7s; }
 
         body {
             background-size: cover;
@@ -487,12 +491,14 @@
 <div class="container">
     <div class="detail-layout">
         <main class="main-content">
-            <div class="hero-section">
+            <!-- 标题区域加动画 -->
+            <div class="hero-section animate__animated animate__fadeInUp">
                 <h1 th:text="${blog != null ? blog.title : '美哉美哉——美学知识科普网站'}">美哉美哉——美学知识科普网站</h1>
                 <div class="hero-meta">美无法被量化，但可以被感知</div>
             </div>
 
-            <div class="unified-content" id="unifiedBody">
+            <!-- 正文内容加动画，稍延迟 -->
+            <div class="unified-content animate__animated animate__fadeInUp" id="unifiedBody">
                 <h2 id="section1">始于一个哲学问题</h2>
                 <p>美，是什么？</p>
                 <p>或许你在面对满是五彩灯光与模板化商业街的景区时，在面对大街小巷难以欣赏的墙绘时，在面对同质化到令人审美疲劳的这些作品时，也会忍不住去想这个问题。</p>
@@ -523,7 +529,8 @@
             </div>
         </main>
 
-        <aside class="toc-sidebar">
+        <!-- 右侧目录加动画，稍延迟 -->
+        <aside class="toc-sidebar animate__animated animate__fadeInRight">
             <div class="toc-title">目录</div>
             <ul class="toc-list">
                 <li class="active"><a data-target="section1">始于一个哲学问题</a></li>

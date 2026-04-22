@@ -305,14 +305,15 @@
 
         /* 毛玻璃外层容器 - 无圆点，左右扩展，上下紧贴 */
         .glass-wrapper {
-            position: relative;
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(12px);
-            border-radius: 0;
-            padding: 1rem 0;
-            margin: 0 7rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-        }
+    position: relative;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;           /* 添加圆角 */
+    border: 1px solid #8fa0b8;     /* 添加边框，颜色 #404e5b */
+    padding: 1rem 0;
+    margin: 0 7rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
 
         .intro-box {
             background-color: rgba(255,255,255,0.88);
@@ -476,6 +477,13 @@
             box-shadow: 0 12px 24px var(--shadow);
         }
 
+        /* 移动端：隐藏轮播图简介 */
+        @media (max-width: 768px) {
+            .carousel-subtitle-vertical {
+                display: none;
+            }
+        }
+
         @media (max-width: 1000px) {
             .left-roll {
                 height: 400px;
@@ -514,7 +522,6 @@
     </style>
 </head>
 <body>
-
 
 <!-- ========= 右上角导航 ========= -->
 <div class="corner-nav">

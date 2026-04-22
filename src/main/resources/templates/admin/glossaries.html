@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head th:replace="admin/_fragments :: head('术语管理')"></head>
+<head th:replace="admin/_fragments :: head('术语管理')">
+  <title>术语管理</title>
+</head>
+<!-- 引入 Animate.css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<style>
+  /* 覆盖全局动画时长为 0.7s */
+  :root {
+      --animate-duration: 0.7s;
+  }
+  /* 确保表格容器内的内容也应用动画，但不影响分页按钮的交互 */
+  .ui.container {
+      animation: fadeInUp var(--animate-duration) both;
+  }
+  /* 可选：让提示消息也有淡入效果 */
+  .ui.success.message {
+      animation: fadeIn var(--animate-duration) both;
+  }
+  @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+  }
+</style>
 <body>
 <!--导航-->
 <nav class="ui inverted attached segment md-padded-tb-mini md-shadow-mini" th:replace="admin/_fragments :: menu(4)"></nav>
 
 <!--内容-->
 <div class="md-pd-tb-massive">
-  <div class="ui container">
+  <div class="ui container animate__animated animate__fadeInUp">
     <!-- 提示消息 -->
-    <div class="ui success message" th:if="${message}" th:text="${message}"></div>
+    <div class="ui success message animate__animated animate__fadeIn" th:if="${message}" th:text="${message}"></div>
 
     <!-- 表格 -->
     <div id="table-container">

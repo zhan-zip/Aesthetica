@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${blog != null ? blog.title + ' · 美学详情页' : '美学详情页'}">美学详情页</title>
+    <!-- 引入 Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --animate-duration: 0.7s;   /* 全局动画时长 */
+        }
+
         body {
             background-size: cover; background-position: center; background-attachment: fixed;
             font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
@@ -278,7 +285,7 @@ body.eye-care-mode .volume-control input[type="range"]::-webkit-slider-thumb {
 
 <div class="container">
     <div class="detail-layout">
-        <aside class="toc-sidebar">
+        <aside class="toc-sidebar animate__animated animate__fadeInRight">
             <div class="toc-title">目录</div>
             <ul class="toc-list" id="dynamicToc"><li>加载中...</li></ul>
             <div class="feature-section">
@@ -299,7 +306,7 @@ body.eye-care-mode .volume-control input[type="range"]::-webkit-slider-thumb {
         </aside>
 
         <main class="main-content">
-            <div class="hero-section">
+            <div class="hero-section animate__animated animate__fadeInUp">
                 <h1 th:text="${blog.title}">文章标题</h1>
                 <div class="hero-meta">
                     <span th:text="${blog.type != null ? blog.type.name : '未分类'}"></span>
@@ -307,7 +314,7 @@ body.eye-care-mode .volume-control input[type="range"]::-webkit-slider-thumb {
                 </div>
             </div>
 
-            <div class="unified-content" id="unifiedBody">
+            <div class="unified-content animate__animated animate__fadeInUp" id="unifiedBody">
                 <!-- 原始 Markdown 内容（隐藏） -->
                 <div id="markdown-source" style="display:none;" th:text="${blog.content}"></div>
                 <!-- 渲染后的 HTML 内容 -->

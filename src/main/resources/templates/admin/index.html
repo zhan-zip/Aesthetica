@@ -11,38 +11,62 @@
 <!--内容-->
 <div class="md-pd-tb-massive">
     <div class="ui container">
-        <div class="ui segment" style="text-align: center; background: #f9f9f9; max-width: 600px; margin: 0 auto 3rem auto;">
+        <!-- 欢迎卡片（使用 CSS 类实现平滑悬浮） -->
+        <div class="ui segment animate__animated animate__fadeInUp hover-card"
+             style="text-align: center; background: #f9f9f9; max-width: 100%; margin: 0 auto 3rem auto; padding: 2rem;">
             <h1 style="color: #404e5b; margin-top: 1rem;">欢迎回来</h1>
             <p style="color: #6c7c8c; font-size: 1.1rem;">美哉·美哉 后台管理系统</p>
             <p style="color: #6c7c8c; font-size: 1.1rem;">您可在下方卡片中快速新增内容，或在右侧导航栏中查看文章与术语列表</p>
         </div>
+
+        <!-- 两个卡片：上下分布，带动画 -->
         <div style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
-            <a th:href="@{/admin/blogs/input}" style="width: 100%; max-width: 500px; text-decoration: none;">
-                <div class="ui card" style="width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.2s; cursor: pointer;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-                    <div class="content" style="text-align: center; padding: 3rem 2rem;">
-                        <div class="header" style="font-size: 1.8rem; margin-top: 1rem;">新文章？</div>
-                        <div class="description" style="font-size: 1.1rem; margin-top: 0.5rem;">新增一篇美学文章</div>
-                    </div>
-                    <div class="extra content" style="text-align: center; background: #8fa0b8; color: white; padding: 0.8rem;">
-                        点击新增文章
+            <!-- 新增文章卡片 -->
+            <a th:href="@{/admin/blogs/input}" style="width: 100%; max-width: 700px; text-decoration: none;">
+                <div class="ui segment animate__animated animate__fadeInUp hover-card"
+                     style="text-align: center; background: #f9f9f9; padding: 2rem 2rem 0 2rem;">
+                    <h1 style="color: #404e5b; margin-top: 1rem;">新文章？</h1>
+                    <p style="color: #6c7c8c; font-size: 1.1rem;">新增一篇美学文章</p>
+                    <!-- 底部按钮块（贴左右和下边） -->
+                    <div style="background: #8fa0b8; color: white; margin: 2rem -2rem 0 -2rem; padding: 1rem; text-align: center;">
+                        点击此处开始写作
                     </div>
                 </div>
             </a>
-            <a th:href="@{/admin/glossaries/input}" style="width: 100%; max-width: 500px; text-decoration: none;">
-                <div class="ui card" style="width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: transform 0.2s; cursor: pointer;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-                    <div class="content" style="text-align: center; padding: 3rem 2rem;">
-                        <div class="header" style="font-size: 1.8rem; margin-top: 1rem;">新术语？</div>
-                        <div class="description" style="font-size: 1.1rem; margin-top: 0.5rem;">新增一条美学专业术语解释</div>
-                    </div>
-                    <div class="extra content" style="text-align: center; background: #8fa0b8; color: white; padding: 0.8rem;">
-                        点击新增术语
+
+            <!-- 新增术语卡片 -->
+            <a th:href="@{/admin/glossaries/input}" style="width: 100%; max-width: 700px; text-decoration: none;">
+                <div class="ui segment animate__animated animate__fadeInUp hover-card"
+                     style="text-align: center; background: #f9f9f9; padding: 2rem 2rem 0 2rem;">
+                    <h1 style="color: #404e5b; margin-top: 1rem;">新术语？</h1>
+                    <p style="color: #6c7c8c; font-size: 1.1rem;">新增一条美学专业术语解释</p>
+                    <div style="background: #8fa0b8; color: white; margin: 2rem -2rem 0 -2rem; padding: 1rem; text-align: center;">
+                        点击此处添加术语
                     </div>
                 </div>
             </a>
         </div>
-
     </div>
 </div>
+
+<!-- 引入 Animate.css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<style>
+    /* 全局动画时长 0.7 秒 */
+    :root {
+        --animate-duration: 0.7s;
+    }
+
+    /* ========= 卡片平滑悬浮效果（与首页完全一致） ========= */
+    .hover-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+    .hover-card:hover {
+        transform: translateY(-2px) scale(1.01) !important;
+        box-shadow: 0 12px 24px rgba(148, 143, 140, 0.15) !important;
+    }
+</style>
 
 <th:block th:replace="admin/_fragments :: script"></th:block>
 

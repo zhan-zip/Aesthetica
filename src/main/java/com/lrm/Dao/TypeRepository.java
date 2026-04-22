@@ -13,4 +13,7 @@ public interface TypeRepository extends JpaRepository<Type, Long> {
 
     @Query(value = "SELECT t.* FROM t_type t ORDER BY (SELECT COUNT(*) FROM t_blog b WHERE b.type_id = t.id) DESC", nativeQuery = true)
     List<Type> findTop(Pageable pageable);
+
+    @Query("SELECT t.name, COALESCE(SUM(b.view), 0) FROM Type t LEFT JOIN t.blogs b GROUP BY t.id")
+    List<Object[]> findCategoryViewSum();
 }

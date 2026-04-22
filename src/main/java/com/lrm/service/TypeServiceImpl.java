@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -72,5 +76,18 @@ public class TypeServiceImpl implements TypeService{
     public List<Type> listTypeTop(Integer size) {
         Pageable pageable = PageRequest.of(0, size);
         return typeRepository.findTop(pageable);
+    }
+
+    @Override
+    public List<Map<String, Object>> getCategoryViewCounts() {
+        List<Object[]> results = typeRepository.findCategoryViewSum();
+        List<Map<String, Object>> data = new ArrayList<>();
+        for (Object[] row : results) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("name", row[0]);
+            item.put("totalViews", row[1]);
+            data.add(item);
+        }
+        return data;
     }
 }

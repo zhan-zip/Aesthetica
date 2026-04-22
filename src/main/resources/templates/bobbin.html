@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>归档线轴 | Aesthetica</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
   <style>
     * {
         margin: 0;
@@ -177,13 +178,63 @@
         visibility: visible;
     }
 
+    /* 顶部标语条 - 半透明白色背景，贴满左右，加动效和悬浮交互 */
+    .top-banner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(4px);
+        padding: 12px 0;
+        z-index: 99;
+        text-align: center;
+        pointer-events: auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .top-banner:hover {
+        transform: translateY(2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .top-banner p {
+        font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
+        font-weight: 700;
+        letter-spacing: 4px;
+        color: #404e5b;
+        margin: 0;
+        line-height: 1.4;
+    }
+    .top-banner p:first-child {
+        font-size: 1.5rem;
+    }
+    .top-banner p:not(:first-child) {
+        font-size: 1.0rem;
+        opacity: 0.9;
+    }
+
+    /* 全屏透明遮罩（用于退出缩放） */
+    .zoom-mask {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        z-index: 999;
+        display: none;
+        pointer-events: auto;
+    }
+    .zoom-mask.active {
+        display: block;
+    }
+
     .timeline-zoom {
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
         transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         transform-origin: center center;
-        will-change: transform;  /* 硬件加速 */
+        will-change: transform;
     }
 
     .timeline {
@@ -219,7 +270,7 @@
         top: 50%;
         transform-origin: center center;
         transition: transform 0.2s;
-        will-change: transform;  /* 硬件加速 */
+        will-change: transform;
     }
 
     .node-dot {
@@ -291,34 +342,34 @@
     }
 
     /* 弹窗缩放弹入动画 */
-@keyframes popZoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.3);
+    @keyframes popZoomIn {
+        from {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
 
-.popup {
-    position: fixed;
-    background-color: var(--card-bg);
-    border: 1px solid var(--gray-brown);
-    padding: 1rem;
-    min-width: 220px;
-    max-width: 280px;
-    z-index: 1000;
-    box-shadow: 0 4px 12px var(--shadow);
-    opacity: 0;
-    visibility: hidden;
-}
-.popup.visible {
-    opacity: 1;
-    visibility: visible;
-    animation: popZoomIn 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
-}
+    .popup {
+        position: fixed;
+        background-color: var(--card-bg);
+        border: 1px solid var(--gray-brown);
+        padding: 1rem;
+        min-width: 220px;
+        max-width: 280px;
+        z-index: 1000;
+        box-shadow: 0 4px 12px var(--shadow);
+        opacity: 0;
+        visibility: hidden;
+    }
+    .popup.visible {
+        opacity: 1;
+        visibility: visible;
+        animation: popZoomIn 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+    }
     .popup h4 {
         font-family: 'Noto Serif SC', serif;
         color: var(--primary);
@@ -387,7 +438,7 @@
         right: 20px;
     }
 
-    /* ========= 线轴所有字体加粗（符合需求，不影响导航栏及其他区域） ========= */
+    /* ========= 线轴所有字体加粗 ========= */
     .timeline .node .node-info,
     .timeline .node .node-count,
     .timeline .node .node-desc,
@@ -396,28 +447,22 @@
     .popup ul li a {
         font-weight: 700 !important;
     }
-
-    /* 确保节点内所有派生文本也强制粗体，同时保留原有字族和排版 */
     .timeline .node .node-info,
     .timeline .node .node-info * {
         font-weight: 700 !important;
     }
-
   </style>
 </head>
 <body>
 
-<!-- 顶部标语 -->
-<div style="position: fixed; top: 20px; left: 0; width: 100%; text-align: center; z-index: 100; pointer-events: none;">
-  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.5rem; letter-spacing: 4px; color: #404e5b; margin: 0;">
-    ———— 美不能被量化，但可以被感知 ————
-  </p>
-  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.0rem; letter-spacing: 4px; color: #404e5b;opacity: 0.9; margin: 0;">
-    连接线长度关联文章数量，让知识变得可视。
-  </p>
-  <p style="font-family: 'Noto Serif SC', 'Source Han Serif SC', serif; font-size: 1.0rem; letter-spacing: 4px; color: #404e5b; opacity: 0.9; margin: 0;">
-    鼠标悬浮在文章标题上时背景自动更改为该文章配图。
-  </p>
+<!-- 全屏透明遮罩（用于点击退出缩放） -->
+<div id="zoomMask" class="zoom-mask"></div>
+
+<!-- 顶部半透明横幅 -->
+<div class="top-banner animate__animated animate__fadeInDown">
+  <p>———— 美不能被量化，但可以被感知 ————</p>
+  <p>连接线长度关联文章数量，让知识变得可视。</p>
+  <p>鼠标悬浮在文章标题上时背景自动更改为该文章配图。</p>
 </div>
 
 <!-- ========= 右上角导航 ========= -->
@@ -534,6 +579,7 @@
   const popupList = document.getElementById('popupList');
   const navPrev = document.getElementById('navPrev');
   const navNext = document.getElementById('navNext');
+  const zoomMask = document.getElementById('zoomMask');
 
   let currentZoomedNode = null;
   let isZoomed = false;
@@ -549,7 +595,6 @@
     const end = 100 - SIDE_MARGIN_PERCENT;
     const step = (end - start) / (nodeCount - 1);
 
-    // 使用 DocumentFragment 批量插入，减少 DOM 重排
     const fragment = document.createDocumentFragment();
 
     categories.forEach((cat, idx) => {
@@ -597,7 +642,6 @@
       fragment.appendChild(nodeDiv);
     });
 
-    // 一次性插入所有节点
     nodesContainer.appendChild(fragment);
   }
 
@@ -629,13 +673,10 @@
     popupTitle.textContent = cat.name;
     popupList.innerHTML = cat.articles.map(a => `<li><a href="/blog/${a.id}" data-image="${a.firstPicture || ''}">${a.title}</a></li>`).join('');
 
-    // 先移除 visible 类（如果存在），强制重绘后重新添加，以重新触发动画
     popup.classList.remove('visible');
-    // 强制重绘
     void popup.offsetWidth;
     popup.classList.add('visible');
 
-    // 绑定悬浮事件等保持不变...
     setTimeout(() => {
         const items = popupList.querySelectorAll('li a');
         items.forEach(item => {
@@ -655,7 +696,7 @@
             }
         });
     }, 50);
-}
+  }
 
   function updateNavButtons() {
     if (!isZoomed) {
@@ -715,6 +756,8 @@
     isAnimating = true;
     hidePopup();
     applyZoomTransform(node);
+    // 显示遮罩，点击遮罩退出缩放
+    zoomMask.classList.add('active');
 
     const onTransitionEnd = () => {
       timelineZoom.removeEventListener('transitionend', onTransitionEnd);
@@ -738,6 +781,7 @@
     isAnimating = true;
     hidePopup();
     timelineZoom.style.transform = 'scale(1) translate(0, 0)';
+    zoomMask.classList.remove('active');
     const onResetEnd = () => {
       timelineZoom.removeEventListener('transitionend', onResetEnd);
       isZoomed = false;
@@ -777,6 +821,14 @@
     }
   }
 
+  // 点击遮罩退出缩放
+  zoomMask.addEventListener('click', () => {
+    if (isZoomed && !isAnimating) {
+      resetView();
+    }
+  });
+
+  // 保留原全局点击监听作为备用（但遮罩已经足够）
   document.addEventListener('click', (e) => {
     const isNode = e.target.closest('.node');
     const isPopup = e.target.closest('.popup');

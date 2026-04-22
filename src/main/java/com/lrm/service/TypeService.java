@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TypeService {
     Type saveType(Type type);
@@ -15,4 +16,5 @@ public interface TypeService {
     Type getTypeByName(String name);
     List<Type> listAllTypes();
     List<Type> listTypeTop(Integer size);
+    List<Map<String, Object>> getCategoryViewCounts();
 }

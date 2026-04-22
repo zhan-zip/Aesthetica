@@ -6,25 +6,31 @@
     <title>登录管理</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
     <link rel="stylesheet" th:href="@{/css/me_define.css}">
+    <!-- 引入 Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
+        /* 全局动画时长 */
+        :root {
+            --animate-duration: 0.7s;
+        }
         body {
-    background:url('../images/background-2.jpg') no-repeat fixed center;
-    font-family: 'Inter', 'Source Han Sans SC', '思源黑体', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--text-main);
-    line-height: 1.6;
-    padding: 3rem 1rem 3rem 0;
-    padding-top: 5rem;       /* 恢复顶部空间 */
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 100vh !important;
-    margin: 0 !important;
-}
-
+            background: url('../images/background-3.jpg') no-repeat fixed center;
+            font-family: 'Inter', 'Source Han Sans SC', '思源黑体', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 3rem 1rem 3rem 0;
+            padding-top: 5rem;
+            display: flex !important;
+            flex-direction: column !important;
+            min-height: 100vh !important;
+            margin: 0 !important;
+        }
     </style>
 </head>
 <body>
 <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-    <div style="background-color: rgba(255,255,255,0.9); border-radius: 12px; padding: 2.5em 2em; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
+    <!-- 添加动画类：淡入上浮，无延迟 -->
+    <div class="animate__animated animate__fadeInUp" style="background-color: rgba(255,255,255,0.9); border-radius: 12px; padding: 2.5em 2em; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
         <div class="ui container" style="max-width: 12em;">
             <h2 class="ui teal image header center aligned">
                 <div class="content" style="color:#404e5b;">登录</div>
@@ -49,11 +55,7 @@
                     </div>
                 </div>
                 <div class="ui error message" th:if="${message}" th:text="${message}"></div>
-
-                <div class="ui error mini message">
-
-                </div>
-
+                <div class="ui error mini message"></div>
                 <div class="ui mini message" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></div>
             </form>
         </div>
