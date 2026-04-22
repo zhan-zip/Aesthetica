@@ -59,6 +59,7 @@ public class IndexController {
 
     @GetMapping("/blog/{id}")
     public String blogDetail(@PathVariable Long id, Model model) {
+        blogService.updateViewCount(id);
         Blog blog = blogService.getBlog(id);
         if (blog == null) {
             System.out.println("博客不存在，id=" + id);

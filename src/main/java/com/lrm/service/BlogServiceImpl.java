@@ -114,4 +114,18 @@ public class BlogServiceImpl implements BlogService{
     public long count() {
         return blogRepository.count();
     }
+
+    @Override
+    @Transactional
+    public void updateViewCount(Long id) {
+        Blog blog = blogRepository.findById(id).orElse(null);
+        if (blog != null) {
+            Integer currentView = blog.getView();
+            if (currentView == null) {
+                currentView = 0;
+            }
+            blog.setView(currentView + 1);
+            blogRepository.save(blog);
+        }
+    }
 }

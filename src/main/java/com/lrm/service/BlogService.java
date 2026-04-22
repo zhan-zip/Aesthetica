@@ -21,4 +21,5 @@ public interface BlogService {
     long countByPublished(boolean published);
     List<Blog> findByPublished(boolean published, Pageable pageable);   //ai4-18
     long count();
+    void updateViewCount(Long id);
 }

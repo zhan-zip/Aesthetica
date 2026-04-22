@@ -9,7 +9,6 @@
     <!-- 引入 Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        // 以下由AI辅助生成：DeepSeek-网页版, 2026-4-15
         /* ========= 所有样式保持不变 ========= */
         * {
             margin: 0;
@@ -31,7 +30,7 @@
         }
 
         body {
-            background: url('../images/background-3.jpg') no-repeat fixed center;
+            background: url('../images/background-4.jpg') no-repeat fixed center;
             font-family: 'Inter', 'Source Han Sans SC', '思源黑体', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text-main);
             line-height: 1.6;
@@ -187,6 +186,11 @@
             height: 800px;
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .left-roll:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 16px 28px var(--shadow);
         }
 
         .carousel-container-vertical {
@@ -297,6 +301,17 @@
 
         .twelve.wide.column {
             padding-left: 4rem !important;
+        }
+
+        /* 毛玻璃外层容器 - 无圆点，左右扩展，上下紧贴 */
+        .glass-wrapper {
+            position: relative;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(12px);
+            border-radius: 0;
+            padding: 1rem 0;
+            margin: 0 7rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
         }
 
         .intro-box {
@@ -474,6 +489,10 @@
             .four.wide.column {
                 margin-left: 0;
             }
+            .glass-wrapper {
+                margin: 0 -1rem;
+                padding: 0.5rem 0;
+            }
         }
 
         @media (max-width: 600px) {
@@ -488,10 +507,14 @@
             .nav-menu {
                 width: 80%;
             }
+            .glass-wrapper {
+                margin: 0 -0.5rem;
+            }
         }
     </style>
 </head>
 <body>
+
 
 <!-- ========= 右上角导航 ========= -->
 <div class="corner-nav">
@@ -513,75 +536,77 @@
 </div>
 <div class="nav-overlay" id="navOverlay"></div>
 
-<!-- ========= 主要内容 ========= -->
-<div class="ui container">
-    <div class="ui grid">
-        <!-- 左侧轮播图（动态绑定最新10篇文章） -->
-        <div class="four wide column animate__animated animate__fadeInLeft">
-            <div class="left-roll" id="verticalCarousel">
-                <div class="carousel-container-vertical">
-                    <div th:each="blog, iterStat : ${latestBlogs}" class="carousel-item-vertical" th:classappend="${iterStat.first} ? 'active'">
-                        <a th:href="@{/blog/{id}(id=${blog.id})}" style="display: block; width: 100%; height: 100%; position: relative; text-decoration: none;">
-                            <div th:style="'background-image: url(' + (${blog.firstPicture} != null ? @{${blog.firstPicture}} : '/images/back.jpg') + '); background-size: cover; background-position: center; width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 0;'"></div>
-                            <div class="carousel-title-vertical" th:text="${blog.title}">标题</div>
-                            <div class="carousel-subtitle-vertical" th:text="${#strings.abbreviate(blog.content, 50)}">简介</div>
-                        </a>
+<!-- ========= 主要内容（包裹在毛玻璃容器内） ========= -->
+<div class="glass-wrapper">
+    <div class="ui container">
+        <div class="ui grid">
+            <!-- 左侧轮播图（动态绑定最新10篇文章） -->
+            <div class="four wide column animate__animated animate__fadeInLeft">
+                <div class="left-roll" id="verticalCarousel">
+                    <div class="carousel-container-vertical">
+                        <div th:each="blog, iterStat : ${latestBlogs}" class="carousel-item-vertical" th:classappend="${iterStat.first} ? 'active'">
+                            <a th:href="@{/blog/{id}(id=${blog.id})}" style="display: block; width: 100%; height: 100%; position: relative; text-decoration: none;">
+                                <div th:style="'background-image: url(' + (${blog.firstPicture} != null ? @{${blog.firstPicture}} : '/images/back.jpg') + '); background-size: cover; background-position: center; width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 0;'"></div>
+                                <div class="carousel-title-vertical" th:text="${blog.title}">标题</div>
+                                <div class="carousel-subtitle-vertical" th:text="${#strings.abbreviate(blog.content, 50)}">简介</div>
+                            </a>
+                        </div>
                     </div>
+                    <button class="carousel-prev" id="carouselPrev">←</button>
+                    <button class="carousel-next" id="carouselNext">→</button>
                 </div>
-                <button class="carousel-prev" id="carouselPrev">←</button>
-                <button class="carousel-next" id="carouselNext">→</button>
             </div>
-        </div>
 
-        <!-- 右侧内容 -->
-        <div class="twelve wide column">
-            <div class="ui grid" style="height: 100%;">
-                <!-- 介绍框（静态） -->
-                <div class="sixteen wide column animate__animated animate__fadeInUp">
-                    <div class="intro-box">
-                        <h1>美哉·美哉——美学知识科普平台</h1>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;致力于构建一个去门槛、去量化的美学知识角落，让美学变得可感可知。</p>
+            <!-- 右侧内容 -->
+            <div class="twelve wide column">
+                <div class="ui grid" style="height: 100%;">
+                    <!-- 介绍框（静态） -->
+                    <div class="sixteen wide column animate__animated animate__fadeInUp">
+                        <div class="intro-box">
+                            <h1>美哉·美哉——美学知识科普平台</h1>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;致力于构建一个去门槛、去量化的美学知识角落，让美学变得可感可知。</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- 关于网站框（静态） -->
-                <div class="sixteen wide column animate__animated animate__fadeInUp">
-                    <div class="about-box">
-                        <h2>美学学科的诞生</h2>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aesthetica，意为感性学，即美学，该词由德国理性主义哲学家鲍姆嘉通发明，1750年同名著作的发表代表着美学学科的建立。自此，美学作为一个独立学科被人们所研究。</p>
+                    <!-- 关于网站框（静态） -->
+                    <div class="sixteen wide column animate__animated animate__fadeInUp">
+                        <div class="about-box">
+                            <h2>美学学科的诞生</h2>
+                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aesthetica，意为感性学，即美学，该词由德国理性主义哲学家鲍姆嘉通发明，1750年同名著作的发表代表着美学学科的建立。自此，美学作为一个独立学科被人们所研究。鲍姆嘉通借此将感性认识的完善纳入哲学视野，使之与逻辑学并立，为后世艺术与审美理论奠定了重要基础。</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- 推荐内容 + 分类区域（动态数据） -->
-                <div class="row" style="margin-top: auto;">
-                    <div class="sixteen wide column">
-                        <div style="display: flex; gap: 2rem;">
-                            <!-- 推荐内容区域 -->
-                            <div style="flex: 1;" class="animate__animated animate__fadeInUp">
-                                <div class="featured-box">
-                                    <div class="section-label">或许你会感兴趣</div>
-                                    <div style="border-top: 1px solid var(--gray-brown); margin: 0.5rem 0 1rem 0;"></div>
-                                    <div class="featured-list">
-                                        <div th:each="blog : ${recommendBlogs}" class="featured-item">
-                                            <a th:href="@{/blog/{id}(id=${blog.id})}" th:text="${blog.title}">文章标题</a>
-                                            <span class="featured-category" th:text="${blog.type.name}">分类</span>
-                                        </div>
-                                        <div th:if="${#lists.isEmpty(recommendBlogs)}" class="featured-item">
-                                            <span>暂无推荐内容</span>
+                    <!-- 推荐内容 + 分类区域（动态数据） -->
+                    <div class="row" style="margin-top: auto;">
+                        <div class="sixteen wide column">
+                            <div style="display: flex; gap: 2rem;">
+                                <!-- 推荐内容区域 -->
+                                <div style="flex: 1;" class="animate__animated animate__fadeInUp">
+                                    <div class="featured-box">
+                                        <div class="section-label">或许你会感兴趣</div>
+                                        <div style="border-top: 1px solid var(--gray-brown); margin: 0.5rem 0 1rem 0;"></div>
+                                        <div class="featured-list">
+                                            <div th:each="blog : ${recommendBlogs}" class="featured-item">
+                                                <a th:href="@{/blog/{id}(id=${blog.id})}" th:text="${blog.title}">文章标题</a>
+                                                <span class="featured-category" th:text="${blog.type.name}">分类</span>
+                                            </div>
+                                            <div th:if="${#lists.isEmpty(recommendBlogs)}" class="featured-item">
+                                                <span>暂无推荐内容</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- 分类区域 -->
-                            <div style="flex: 1;" class="animate__animated animate__fadeInUp">
-                                <div class="categories-box">
-                                    <div class="section-label">分类</div>
-                                    <div style="border-top: 1px solid var(--gray-brown); margin: 0.5rem 0 1rem 0;"></div>
-                                    <div class="category-list">
-                                        <div th:each="type : ${types}" class="category-item">
-                                            <a th:href="@{/bobbin(type=${type.name})}" th:text="${type.name}">分类名称</a>
-                                            <span class="category-count" th:text="${type.blogs.size()} + '篇'">0篇</span>
+                                <!-- 分类区域 -->
+                                <div style="flex: 1;" class="animate__animated animate__fadeInUp">
+                                    <div class="categories-box">
+                                        <div class="section-label">分类</div>
+                                        <div style="border-top: 1px solid var(--gray-brown); margin: 0.5rem 0 1rem 0;"></div>
+                                        <div class="category-list">
+                                            <div th:each="type : ${types}" class="category-item">
+                                                <a th:href="@{/bobbin(type=${type.name})}" th:text="${type.name}">分类名称</a>
+                                                <span class="category-count" th:text="${type.blogs.size()} + '篇'">0篇</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

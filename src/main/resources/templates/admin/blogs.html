@@ -45,6 +45,7 @@
                     <th></th>
                     <th>标题</th>
                     <th>分类</th>
+                    <th>浏览量</th>
                     <th>ID</th>
                     <th>发布状态</th>
                     <th>更新时间</th>
@@ -58,6 +59,7 @@
                     <td th:text="${iterStat.count}">1</td>
                     <td th:text="${blog.title}">133</td>
                     <td th:text="${blog.type.name}">分类</td>
+                    <td th:text="${blog.view != null ? blog.view : 0}">0</td>
                     <td th:text="${blog.id}">133</td>
                     <td th:text="${blog.published} ? '发布' : '草稿'">草稿</td>
                     <td th:text="${blog.updateTime}">2026</td>
