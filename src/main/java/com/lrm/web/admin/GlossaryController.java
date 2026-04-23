@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.stream.Collectors;
-
+// 经AI辅助生成：DeepSeek最新版, 2026-04-19
 @Controller
 @RequestMapping("/admin")
 public class GlossaryController {

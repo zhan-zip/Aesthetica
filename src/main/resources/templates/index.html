@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- 引入 Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!--经AI辅助生成：DeepSeek最新版, 2026-4-16-->
     <style>
-        /* ========= 所有样式保持不变 ========= */
         * {
             margin: 0;
             padding: 0;
@@ -181,7 +181,7 @@
             visibility: visible;
         }
 
-        /* ========= 左侧上下轮播图样式 ========= */
+        /* 左侧轮播图*/
         .left-roll {
             height: 800px;
             position: relative;
@@ -303,7 +303,7 @@
             padding-left: 4rem !important;
         }
 
-        /* 毛玻璃外层容器 - 无圆点，左右扩展，上下紧贴 */
+        /* 毛玻璃 */
         .glass-wrapper {
     position: relative;
     background: rgba(255, 255, 255, 0.3);
@@ -394,7 +394,7 @@
             margin-top: 40px;
         }
 
-        /* 推荐列表项悬浮效果 */
+        /* 推荐列表悬浮效果 */
         .featured-item {
             display: flex;
             justify-content: space-between;
@@ -408,7 +408,7 @@
             box-shadow: 0 2px 8px var(--shadow);
         }
 
-        /* 分类列表项悬浮效果 */
+        /* 分类列表悬浮效果 */
         .category-item {
             display: flex;
             justify-content: space-between;
@@ -477,7 +477,7 @@
             box-shadow: 0 12px 24px var(--shadow);
         }
 
-        /* 移动端：隐藏轮播图简介 */
+        /* 移动端 */
         @media (max-width: 768px) {
             .carousel-subtitle-vertical {
                 display: none;
@@ -523,7 +523,7 @@
 </head>
 <body>
 
-<!-- ========= 右上角导航 ========= -->
+<!-- 右上角导航 -->
 <div class="corner-nav">
     <div class="nav-trigger" id="navTrigger">
         <span></span>
@@ -543,11 +543,11 @@
 </div>
 <div class="nav-overlay" id="navOverlay"></div>
 
-<!-- ========= 主要内容（包裹在毛玻璃容器内） ========= -->
+<!--内容 -->
 <div class="glass-wrapper">
     <div class="ui container">
         <div class="ui grid">
-            <!-- 左侧轮播图（动态绑定最新10篇文章） -->
+            <!-- 左侧轮播图 -->
             <div class="four wide column animate__animated animate__fadeInLeft">
                 <div class="left-roll" id="verticalCarousel">
                     <div class="carousel-container-vertical">
@@ -567,7 +567,7 @@
             <!-- 右侧内容 -->
             <div class="twelve wide column">
                 <div class="ui grid" style="height: 100%;">
-                    <!-- 介绍框（静态） -->
+                    <!-- 介绍 -->
                     <div class="sixteen wide column animate__animated animate__fadeInUp">
                         <div class="intro-box">
                             <h1>美哉·美哉——美学知识科普平台</h1>
@@ -575,7 +575,7 @@
                         </div>
                     </div>
 
-                    <!-- 关于网站框（静态） -->
+                    <!-- 关于网站 -->
                     <div class="sixteen wide column animate__animated animate__fadeInUp">
                         <div class="about-box">
                             <h2>美学学科的诞生</h2>
@@ -583,7 +583,7 @@
                         </div>
                     </div>
 
-                    <!-- 推荐内容 + 分类区域（动态数据） -->
+                    <!-- 推荐内容 + 分类区域 -->
                     <div class="row" style="margin-top: auto;">
                         <div class="sixteen wide column">
                             <div style="display: flex; gap: 2rem;">
@@ -677,7 +677,7 @@
         startAutoTimer();
     })();
 
-    // 导航交互（保持不变）
+    // 导航
     (function() {
         const trigger = document.getElementById('navTrigger');
         const menu = document.getElementById('navMenu');

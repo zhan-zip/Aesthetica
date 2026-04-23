@@ -22,7 +22,7 @@ public class LogAspect {
     @Before("log()")
     public void doBefore(JoinPoint joinPoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        // 判空：如果没有请求上下文（如容器启动时），直接返回        //ai4-16
+        // 判空：如果没有请求上下文（如容器启动时），直接返回        // 经AI辅助生成：DeepSeek最新版, 2026-04-16
         if (attributes == null) {
             return;
         }

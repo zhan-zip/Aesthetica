@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Controller     //ai4-16
+@Controller     // 经AI辅助生成：DeepSeek最新版, 2026-04-16
 public class FileUploadController {
 
     // 上传目录：项目运行目录下的 static/uploads/ （Spring Boot 会自动映射 /uploads/**）

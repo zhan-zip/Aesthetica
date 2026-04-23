@@ -6,11 +6,13 @@
     <title th:text="${blog != null ? blog.title + ' · 美学详情页' : '美学详情页'}">美学详情页</title>
     <!-- 引入 Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!--经AI辅助生成：DeepSeek最新版, 2026-4-16-->
     <style>
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --animate-duration: 0.7s;   /* 全局动画时长 */
+            --animate-duration: 0.7s;
         }
 
         body {
@@ -347,7 +349,7 @@ body.eye-care-mode .volume-control input[type="range"]::-webkit-slider-thumb {
 function replaceTermsWithTooltips(html, glossaries) {
     if (!glossaries || glossaries.length === 0) return html;
 
-    // 1. 临时保护 h2 标题内容
+    // 临时保护 h2 标题内容
     const placeholders = [];
     let idx = 0;
     const h2Regex = /<h2([^>]*)>([\s\S]*?)<\/h2>/gi;
@@ -357,7 +359,7 @@ function replaceTermsWithTooltips(html, glossaries) {
         return `<h2${attrs}>${key}</h2>`;
     });
 
-    // 2. 按术语长度降序排序（保证长术语优先匹配）
+    // 按术语长度降序排序（保证长术语优先匹配）
     const sorted = [...glossaries].sort((a, b) => b.term.length - a.term.length);
     // 构建一个正则表达式，同时匹配所有术语（按长度降序，但由于正则引擎从左到右，分组顺序无关紧要，关键是要匹配最长）
     const pattern = sorted.map(item => escapeRegExp(item.term)).join('|');
@@ -372,7 +374,7 @@ function replaceTermsWithTooltips(html, glossaries) {
             const def = escapeHtml(matchedItem.definition);
             return `<span class="glossary-term" data-def="${def}">${match}</span>`;
         }
-        return match; // 理论上不会走到这里
+        return match; // 理论上不会走到这里..吧
     });
 
     // 3. 恢复 h2 标题

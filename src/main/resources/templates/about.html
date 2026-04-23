@@ -6,6 +6,7 @@
     <title>关于网站</title>
     <!-- 引入 Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!--经AI辅助生成：DeepSeek最新版, 2026-4-16-->
     <style>
         * {
             margin: 0;
@@ -22,8 +23,8 @@
             background-repeat: no-repeat;
             font-family: 'Noto Serif SC', 'Source Han Serif SC', 'SimSun', serif;
             line-height: 1.6;
-            padding: 5rem 2rem 3rem;      /* 对齐详情页 */
-            font-size: 1.1rem;             /* 对齐详情页 */
+            padding: 5rem 2rem 3rem;
+            font-size: 1.1rem;
             color: #404e5b;  /* 灰蓝色主文字 */
         }
 
@@ -32,7 +33,7 @@
             margin: 0 auto;
         }
 
-        /* ========= 右上角隐藏式导航 ========= */
+        /*导航 */
         .corner-nav {
             position: fixed;
             top: 24px;
@@ -165,7 +166,7 @@
             visibility: visible;
         }
 
-        /* ========= 详情页主布局 ========= */
+        /* 主布局 */
         .detail-layout {
             display: flex;
             gap: 3rem;
@@ -179,7 +180,7 @@
             gap: 2rem;
         }
 
-        /* ========= 右侧目录 ========= */
+        /* 目录 */
         .toc-sidebar {
             flex: 0 0 280px;
             position: sticky;
@@ -188,12 +189,12 @@
             border-radius: 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
             padding: 2rem 1.5rem;
-            min-height: 75vh;           /* 对齐详情页 */
-            backdrop-filter: blur(2px);  /* 毛玻璃效果，可选 */
+            min-height: 75vh;
+            backdrop-filter: blur(2px);
         }
 
         .toc-title {
-            font-size: 1.2rem;           /* 对齐详情页 */
+            font-size: 1.2rem;
             color: #404e5b;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -204,8 +205,8 @@
 
         .toc-list {
             list-style: none;
-            max-height: 70vh;            /* 对齐详情页 */
-            overflow-y: auto;            /* 对齐详情页 */
+            max-height: 70vh;
+            overflow-y: auto;
         }
 
         .toc-list li {
@@ -215,7 +216,7 @@
         .toc-list li a {
             text-decoration: none;
             color: #404e5b;
-            font-size: 1.1rem;           /* 对齐详情页 */
+            font-size: 1.1rem;
             transition: all 0.2s;
             display: block;
             padding: 0.3rem 0;
@@ -237,13 +238,13 @@
         }
 
         .hero-section {
-            background-color: rgba(255, 255, 255, 0.75);   /* 半透明，对齐详情页 */
+            background-color: rgba(255, 255, 255, 0.75);
             padding: 3rem;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
         .hero-section h1 {
-            font-size: 2.3rem;           /* 对齐详情页 */
+            font-size: 2.3rem;
             font-weight: 400;
             letter-spacing: 4px;
             color: #404e5b;
@@ -256,7 +257,7 @@
             justify-content: flex-end;
             margin-top: 1rem;
             color: #5a7d9a;
-            font-size: 1.2rem;           /* 对齐详情页 */
+            font-size: 1.2rem;
         }
 
         .unified-content {
@@ -266,7 +267,7 @@
         }
 
         .unified-content h2 {
-            font-size: 1.8rem;           /* 对齐详情页 */
+            font-size: 1.8rem;
             font-weight: 400;
             letter-spacing: 3px;
             color: #404e5b;
@@ -282,13 +283,13 @@
 
         .unified-content p {
             color: #404e5b;
-            font-size: 1.1rem;           /* 对齐详情页 */
+            font-size: 1.1rem;
             line-height: 1.8;
             margin-bottom: 1.2rem;
         }
 
         .feature-section {
-            margin-top: 1.5rem;           /* 对齐详情页 */
+            margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 1px solid #E2E8F0;
         }
@@ -313,7 +314,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 1rem;             /* 稍微放大 */
+            font-size: 1rem;
             color: #404e5b;
         }
 
@@ -362,7 +363,7 @@
             transform: translateX(20px);
         }
 
-        /* 护眼模式 - 暖黄色调（完全保留原有） */
+        /* 护眼模式 */
         body.eye-care-mode {
             background-color: #FDF5E6 !important;
             background-image: none !important;
@@ -468,7 +469,7 @@
 </head>
 <body>
 
-<!-- ========= 右上角隐藏式导航 ========= -->
+<!--导航-->
 <div class="corner-nav">
     <div class="nav-trigger" id="navTrigger">
         <span></span>
@@ -497,7 +498,7 @@
                 <div class="hero-meta">美无法被量化，但可以被感知</div>
             </div>
 
-            <!-- 正文内容加动画，稍延迟 -->
+            <!-- 正文内容 -->
             <div class="unified-content animate__animated animate__fadeInUp" id="unifiedBody">
                 <h2 id="section1">始于一个哲学问题</h2>
                 <p>美，是什么？</p>
@@ -529,7 +530,7 @@
             </div>
         </main>
 
-        <!-- 右侧目录加动画，稍延迟 -->
+        <!-- 右侧目录 -->
         <aside class="toc-sidebar animate__animated animate__fadeInRight">
             <div class="toc-title">目录</div>
             <ul class="toc-list">

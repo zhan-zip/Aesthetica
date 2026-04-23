@@ -30,7 +30,7 @@ public class IndexController {
     @Autowired
     private GlossaryService glossaryService;
 
-    @GetMapping("/")            //以下部分代码为AI辅助生成：DeepSeek, 2026-3
+    @GetMapping("/")            // 经AI辅助生成：DeepSeek最新版, 2026-03
     public String index(@PageableDefault(size = 4,sort = {"updateTime"}, direction = Sort.Direction.DESC) Pageable pageable, BlogQuery blog, Model model) {
         model.addAttribute("page",blogService.listBlog(pageable));
         model.addAttribute("types",typeService.listTypeTop(6));
@@ -44,7 +44,7 @@ public class IndexController {
             }
         }
         model.addAttribute("recommendBlogs", recommendBlogs);
-        model.addAttribute("latestBlogs", blogService.getLatestBlogs(10));      //ai辅助4-16
+        model.addAttribute("latestBlogs", blogService.getLatestBlogs(10));      // 经AI辅助生成：DeepSeek最新版, 2026-04-16
 
         System.out.println("--index控制器执行了---");
         return "index";
@@ -75,7 +75,7 @@ public class IndexController {
         return "blog";
     }
 
-    @GetMapping("/bobbin")      //ds4-17
+    @GetMapping("/bobbin")      // 经AI辅助生成：DeepSeek最新版, 2026-04-17
     public String bobbin(Model model) {
         List<Type> types = typeService.listTypeTop(10);
 

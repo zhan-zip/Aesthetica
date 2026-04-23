@@ -6,6 +6,7 @@
   <title>归档线轴 | Aesthetica</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!--经AI辅助生成：DeepSeek最新版, 2026-4-16-->
   <style>
     * {
         margin: 0;
@@ -44,7 +45,7 @@
         font-weight: 400;
     }
 
-    /* ========= 右上角方块导航 ========= */
+    /*右上角导航*/
     .corner-nav {
         position: fixed;
         top: 24px;
@@ -178,7 +179,7 @@
         visibility: visible;
     }
 
-    /* 顶部标语条 - 半透明白色背景，贴满左右，加动效和悬浮交互 */
+    /* 顶部 */
     .top-banner {
         position: fixed;
         top: 0;
@@ -341,7 +342,7 @@
         background-color: var(--accent-blue);
     }
 
-    /* 弹窗缩放弹入动画 */
+    /* 弹窗缩放弹入 */
     @keyframes popZoomIn {
         from {
             opacity: 0;
@@ -438,7 +439,7 @@
         right: 20px;
     }
 
-    /* ========= 线轴所有字体加粗 ========= */
+    /* 字体加粗 */
     .timeline .node .node-info,
     .timeline .node .node-count,
     .timeline .node .node-desc,
@@ -465,7 +466,7 @@
   <p>鼠标悬浮在文章标题上时背景自动更改为该文章配图。</p>
 </div>
 
-<!-- ========= 右上角导航 ========= -->
+<!--右上角导航 -->
 <div class="corner-nav">
   <div class="nav-trigger" id="navTrigger">
     <span></span>
@@ -828,7 +829,7 @@
     }
   });
 
-  // 保留原全局点击监听作为备用（但遮罩已经足够）
+  // 保留原全局点击监听  备用
   document.addEventListener('click', (e) => {
     const isNode = e.target.closest('.node');
     const isPopup = e.target.closest('.popup');
